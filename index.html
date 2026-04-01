@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBI Grade B | Prep Hub Elite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
+        :root { --sidebar-w: 280px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; overflow: hidden; height: 100vh; width: 100vw; }
+        
+        /* Sidebar Transition Logic */
+        .sidebar { 
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            width: var(--sidebar-w); 
+            transform: translateX(0);
+        }
+        .sidebar.collapsed { transform: translateX(-100%); }
+
+        /* Header Transition Logic */
+        header { transition: transform 0.4s ease, height 0.4s ease; }
+        .header-hidden { transform: translateY(-100%); height: 0 !important; overflow: hidden; border: none !important; }
+
+        /* Main Content Transition Logic */
+        .main-content { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            margin-left: var(--sidebar-w); 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content.expanded { margin-left: 0; }
+        
+        /* Fix for bottom white space */
+        .main-content.full-v { margin-top: 0; height: 100vh !important; }
+
+        /* Utility */
+        .no-wrap { white-space: nowrap; overflow: hidden; }
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+
+        /* Nav Item Styles */
+        .nav-item.active { background: #eff6ff; color: #2563eb; border-right: 4px solid #2563eb; }
+        .nav-item.active i { color: #2563eb; }
+        
+        iframe { 
+            border: none; 
+            width: 100%; 
+            height: 100%; 
+            background: white; 
+            display: block;
+            transition: border-radius 0.4s ease;
+            flex-grow: 1;
+        }
+
+        /* Floating Exit Button */
+        #exitBtn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: #1e293b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="flex h-screen w-screen overflow-hidden">
+
+    <div id="exitBtn" onclick="exitFullScreenMode()">
+        <i class="fas fa-compress-alt mr-1"></i>
+    </div>
+
+    <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 z-50 bg-white border-r border-slate-200 flex flex-col shadow-xl lg:shadow-none">
+        
+        <div class="p-6 flex items-center gap-3 border-b border-slate-100 no-wrap">
+            <div class="flex-shrink-0 bg-blue-600 h-10 w-10 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                <i class="fas fa-graduation-cap text-white"></i>
+            </div>
+            <div class="no-wrap">
+                <h1 class="font-bold text-slate-800 tracking-tight">RBI Grade B</h1>
+                <p class="text-[10px] text-blue-500 font-bold uppercase tracking-widest">Digital Library</p>
+            </div>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto custom-scroll py-4">
+            <div class="px-6 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest no-wrap">Navigation</div>
+            
+            <a href="RBI_Grade-B.html" target="contentFrame" onclick="setActive(this, 'Strategy Overview')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all active no-wrap">
+                <i class="fas fa-grip-vertical w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Strategy Overview</span>
+            </a>
+
+            <div class="px-6 mt-6 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest no-wrap">Phase I</div>
+            <a href="Quant-Paper-I.html" target="contentFrame" onclick="setActive(this, 'Quantitative Aptitude')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-calculator w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Quantitative Aptitude</span>
+            </a>
+            <a href="English-Paper-I.html" target="contentFrame" onclick="setActive(this, 'English Language')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-font w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>English Language</span>
+            </a>
+            <a href="RA-Paper-I.html" target="contentFrame" onclick="setActive(this, 'Reasoning Ability')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-brain w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Reasoning Ability</span>
+            </a>
+
+            <div class="px-6 mt-6 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest no-wrap">Phase II</div>
+            <a href="ESI-Paper-II.html" target="contentFrame" onclick="setActive(this, 'Economic & Social')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-chart-line w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Economic & Social</span>
+            </a>
+            <a href="Finance-Paper-II.html" target="contentFrame" onclick="setActive(this, 'Finance Management')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-coins w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Finance Management</span>
+            </a>
+            <a href="Management-Paper-II.html" target="contentFrame" onclick="setActive(this, 'Management')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-users-gear w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Management</span>
+            </a>
+            <a href="English-Paper-II.html" target="contentFrame" onclick="setActive(this, 'Descriptive English')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-pen-nib w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Descriptive English</span>
+            </a>
+
+            <div class="px-6 mt-10 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest no-wrap">Connect</div>
+            <a href="mailto:d.adhikary.ai@gmail.com" onclick="setActive(this, 'Contact')" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-envelope w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Email Me</span>
+            </a>
+            <a href="#" onclick="showSupport(this)" class="nav-item flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-all no-wrap">
+                <i class="fas fa-heart w-6 mr-3 flex-shrink-0 text-slate-400"></i> <span>Support Project</span>
+            </a>
+        </nav>
+
+        <div class="p-6 bg-slate-50 border-t border-slate-100 no-wrap">
+            <div class="flex items-center gap-3">
+                <div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold">DA</div>
+                <div class="no-wrap">
+                    <p class="text-xs font-bold text-slate-800">Dipankar Adhikary</p>
+                    <a href="https://github.com/adhikary-dipankar" target="_blank" class="text-[10px] text-slate-400 hover:text-blue-600">github.com/adhikary-dipankar</a>
+                </div>
+            </div>
+        </div>
+        <p style="margin: 4px; font-size: 9px; color: #1b3c69;">
+            <b>Note:</b> Educational guide only. Always verify rates and circulars via official RBI sources. 
+            <span style="margin-left: 6px;">© 2026 Dipankar Adhikary • Prep Hub Elite</span>
+        </p>
+        <br>
+    </aside>
+
+    <div id="main-content" class="main-content flex-1 flex flex-col h-full bg-slate-50">
+        
+        <header id="main-header" class="h-16 bg-white/80 backdrop-blur-md flex items-center justify-between px-8 border-b border-slate-200 z-40">
+            <div class="flex items-center gap-6">
+                <button onclick="toggleSidebar()" class="p-2 bg-slate-100 text-slate-600 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-all">
+                    <i id="menuIcon" class="fas fa-outdent text-xl"></i>
+                </button>
+                <div class="hidden md:block">
+                    <h4 id="pageTitle" class="text-lg font-bold text-slate-800">Strategy</h4>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-2xl border border-slate-200 shadow-sm mr-2">
+                    <span id="liveClock" class="text-[11px] font-mono font-bold text-slate-600 tracking-tight"></span>
+                </div>
+                <button onclick="enterFullScreenMode()" class="p-2 bg-blue-500  text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-100" title="Full Screen Mode">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+            </div>
+           
+        </header>
+
+        <main class="flex-1 p-0 relative overflow-hidden flex flex-col">
+            <div id="supportOverlay" class="hidden absolute inset-0 z-[60] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+                <div class="bg-white max-w-sm w-full rounded-[2.5rem] shadow-2xl overflow-hidden p-8 text-center relative border border-slate-100">
+                    <button onclick="closeSupport()" class="absolute top-6 right-6 text-slate-300 hover:text-slate-600 transition">
+                        <i class="fas fa-times-circle text-2xl"></i>
+                    </button>
+                    <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-1">Support My Work</h3>
+                    <p class="text-slate-500 text-xs mb-8">Enter an amount (Min ₹10) to contribute.</p>
+
+                    <div class="mb-6">
+                        <div class="relative">
+                            <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xl">₹</span>
+                            <input type="number" id="customAmtInput" value="100" min="10" oninput="validateAndSet(this.value)"
+                                class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl py-4 pl-10 pr-4 text-2xl font-black text-slate-800 focus:border-blue-500 focus:bg-white outline-none transition-all text-center">
+                        </div>
+                        <p id="errorMsg" class="text-[10px] text-red-500 font-bold mt-2 hidden">Minimum amount must be ₹10</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-2xl flex items-center justify-between border border-slate-100 mb-8">
+                        <div class="text-left">
+                            <p class="text-[9px] text-slate-400 font-bold uppercase">Payee UPI ID</p>
+                            <p id="upiIdText" class="text-sm font-bold text-slate-700">dipu98adhikary-1@oksbi</p>
+                        </div>
+                        <button onclick="copyUpi()" class="bg-white p-2 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition shadow-sm">
+                            <i id="copyIcon" class="fas fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <a id="upiLink" href="#" class="block w-full py-4 rounded-2xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                        <i class="fas fa-bolt mr-2"></i> Pay Now
+                    </a>
+                </div>
+            </div>
+            <iframe id="contentFrame" name="contentFrame" src="RBI_Grade-B.html"></iframe>
+        </main>
+        
+    </div>
+
+    <script>
+        const upiId = "dipu98adhikary-1@oksbi";
+        const userName = "Dipankar Adhikary";
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const icon = document.getElementById('menuIcon');
+            
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                icon.className = 'fas fa-indent text-xl';
+            } else {
+                icon.className = 'fas fa-outdent text-xl';
+            }
+        }
+
+        function enterFullScreenMode() {
+            document.getElementById('sidebar').classList.add('collapsed');
+            document.getElementById('main-content').classList.add('expanded');
+            document.getElementById('main-content').classList.add('full-v');
+            document.getElementById('main-header').classList.add('header-hidden');
+            document.getElementById('exitBtn').style.display = 'block';
+            document.getElementById('contentFrame').style.borderRadius = '0';
+        }
+
+        function exitFullScreenMode() {
+            document.getElementById('sidebar').classList.remove('collapsed');
+            document.getElementById('main-content').classList.remove('expanded');
+            document.getElementById('main-content').classList.remove('full-v');
+            document.getElementById('main-header').classList.remove('header-hidden');
+            document.getElementById('exitBtn').style.display = 'none';
+            document.getElementById('contentFrame').style.borderRadius = '0';
+            
+            // Reset Sidebar icon
+            document.getElementById('menuIcon').className = 'fas fa-outdent text-xl';
+        }
+
+        function setActive(element, title) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('pageTitle').innerText = title;
+            closeSupport();
+            
+            // Trigger Full Screen on navigate
+            enterFullScreenMode();
+        }
+
+        function showSupport(element) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('pageTitle').innerText = "Support & Donate";
+            document.getElementById('supportOverlay').classList.remove('hidden');
+        }
+
+        function closeSupport() {
+            document.getElementById('supportOverlay').classList.add('hidden');
+        }
+
+        function validateAndSet(val) {
+            const amt = parseFloat(val);
+            const btn = document.getElementById('upiLink');
+            const error = document.getElementById('errorMsg');
+            if (isNaN(amt) || amt < 10) {
+                btn.classList.add('opacity-50', 'pointer-events-none');
+                error.classList.remove('hidden');
+            } else {
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+                error.classList.add('hidden');
+                btn.setAttribute('href', `upi://pay?pa=${upiId}&pn=${encodeURIComponent(userName)}&am=${amt}&cu=INR&tn=Study%20Support`);
+            }
+        }
+
+        function copyUpi() {
+            navigator.clipboard.writeText(document.getElementById('upiIdText').innerText).then(() => {
+                const icon = document.getElementById('copyIcon');
+                icon.className = 'fas fa-check text-green-500';
+                setTimeout(() => { icon.className = 'fas fa-copy'; }, 2000);
+            });
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short', year: '2-digit' });
+            const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            document.getElementById('liveClock').innerHTML = `<span class="text-blue-600 uppercase">${dateStr}</span> <span class="text-slate-300 mx-1">|</span> ${timeStr}`;
+        }
+
+        window.onload = function() {
+            validateAndSet(100);
+            setInterval(updateClock, 1000);
+            updateClock();
+            
+            // Initial sidebar setup for mobile
+            if (window.innerWidth < 1024) {
+                document.getElementById('sidebar').classList.add('collapsed');
+                document.getElementById('main-content').classList.add('expanded');
+                document.getElementById('menuIcon').className = 'fas fa-indent text-xl';
+            }
+        };
+    </script>
+</body>
+</html>
