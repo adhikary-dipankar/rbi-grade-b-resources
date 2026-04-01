@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://yourdomain.com/index.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>1.00</priority>
+  </url>
+  
+  <url>
+    <loc>https://yourdomain.com/RBI_Grade-B.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://yourdomain.com/Quant-Paper-I.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/English-Paper-I.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/RA-Paper-I.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://yourdomain.com/ESI-Paper-II.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/Finance-Paper-II.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/Management-Paper-II.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+</urlset>
