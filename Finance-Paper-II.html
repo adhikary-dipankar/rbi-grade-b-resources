@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance — RBI Grade B</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0f1923;color:#d4d4d4;line-height:1.75;padding:20px;min-height:100vh}
+.header{text-align:center;padding:45px 20px;background:linear-gradient(135deg,#1a3a5c 0%,#0d2137 50%,#1a3a5c 100%);border:1px solid #2a5a8a;border-radius:20px;margin-bottom:30px;box-shadow:0 10px 40px rgba(26,58,92,0.5)}
+.header h1{font-size:2.5em;color:#f0c040;text-shadow:1px 1px 3px rgba(0,0,0,0.5);margin-bottom:10px;letter-spacing:1px}
+.header p{font-size:1.05em;color:#a0b8d0;max-width:780px;margin:0 auto}
+.header .badge{display:inline-block;background:rgba(240,192,64,0.15);padding:6px 18px;border-radius:20px;margin-top:15px;font-size:0.9em;color:#f0c040;border:1px solid rgba(240,192,64,0.3)}
+.rates-panel{background:linear-gradient(135deg,#0a1f30,#12304a);border:1px solid #2a5a8a;border-radius:15px;padding:25px;margin-bottom:25px}
+.rates-panel h2{color:#f0c040;margin-bottom:15px;font-size:1.3em;text-align:center}
+.rates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.rate-card{background:rgba(240,192,64,0.06);border:1px solid rgba(240,192,64,0.15);border-radius:10px;padding:12px 15px;text-align:center}
+.rate-card .label{color:#8ab4d8;font-size:0.82em;text-transform:uppercase;letter-spacing:0.5px}
+.rate-card .value{color:#f0c040;font-size:1.4em;font-weight:bold;margin-top:4px}
+.rate-card .date{color:#5a7a9a;font-size:0.72em;margin-top:2px}
+.toc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:15px;padding:25px 30px;margin-bottom:30px}
+.toc h2{color:#f0c040;margin-bottom:15px;font-size:1.3em}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
+.toc a{color:#8ab4d8;text-decoration:none;padding:6px 10px;border-radius:8px;transition:all 0.3s;display:block;font-size:0.93em}
+.toc a:hover{background:rgba(240,192,64,0.1);color:#f0c040;transform:translateX(5px)}
+.toc a .num{color:#f0c040;font-weight:bold;margin-right:8px}
+.ch{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:15px;margin-bottom:22px;overflow:hidden;transition:transform 0.3s}
+.ch:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,0,0,0.3)}
+.ch-hd{padding:18px 25px;cursor:pointer;display:flex;align-items:center;gap:15px;user-select:none;flex-wrap:wrap}
+.ch-n{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1em;color:#0f1923;flex-shrink:0;background:#f0c040}
+.ch-hd h2{font-size:1.2em;color:#e8e0d0;flex-grow:1}
+.ch-hd .pr{padding:4px 12px;border-radius:20px;font-size:0.72em;font-weight:bold;text-transform:uppercase;letter-spacing:1px}
+.pr-h{background:rgba(240,80,60,0.15);color:#ff8a75;border:1px solid rgba(240,80,60,0.3)}
+.pr-m{background:rgba(240,192,64,0.15);color:#f0c040;border:1px solid rgba(240,192,64,0.3)}
+.pr-l{background:rgba(100,200,140,0.15);color:#80d0a0;border:1px solid rgba(100,200,140,0.3)}
+.tgl{font-size:1.4em;transition:transform 0.3s;color:#f0c040}
+.ch.open .tgl{transform:rotate(180deg)}
+.ch-bd{padding:0 25px 25px;display:none}
+.ch.open .ch-bd{display:block;animation:fi 0.3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.fg{margin-bottom:18px}
+.fg h3{color:#f0c040;font-size:1em;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid rgba(240,192,64,0.15)}
+.fb{background:rgba(0,0,0,0.25);border:1px solid rgba(42,90,138,0.3);border-radius:10px;padding:15px 20px;margin-bottom:10px;font-size:0.91em;line-height:1.9;overflow-x:auto}
+.fb .hl{color:#f0c040;font-weight:bold}
+.fb .ky{color:#80d0a0;font-weight:bold}
+.fb .nt{color:#8ab4d8;font-style:italic}
+.fb .rd{color:#ff8a75;font-weight:bold}
+.fb ul{list-style:none;padding-left:0}
+.fb ul li{padding:3px 0 3px 20px;position:relative}
+.fb ul li::before{content:"▹";position:absolute;left:0;color:#f0c040}
+.ft{width:100%;border-collapse:collapse;margin:8px 0;font-size:0.88em}
+.ft th{background:rgba(240,192,64,0.2);color:#f0c040;padding:10px 14px;text-align:left;border:1px solid rgba(255,255,255,0.08);font-weight:600}
+.ft td{padding:8px 14px;border:1px solid rgba(255,255,255,0.04);color:#c0c0c0}
+.ft tr:nth-child(even){background:rgba(255,255,255,0.02)}
+.ft tr:hover{background:rgba(240,192,64,0.05)}
+.tip{background:linear-gradient(135deg,rgba(100,200,140,0.08),rgba(80,180,120,0.03));border-left:4px solid #80d0a0;border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:0.9em}
+.tip b{color:#80d0a0}
+.warn{background:linear-gradient(135deg,rgba(240,80,60,0.08),rgba(200,60,40,0.03));border-left:4px solid #ff8a75;border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:0.9em}
+.warn b{color:#ff8a75}
+.footer{text-align:center;padding:30px;margin-top:30px;color:#5a7a9a;font-size:0.88em}
+.footer .btn{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#1a3a5c,#2a5a8a);color:#f0c040;border:1px solid #2a5a8a;border-radius:25px;font-size:0.95em;cursor:pointer;margin:8px;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s}
+.footer .btn:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(26,58,92,0.5)}
+#stt{position:fixed;bottom:30px;right:30px;width:48px;height:48px;background:#1a3a5c;color:#f0c040;border:1px solid #2a5a8a;border-radius:50%;font-size:1.4em;cursor:pointer;display:none;z-index:1000;transition:transform 0.3s}
+#stt:hover{transform:scale(1.1)}
+@media print{body{background:#fff;color:#000;padding:10px}.header{background:#1a3a5c}.ch{border:1px solid #ccc;break-inside:avoid}.ch-bd{display:block!important}.fb{background:#f5f5f5;color:#000;border-color:#ccc}.ft th{background:#ddd;color:#000}.ft td{color:#000}#stt,.tgl{display:none!important}}
+@media(max-width:768px){.header h1{font-size:1.5em}.toc-grid{grid-template-columns:1fr}.rates-grid{grid-template-columns:repeat(2,1fr)}.ch-hd{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- HEADER -->
+<div class="header">
+<h1>Finance</h1>
+<p>Complete Financial Terms, Concepts & Definitions from Roots to Current Day<br>For RBI Grade B Phase 2 — Paper III (Finance & Management)</p>
+<div class="badge"> 100 Marks | 50 Objective + 50 Descriptive | Chapters 1–15</div>
+</div>
+
+<!-- LIVE RATES PANEL -->
+<div class="rates-panel">
+<h2>RBI Key Rates — Live as of February 2026 MPC Meeting</h2>
+<div class="rates-grid">
+<div class="rate-card"><div class="label">Policy Repo Rate</div><div class="value">5.25%</div><div class="date">Since Dec 5, 2025</div></div>
+<div class="rate-card"><div class="label">SDF Rate</div><div class="value">5.00%</div><div class="date">Repo − 25 bps</div></div>
+<div class="rate-card"><div class="label">MSF Rate</div><div class="value">5.50%</div><div class="date">Repo + 25 bps</div></div>
+<div class="rate-card"><div class="label">Bank Rate</div><div class="value">5.50%</div><div class="date">= MSF Rate</div></div>
+<div class="rate-card"><div class="label">Fixed Reverse Repo</div><div class="value">3.35%</div><div class="date">Legacy rate</div></div>
+<div class="rate-card"><div class="label">CRR</div><div class="value">3.00%</div><div class="date">Cash Reserve Ratio</div></div>
+<div class="rate-card"><div class="label">SLR</div><div class="value">18.00%</div><div class="date">Statutory Liquidity Ratio</div></div>
+<div class="rate-card"><div class="label">MPC Stance</div><div class="value">Neutral</div><div class="date">Unanimous hold</div></div>
+<div class="rate-card"><div class="label">GDP Growth FY26</div><div class="value">7.4%</div><div class="date">FAE estimate</div></div>
+<div class="rate-card"><div class="label">CPI Inflation FY26</div><div class="value">2.1%</div><div class="date">Projected</div></div>
+<div class="rate-card"><div class="label">RBI Governor</div><div class="value" style="font-size:0.95em">Sanjay Malhotra</div><div class="date">Since Dec 2025</div></div>
+<div class="rate-card"><div class="label">Next MPC Meeting</div><div class="value" style="font-size:0.95em">Apr 6–8</div><div class="date">2026</div></div>
+</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+<h2>Chapters (Click to Jump)</h2>
+<div class="toc-grid">
+<a href="#c1"><span class="num">01</span> Indian Financial System — Structure</a>
+<a href="#c2"><span class="num">02</span> Reserve Bank of India — Functions & Tools</a>
+<a href="#c3"><span class="num">03</span> Banking System in India</a>
+<a href="#c4"><span class="num">04</span> Key Financial Institutions (NABARD, SIDBI, etc.)</a>
+<a href="#c5"><span class="num">05</span> Monetary Policy — Instruments & Framework</a>
+<a href="#c6"><span class="num">06</span> Financial Markets — Money, Capital, Forex</a>
+<a href="#c7"><span class="num">07</span> Derivatives — Forwards, Futures, Options, Swaps</a>
+<a href="#c8"><span class="num">08</span> Banking Terms & Ratios — A to Z Glossary</a>
+<a href="#c9"><span class="num">09</span> Inflation — Types, WPI, CPI, Control</a>
+<a href="#c10"><span class="num">10</span> Fiscal Policy & Union Budget 2026-27</a>
+<a href="#c11"><span class="num">11</span> Accounting & Financial Statements</a>
+<a href="#c12"><span class="num">12</span> Financial Ratios — All Formulas</a>
+<a href="#c13"><span class="num">13</span> Financial Inclusion & Govt Schemes</a>
+<a href="#c14"><span class="num">14</span> Digital Payments & FinTech</a>
+<a href="#c15"><span class="num">15</span> Corporate Governance, Risk Mgmt & Basel</a>
+</div>
+</div>
+
+<!-- ═══════ CH1: INDIAN FINANCIAL SYSTEM ═══════ -->
+<div class="ch open" id="c1">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">01</div><h2>Indian Financial System — Structure & Overview</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>What is a Financial System?</h3>
+<div class="fb"><ul>
+<li>A <span class="hl">Financial System</span> is a set of institutions, instruments, markets, and regulations that facilitate the transfer of funds from <span class="ky">surplus units (savers)</span> to <span class="ky">deficit units (borrowers)</span></li>
+<li>Components: <span class="hl">Financial Institutions + Financial Markets + Financial Instruments + Financial Services + Regulators</span></li>
+</ul></div></div>
+<div class="fg"><h3>Components of Indian Financial System</h3>
+<div class="fb"><table class="ft">
+<tr><th>Component</th><th>Examples</th><th>Role</th></tr>
+<tr><td><b>Financial Institutions</b></td><td>Banks (SBI, PNB), NBFCs, Insurance Cos, Mutual Funds, Pension Funds</td><td>Intermediaries between savers & borrowers</td></tr>
+<tr><td><b>Financial Markets</b></td><td>Money Market, Capital Market, Forex Market, Derivatives Market</td><td>Platform for buying/selling financial instruments</td></tr>
+<tr><td><b>Financial Instruments</b></td><td>Equity, Bonds, T-Bills, Commercial Paper, Certificates of Deposit</td><td>Claims on future cash flows</td></tr>
+<tr><td><b>Financial Services</b></td><td>Banking, Insurance, Leasing, Factoring, Mutual Funds, VC</td><td>Services that facilitate financial transactions</td></tr>
+<tr><td><b>Regulators</b></td><td>RBI, SEBI, IRDAI, PFRDA, NABARD, NHB</td><td>Supervise and regulate the system</td></tr>
+</table></div></div>
+<div class="fg"><h3>Financial Regulators in India</h3>
+<div class="fb"><table class="ft">
+<tr><th>Regulator</th><th>Full Name</th><th>Regulates</th><th>Estd.</th></tr>
+<tr><td><span class="hl">RBI</span></td><td>Reserve Bank of India</td><td>Banks, NBFCs, Payment Systems, Money Market, Forex</td><td>1935</td></tr>
+<tr><td><span class="hl">SEBI</span></td><td>Securities & Exchange Board of India</td><td>Stock Exchanges, Mutual Funds, FPIs, Credit Rating Agencies</td><td>1992</td></tr>
+<tr><td><span class="hl">IRDAI</span></td><td>Insurance Regulatory & Development Authority of India</td><td>Insurance companies & intermediaries</td><td>1999</td></tr>
+<tr><td><span class="hl">PFRDA</span></td><td>Pension Fund Regulatory & Development Authority</td><td>NPS, Pension Funds</td><td>2014</td></tr>
+<tr><td><span class="hl">NHB</span></td><td>National Housing Bank</td><td>Housing Finance Companies</td><td>1988</td></tr>
+<tr><td><span class="hl">NABARD</span></td><td>National Bank for Agriculture & Rural Development</td><td>Cooperative Banks, RRBs, Rural Finance</td><td>1982</td></tr>
+<tr><td><span class="hl">IBBI</span></td><td>Insolvency & Bankruptcy Board of India</td><td>Insolvency resolution process</td><td>2016</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- ═══════ CH2: RBI ═══════ -->
+<div class="ch" id="c2">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">02</div><h2>Reserve Bank of India — Functions, Structure & Tools</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>RBI — Key Facts</h3>
+<div class="fb"><table class="ft">
+<tr><th>Detail</th><th>Info</th></tr>
+<tr><td>Established</td><td>April 1, 1935 (under RBI Act, 1934)</td></tr>
+<tr><td>Nationalised</td><td>January 1, 1949</td></tr>
+<tr><td>Headquarters</td><td>Mumbai (Mint Road)</td></tr>
+<tr><td>Current Governor</td><td>Shri Sanjay Malhotra (since Dec 2025)</td></tr>
+<tr><td>Deputy Governors</td><td>4 (Max)</td></tr>
+<tr><td>Regional Offices</td><td>31 (including sub-offices)</td></tr>
+<tr><td>Subsidiaries</td><td>DICGC, ReBIT, IFTAS</td></tr>
+</table></div></div>
+<div class="fg"><h3>Functions of RBI</h3>
+<div class="fb"><ul>
+<li><span class="hl">1. Monetary Authority:</span> Formulates & implements monetary policy to maintain price stability (inflation target: 4% ± 2%)</li>
+<li><span class="hl">2. Issuer of Currency:</span> Sole authority to issue banknotes in India (except ₹1 coin — issued by GoI)</li>
+<li><span class="hl">3. Banker to Government:</span> Manages GoI's banking transactions, public debt, issues G-Secs</li>
+<li><span class="hl">4. Banker's Bank:</span> Lender of last resort; maintains CRR/SLR; provides clearing house facility</li>
+<li><span class="hl">5. Regulator & Supervisor:</span> Regulates banks, NBFCs, payment systems; issues licenses; conducts inspections</li>
+<li><span class="hl">6. Foreign Exchange Manager:</span> Manages forex reserves; facilitates external trade; administers FEMA, 1999</li>
+<li><span class="hl">7. Developmental Role:</span> Financial inclusion, priority sector lending, KCC, SHG-Bank linkage</li>
+<li><span class="hl">8. Payment System Regulator:</span> Operates RTGS, NEFT; regulates UPI, card networks, PPI</li>
+</ul></div></div>
+<div class="fg"><h3>RBI's Monetary Policy Instruments — Complete</h3>
+<div class="fb"><table class="ft">
+<tr><th>Instrument</th><th>Type</th><th>Current Rate</th><th>How It Works</th></tr>
+<tr><td><span class="hl">Repo Rate</span></td><td>Quantitative</td><td>5.25%</td><td>Rate at which RBI lends to banks (overnight) against G-Secs. ↑ Repo = ↑ lending rates = tight money</td></tr>
+<tr><td><span class="hl">SDF Rate</span></td><td>Quantitative</td><td>5.00%</td><td>Rate at which banks park excess funds with RBI (no collateral needed). Floor of LAF corridor</td></tr>
+<tr><td><span class="hl">MSF Rate</span></td><td>Quantitative</td><td>5.50%</td><td>Emergency borrowing rate for banks (can dip into SLR up to 2%). Ceiling of LAF corridor</td></tr>
+<tr><td><span class="hl">Bank Rate</span></td><td>Quantitative</td><td>5.50%</td><td>Rate for long-term lending by RBI to banks. Penal rate for SLR/CRR shortfall</td></tr>
+<tr><td><span class="hl">Reverse Repo</span></td><td>Quantitative</td><td>3.35%</td><td>Fixed rate (legacy). Replaced by SDF as floor since April 2022</td></tr>
+<tr><td><span class="hl">CRR</span></td><td>Quantitative</td><td>3.00%</td><td>% of NDTL banks MUST keep with RBI as cash. No interest earned. ↑ CRR = less money to lend</td></tr>
+<tr><td><span class="hl">SLR</span></td><td>Quantitative</td><td>18.00%</td><td>% of NDTL banks MUST invest in G-Secs/Gold/Cash. Ensures solvency. ↑ SLR = less free cash</td></tr>
+<tr><td><span class="hl">OMO</span></td><td>Quantitative</td><td>—</td><td>Open Market Operations: RBI buys/sells G-Secs to inject/absorb liquidity</td></tr>
+<tr><td><span class="hl">MSS</span></td><td>Quantitative</td><td>—</td><td>Market Stabilisation Scheme: T-Bills/Bonds issued to absorb excess liquidity</td></tr>
+<tr><td><span class="hl">Moral Suasion</span></td><td>Qualitative</td><td>—</td><td>RBI persuades/advises banks verbally (no legal force)</td></tr>
+<tr><td><span class="hl">Selective Credit Control</span></td><td>Qualitative</td><td>—</td><td>Margin requirements, credit rationing for specific sectors</td></tr>
+</table></div></div>
+<div class="tip"><b>💡 LAF Corridor:</b> SDF (5.00%) ← Repo (5.25%) → MSF (5.50%). The corridor width = 50 bps (25 bps each side). All overnight rates move within this band.</div>
+</div></div>
+
+<!-- ═══════ CH3: BANKING SYSTEM ═══════ -->
+<div class="ch" id="c3">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">03</div><h2>Banking System in India — Structure & Types</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>Structure of Indian Banking</h3>
+<div class="fb"><table class="ft">
+<tr><th>Category</th><th>Types</th><th>Key Details</th></tr>
+<tr><td rowspan="4"><b>Scheduled Commercial Banks (SCBs)</b></td><td>Public Sector Banks (PSBs)</td><td>12 PSBs (after mergers). Govt holds ≥51%. E.g., SBI, PNB, BOB</td></tr>
+<tr><td>Private Sector Banks</td><td>E.g., HDFC Bank, ICICI, Axis, Kotak. Growing rapidly</td></tr>
+<tr><td>Foreign Banks</td><td>E.g., Citibank, HSBC, Standard Chartered. Operate as branches/WOS</td></tr>
+<tr><td>Small Finance Banks (SFBs)</td><td>11 SFBs. Must lend 75% to priority sector. Min ₹25 lakh capital</td></tr>
+<tr><td><b>Payments Banks</b></td><td>Airtel, Paytm, India Post, Fino, Jio</td><td>Max deposit ₹2 lakh. No lending. Payment services only</td></tr>
+<tr><td><b>Regional Rural Banks (RRBs)</b></td><td>43 RRBs</td><td>Shareholding: GoI 50%, State 15%, Sponsor Bank 35%. Rural lending</td></tr>
+<tr><td rowspan="2"><b>Cooperative Banks</b></td><td>Urban Cooperative Banks (UCBs)</td><td>Regulated by RBI + State Registrar. Serve urban/semi-urban areas</td></tr>
+<tr><td>Rural Cooperatives</td><td>PACS → DCCBs → StCBs (3-tier). Regulated by NABARD + State</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Banking Terms</h3>
+<div class="fb"><table class="ft">
+<tr><th>Term</th><th>Full Form</th><th>Meaning</th></tr>
+<tr><td><span class="hl">NDTL</span></td><td>Net Demand & Time Liabilities</td><td>Total deposits (demand + time) minus inter-bank deposits. Base for CRR/SLR calculation</td></tr>
+<tr><td><span class="hl">CASA</span></td><td>Current Account Savings Account</td><td>Low-cost deposits for banks. Higher CASA ratio = lower cost of funds = higher profitability</td></tr>
+<tr><td><span class="hl">NPA</span></td><td>Non-Performing Asset</td><td>Loan where interest/principal overdue for >90 days</td></tr>
+<tr><td><span class="hl">GNPA</span></td><td>Gross NPA</td><td>Total NPAs before provisioning</td></tr>
+<tr><td><span class="hl">NNPA</span></td><td>Net NPA</td><td>GNPA minus provisions. True measure of asset quality</td></tr>
+<tr><td><span class="hl">PSL</span></td><td>Priority Sector Lending</td><td>40% of ANBC must go to agriculture, MSME, education, housing, weaker sections</td></tr>
+<tr><td><span class="hl">MCLR</span></td><td>Marginal Cost of Funds Based Lending Rate</td><td>Internal benchmark for bank lending rates (since Apr 2016)</td></tr>
+<tr><td><span class="hl">EBLR</span></td><td>External Benchmark Linked Lending Rate</td><td>Linked to Repo Rate / T-Bill / FBIL rate. Mandatory for new retail loans since Oct 2019</td></tr>
+<tr><td><span class="hl">Base Rate</span></td><td>—</td><td>Minimum rate below which banks cannot lend (pre-MCLR system)</td></tr>
+<tr><td><span class="hl">DICGC</span></td><td>Deposit Insurance & Credit Guarantee Corp.</td><td>Insures deposits up to ₹5 lakh per depositor per bank</td></tr>
+<tr><td><span class="hl">PCA</span></td><td>Prompt Corrective Action</td><td>RBI framework to restrict weak banks (triggered by NPA/CRAR/ROA thresholds)</td></tr>
+<tr><td><span class="hl">CRAR / CAR</span></td><td>Capital to Risk-weighted Assets Ratio</td><td>Minimum 9% for Indian banks (Basel III). Measures bank solvency</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- ═══════ CH4: FINANCIAL INSTITUTIONS ═══════ -->
+<div class="ch" id="c4">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">04</div><h2>Key Financial Institutions — NABARD, SIDBI, EXIM, NHB, NaBFID</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fb"><table class="ft">
+<tr><th>Institution</th><th>Full Name</th><th>Estd.</th><th>Function</th></tr>
+<tr><td><span class="hl">NABARD</span></td><td>National Bank for Agriculture & Rural Development</td><td>1982</td><td>Apex body for rural credit; refinances cooperative banks & RRBs; promotes SHGs, FPOs; regulates rural cooperative banks</td></tr>
+<tr><td><span class="hl">SIDBI</span></td><td>Small Industries Development Bank of India</td><td>1990</td><td>Apex body for MSME sector; provides direct & indirect finance; Fund of Funds for startups</td></tr>
+<tr><td><span class="hl">EXIM Bank</span></td><td>Export-Import Bank of India</td><td>1982</td><td>Finances, facilitates & promotes India's international trade; Lines of Credit to foreign govts</td></tr>
+<tr><td><span class="hl">NHB</span></td><td>National Housing Bank</td><td>1988</td><td>Apex body for housing finance; regulates HFCs; promotes affordable housing</td></tr>
+<tr><td><span class="hl">NaBFID</span></td><td>National Bank for Financing Infrastructure & Development</td><td>2021</td><td>Development Finance Institution (DFI) for long-term infrastructure financing</td></tr>
+<tr><td><span class="hl">ECGC</span></td><td>Export Credit Guarantee Corporation</td><td>1957</td><td>Provides credit risk insurance to exporters</td></tr>
+<tr><td><span class="hl">MUDRA</span></td><td>Micro Units Development & Refinance Agency</td><td>2015</td><td>Refinances micro-enterprise loans: Shishu (up to ₹50K), Kishor (₹50K–5L), Tarun (₹5L–10L)</td></tr>
+</table></div>
+</div></div>
+
+<!-- ═══════ CH5: MONETARY POLICY ═══════ -->
+<div class="ch" id="c5">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">05</div><h2>Monetary Policy — Framework, MPC & Transmission</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>Monetary Policy Framework</h3>
+<div class="fb"><ul>
+<li><span class="hl">Flexible Inflation Targeting (FIT)</span> adopted in 2016 under amended RBI Act</li>
+<li><span class="ky">Inflation Target:</span> 4% CPI ± 2% tolerance band (i.e., 2%–6%)</li>
+<li><span class="ky">Monetary Policy Committee (MPC):</span> 6 members — 3 from RBI (Governor as Chair, 1 DG, 1 ED) + 3 external members appointed by GoI</li>
+<li>MPC meets <span class="hl">at least 4 times a year</span> (currently meets 6 times — bi-monthly)</li>
+<li>Decisions by <span class="hl">majority vote</span>; Governor has casting vote in case of tie</li>
+<li>Minutes published 14 days after meeting</li>
+<li><span class="ky">Current MPC (Feb 2026):</span> Sanjay Malhotra (Chair), Poonam Gupta (DG), Indranil Bhattacharyya (ED), Nagesh Kumar, Saugata Bhattacharya, Ram Singh</li>
+</ul></div></div>
+<div class="fg"><h3>Types of Monetary Policy Stance</h3>
+<div class="fb"><table class="ft">
+<tr><th>Stance</th><th>Meaning</th><th>Signal</th></tr>
+<tr><td><span class="hl">Accommodative</span></td><td>Ready to cut rates or keep rates low</td><td>Growth priority; rates may go down, not up</td></tr>
+<tr><td><span class="hl">Neutral</span></td><td>Flexibility in either direction</td><td>Can raise or cut rates based on data</td></tr>
+<tr><td><span class="hl">Hawkish / Tightening</span></td><td>Ready to raise rates</td><td>Inflation priority; rates may go up</td></tr>
+<tr><td><span class="ky">Current (Feb 2026)</span></td><td><b>Neutral</b></td><td>MPC keeping options open; cumulative 125 bps cut done</td></tr>
+</table></div></div>
+<div class="fg"><h3>Monetary Policy Transmission</h3>
+<div class="fb"><ul>
+<li><span class="ky">Transmission</span> = How RBI rate changes flow to actual bank lending/deposit rates</li>
+<li><span class="hl">Channels:</span> Interest Rate Channel → Credit Channel → Asset Price Channel → Exchange Rate Channel → Expectations Channel</li>
+<li>EBLR system (since Oct 2019) improved transmission vs MCLR/Base Rate</li>
+<li>Transmission often incomplete due to banks' CASA ratios, NPA levels, and competition</li>
+</ul></div></div>
+</div></div>
+
+<!-- ═══════ CH6: FINANCIAL MARKETS ═══════ -->
+<div class="ch" id="c6">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">06</div><h2>Financial Markets — Money, Capital, Forex & Bond Markets</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>Money Market Instruments (Short-term: up to 1 year)</h3>
+<div class="fb"><table class="ft">
+<tr><th>Instrument</th><th>Issuer</th><th>Maturity</th><th>Key Feature</th></tr>
+<tr><td><span class="hl">Treasury Bills (T-Bills)</span></td><td>Government of India</td><td>91 / 182 / 364 days</td><td>Zero coupon; issued at discount; risk-free; benchmark</td></tr>
+<tr><td><span class="hl">Commercial Paper (CP)</span></td><td>Corporates</td><td>7 days – 1 year</td><td>Unsecured promissory note; min ₹5 lakh; high credit rating needed</td></tr>
+<tr><td><span class="hl">Certificate of Deposit (CD)</span></td><td>Banks / FIs</td><td>7 days – 1 year (banks); 1–3 yrs (FIs)</td><td>Negotiable term deposit; issued at discount</td></tr>
+<tr><td><span class="hl">Call Money</span></td><td>Banks</td><td>1 day (overnight)</td><td>Inter-bank lending; no collateral; rate = call rate</td></tr>
+<tr><td><span class="hl">Notice Money</span></td><td>Banks</td><td>2–14 days</td><td>Short-term inter-bank borrowing</td></tr>
+<tr><td><span class="hl">Term Money</span></td><td>Banks</td><td>15 days – 1 year</td><td>Inter-bank term lending</td></tr>
+<tr><td><span class="hl">Repo / Reverse Repo</span></td><td>RBI / Banks</td><td>Overnight / Term</td><td>Collateralized lending using G-Secs</td></tr>
+<tr><td><span class="hl">CBLO → TREPS</span></td><td>Banks, MFs, Insurance</td><td>Overnight</td><td>Triparty Repo on G-Secs; replaced CBLO in 2018</td></tr>
+</table></div></div>
+<div class="fg"><h3>Capital Market</h3>
+<div class="fb"><table class="ft">
+<tr><th>Segment</th><th>Type</th><th>Examples</th></tr>
+<tr><td><b>Primary Market</b></td><td>New issue of securities</td><td>IPO, FPO, Rights Issue, Private Placement, QIP, OFS</td></tr>
+<tr><td><b>Secondary Market</b></td><td>Trading of existing securities</td><td>BSE (1875), NSE (1992) — Sensex, Nifty 50</td></tr>
+<tr><td><b>Equity Market</b></td><td>Shares / Stocks</td><td>Common Stock, Preference Shares, ADR, GDR</td></tr>
+<tr><td><b>Bond / Debt Market</b></td><td>Fixed income instruments</td><td>G-Secs, SDL, Corporate Bonds, Municipal Bonds, PSU Bonds</td></tr>
+</table></div></div>
+<div class="fg"><h3>Foreign Exchange (Forex) Market</h3>
+<div class="fb"><ul>
+<li>India follows <span class="hl">Managed Float</span> exchange rate system (not fully fixed, not fully floating)</li>
+<li>RBI intervenes to prevent excessive volatility (buys/sells USD)</li>
+<li><span class="ky">FBIL</span> (Financial Benchmarks India Ltd) publishes daily reference rates</li>
+<li>Current INR/USD ≈ ₹94.65 (as of March 30, 2026)</li>
+<li><span class="hl">Key Terms:</span> Spot Rate, Forward Rate, NEER (Nominal Effective Exchange Rate), REER (Real Effective Exchange Rate)</li>
+<li><span class="ky">Nostro Account:</span> Indian bank's account in foreign bank (in foreign currency)</li>
+<li><span class="ky">Vostro Account:</span> Foreign bank's account in Indian bank (in INR)</li>
+</ul></div></div>
+</div></div>
+
+<!-- ═══════ CH7: DERIVATIVES ═══════ -->
+<div class="ch" id="c7">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">07</div><h2>Derivatives — Forwards, Futures, Options & Swaps</h2><span class="pr pr-m">Medium</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>What is a Derivative?</h3>
+<div class="fb"><ul>
+<li>A <span class="hl">Derivative</span> is a financial contract whose value is <span class="ky">derived</span> from an underlying asset (stock, bond, commodity, currency, interest rate, index)</li>
+<li>Used for: <span class="ky">Hedging</span> (risk reduction), <span class="ky">Speculation</span> (profit from price movement), <span class="ky">Arbitrage</span> (risk-free profit from price differences)</li>
+</ul></div></div>
+<div class="fg"><h3>Types of Derivatives</h3>
+<div class="fb"><table class="ft">
+<tr><th>Type</th><th>Definition</th><th>Exchange Traded?</th><th>Obligation</th><th>Example</th></tr>
+<tr><td><span class="hl">Forward</span></td><td>Custom contract to buy/sell asset at future date at agreed price</td><td>❌ OTC (Over-the-counter)</td><td>Both parties obligated</td><td>Farmer agrees to sell wheat at ₹2000/quintal after 3 months</td></tr>
+<tr><td><span class="hl">Future</span></td><td>Standardised forward contract traded on exchange</td><td>✅ Exchange (NSE, MCX)</td><td>Both parties obligated</td><td>Nifty Futures, Gold Futures</td></tr>
+<tr><td><span class="hl">Option</span></td><td>Right (not obligation) to buy/sell asset at strike price</td><td>✅ Exchange (mostly)</td><td>Buyer has right; Seller has obligation</td><td>Call Option (right to buy); Put Option (right to sell)</td></tr>
+<tr><td><span class="hl">Swap</span></td><td>Agreement to exchange cash flows between two parties</td><td>❌ OTC</td><td>Both parties obligated</td><td>Interest Rate Swap (fixed ↔ floating); Currency Swap</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Options Terminology</h3>
+<div class="fb"><ul>
+<li><span class="ky">Call Option:</span> Right to BUY at strike price. Buyer expects price to ↑</li>
+<li><span class="ky">Put Option:</span> Right to SELL at strike price. Buyer expects price to ↓</li>
+<li><span class="ky">Strike Price:</span> Pre-agreed price at which the option can be exercised</li>
+<li><span class="ky">Premium:</span> Price paid by option buyer to the option seller (writer)</li>
+<li><span class="ky">Expiry Date:</span> Last date to exercise the option</li>
+<li><span class="ky">In the Money (ITM):</span> Option has intrinsic value (profitable if exercised now)</li>
+<li><span class="ky">Out of the Money (OTM):</span> No intrinsic value (not profitable if exercised now)</li>
+<li><span class="ky">At the Money (ATM):</span> Strike price = Current market price</li>
+</ul></div></div>
+</div></div>
+
+<!-- ═══════ CH8: BANKING TERMS A–Z ═══════ -->
+<div class="ch" id="c8">
+<div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">08</div><h2>Banking & Financial Terms — A to Z Glossary</h2><span class="pr pr-h">Must Know</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fb"><table class="ft">
+<tr><th>Term</th><th>Definition</th></tr>
+<tr><td><span class="hl">ANBC</span></td><td>Adjusted Net Bank Credit — used to compute Priority Sector Lending targets</td></tr>
+<tr><td><span class="hl">ARC</span></td><td>Asset Reconstruction Company — buys NPAs from banks at discount & tries to recover</td></tr>
+<tr><td><span class="hl">Basel III</span></td><td>Global banking regulation for capital adequacy, stress testing & liquidity (BIS)</td></tr>
+<tr><td><span class="hl">CAR/CRAR</span></td><td>Capital Adequacy Ratio = (Tier 1 + Tier 2 Capital) / Risk Weighted Assets. Min 9% in India</td></tr>
+<tr><td><span class="hl">CBDC</span></td><td>Central Bank Digital Currency — Digital Rupee (e₹) launched by RBI in 2022</td></tr>
+<tr><td><span class="hl">CET1</span></td><td>Common Equity Tier 1 — highest quality capital (equity + retained earnings). Min 5.5%</td></tr>
+<tr><td><span class="hl">Core Banking</span></td><td>Centralised system allowing customers to access bank from any branch (CBS)</td></tr>
+<tr><td><span class="hl">CRILC</span></td><td>Central Repository of Information on Large Credits — RBI database of large borrowers</td></tr>
+<tr><td><span class="hl">DRT</span></td><td>Debt Recovery Tribunal — adjudicates NPA recovery cases (under RDDBFI Act, 1993)</td></tr>
+<tr><td><span class="hl">ECB</span></td><td>External Commercial Borrowings — loans raised by Indian entities from foreign sources</td></tr>
+<tr><td><span class="hl">FCNR</span></td><td>Foreign Currency Non-Resident Account — term deposit in foreign currency by NRIs</td></tr>
+<tr><td><span class="hl">FPI</span></td><td>Foreign Portfolio Investor — invests in Indian securities market (registered with SEBI)</td></tr>
+<tr><td><span class="hl">G-Sec</span></td><td>Government Security — debt instrument issued by GoI/State Govts. Safest Indian investment</td></tr>
+<tr><td><span class="hl">IBC</span></td><td>Insolvency & Bankruptcy Code, 2016 — unified framework for resolution/liquidation</td></tr>
+<tr><td><span class="hl">KYC</span></td><td>Know Your Customer — identity verification process mandated by RBI for all bank accounts</td></tr>
+<tr><td><span class="hl">LAF</span></td><td>Liquidity Adjustment Facility — RBI's tool to inject/absorb liquidity via repo/reverse repo</td></tr>
+<tr><td><span class="hl">LCR</span></td><td>Liquidity Coverage Ratio — Min 100%. Bank must hold HQLA to cover 30-day net outflows</td></tr>
+<tr><td><span class="hl">NBFC</span></td><td>Non-Banking Financial Company — registered under RBI; lends but can't accept demand deposits</td></tr>
+<tr><td><span class="hl">NEFT</span></td><td>National Electronic Funds Transfer — 24x7 real-time settlement (since Dec 2019)</td></tr>
+<tr><td><span class="hl">NRE Account</span></td><td>Non-Resident External Account — foreign earnings deposited in INR; fully repatriable; tax-free interest</td></tr>
+<tr><td><span class="hl">NRO Account</span></td><td>Non-Resident Ordinary Account — Indian income of NRIs in INR; limited repatriation; taxable</td></tr>
+<tr><td><span class="hl">NSFR</span></td><td>Net Stable Funding Ratio — ensures long-term funding stability. Min 100% (Basel III)</td></tr>
+<tr><td><span class="hl">OCA</span></td><td>One-Time Restructuring of Loans — permitted by RBI during crises (e.g., COVID)</td></tr>
+<tr><td><span class="hl">PCR</span></td><td>Provision Coverage Ratio = Provisions / Gross NPAs × 100. Higher = safer</td></tr>
+<tr><td><span class="hl">RTGS</span></td><td>Real Time Gross Settlement — large-value (min ₹2 lakh) instant fund transfer; 24x7</td></tr>
+<tr><td><span class="hl">SARFAESI</span></td><td>Securitisation & Reconstruction of Financial Assets & Enforcement of Security Interest Act, 2002 — lets banks seize collateral without court</td></tr>
+<tr><td><span class="hl">SDL</span></td><td>State Development Loans — bonds issued by State Governments</td></tr>
+<tr><td><span class="hl">SWIFT</span></td><td>Society for Worldwide Interbank Financial Telecommunication — secure global messaging for banks</td></tr>
+<tr><td><span class="hl">UPI</span></td><td>Unified Payments Interface — real-time mobile payment system by NPCI. India's most used payment method</td></tr>
+<tr><td><span class="hl">WACR</span></td><td>Weighted Average Call Rate — operating target of monetary policy. Tracks near repo rate</td></tr>
+<tr><td><span class="hl">Write-off</span></td><td>Bank removes bad loan from books (still pursues recovery). Cleans balance sheet, not forgiveness</td></tr>
+<tr><td><span class="hl">Yield Curve</span></td><td>Graph plotting interest rates vs bond maturity. Normal = upward slope. Inverted = recession signal</td></tr>
+</table></div>
+</div></div>
+
+<!-- CH9: INFLATION -->
+<div class="ch open" id="c9"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">09</div><h2>Inflation — Types, Measurement, CPI, WPI & Control</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>What is Inflation?</h3><div class="fb"><ul>
+<li><span class="hl">Inflation</span> = Sustained increase in the general price level over time → reduces purchasing power of money</li>
+<li><span class="hl">Deflation</span> = Sustained decrease in price level | <span class="hl">Disinflation</span> = Rate of inflation is decreasing</li>
+<li><span class="hl">Stagflation</span> = High inflation + Low growth + High unemployment (worst combo)</li>
+<li><span class="hl">Hyperinflation</span> = Extremely rapid inflation (50%+ per month)</li></ul></div></div>
+<div class="fg"><h3>Types of Inflation</h3><div class="fb"><table class="ft"><tr><th>Type</th><th>Cause</th><th>Example</th></tr>
+<tr><td><span class="hl">Demand-Pull</span></td><td>Too much money chasing too few goods → excess demand</td><td>Govt stimulus leading to higher spending</td></tr>
+<tr><td><span class="hl">Cost-Push</span></td><td>Rising input costs → producers pass on to consumers</td><td>Oil price shock → higher transport & production costs</td></tr>
+<tr><td><span class="hl">Built-in / Wage-Price Spiral</span></td><td>Workers demand higher wages → firms raise prices → cycle repeats</td><td>Unionised sector wage negotiations</td></tr>
+<tr><td><span class="hl">Structural</span></td><td>Supply-side bottlenecks (infrastructure, regulation)</td><td>Food inflation due to poor storage in India</td></tr></table></div></div>
+<div class="fg"><h3>Measurement of Inflation in India</h3><div class="fb"><table class="ft"><tr><th>Index</th><th>Full Name</th><th>Base Year</th><th>Published By</th><th>Items</th><th>Key Use</th></tr>
+<tr><td><span class="hl">CPI</span></td><td>Consumer Price Index</td><td>2024=100 (new series from Jan 2026)</td><td>MOSPI (NSO)</td><td>299 items in 8 groups</td><td><b>RBI's target for monetary policy (4%±2%)</b></td></tr>
+<tr><td><span class="hl">WPI</span></td><td>Wholesale Price Index</td><td>2011-12=100</td><td>DPIIT (Commerce Ministry)</td><td>697 items</td><td>Measures producer-level inflation; used for deflator</td></tr></table></div></div>
+<div class="fg"><h3>CPI Components (Weights)</h3><div class="fb"><table class="ft"><tr><th>Group</th><th>Weight</th></tr>
+<tr><td><span class="hl">Food & Beverages</span></td><td>~45.86%</td></tr>
+<tr><td>Housing</td><td>~10.07%</td></tr>
+<tr><td>Fuel & Light</td><td>~6.84%</td></tr>
+<tr><td>Clothing & Footwear</td><td>~6.53%</td></tr>
+<tr><td>Miscellaneous (Health, Education, Transport)</td><td>~28.32%</td></tr>
+<tr><td><span class="ky">Core Inflation</span></td><td>CPI minus Food & Fuel — shows underlying price pressure</td></tr></table></div></div>
+<div class="fg"><h3>Current Inflation Numbers (FY 2025-26)</h3><div class="fb"><ul>
+<li><span class="hl">CPI Inflation FY26 projected:</span> 2.1% (RBI, Feb 2026 MPC)</li>
+<li>CPI Nov 2025: 0.7% | CPI Dec 2025: 1.3% (below 2% lower tolerance band)</li>
+<li>Core inflation (excl. gold): 2.6% — very benign</li>
+<li><span class="nt">Food group in deflation; precious metals pushing up core</span></li></ul></div></div>
+<div class="fg"><h3>Inflation Control Measures</h3><div class="fb"><table class="ft"><tr><th>Type</th><th>Measures</th></tr>
+<tr><td><span class="hl">Monetary Policy</span></td><td>↑ Repo Rate, ↑ CRR, Sell G-Secs (OMO), ↑ SLR → Tighten money supply</td></tr>
+<tr><td><span class="hl">Fiscal Policy</span></td><td>↓ Govt spending, ↑ Taxes, ↓ Subsidies → Reduce demand</td></tr>
+<tr><td><span class="hl">Supply-side</span></td><td>Import duty cuts, release buffer stocks, improve logistics, ban hoarding</td></tr>
+<tr><td><span class="hl">Administrative</span></td><td>Stock limits on essential commodities, price caps, APMC reforms</td></tr></table></div></div>
+</div></div>
+
+<!-- CH10: FISCAL POLICY & BUDGET -->
+<div class="ch" id="c10"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">10</div><h2>Fiscal Policy & Union Budget 2026-27</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>Key Fiscal Terms</h3><div class="fb"><table class="ft"><tr><th>Term</th><th>Formula / Definition</th></tr>
+<tr><td><span class="hl">Revenue Deficit</span></td><td>Revenue Expenditure − Revenue Receipts (Govt spending more than earning on regular items)</td></tr>
+<tr><td><span class="hl">Fiscal Deficit</span></td><td>Total Expenditure − Total Receipts (excl. borrowings) = Total Borrowing Requirement of Govt</td></tr>
+<tr><td><span class="hl">Primary Deficit</span></td><td>Fiscal Deficit − Interest Payments (shows borrowing need excluding past debt servicing)</td></tr>
+<tr><td><span class="hl">Revenue Receipts</span></td><td>Tax Revenue + Non-Tax Revenue (don't create liability)</td></tr>
+<tr><td><span class="hl">Capital Receipts</span></td><td>Borrowings + Disinvestment + Loan Recoveries (create liability or reduce assets)</td></tr>
+<tr><td><span class="hl">Revenue Expenditure</span></td><td>Salaries, Subsidies, Interest payments, Pensions (don't create assets)</td></tr>
+<tr><td><span class="hl">Capital Expenditure</span></td><td>Roads, Bridges, Defence equipment (create assets or reduce liabilities)</td></tr>
+<tr><td><span class="hl">FRBM Act</span></td><td>Fiscal Responsibility & Budget Management Act, 2003 — mandates fiscal discipline</td></tr></table></div></div>
+<div class="fg"><h3>Union Budget 2026-27 — Key Numbers</h3><div class="fb"><table class="ft"><tr><th>Parameter</th><th>FY26 RE</th><th>FY27 BE</th></tr>
+<tr><td><span class="hl">Total Expenditure</span></td><td>₹49.65 lakh Cr</td><td>₹53.47 lakh Cr (+7.7%)</td></tr>
+<tr><td><span class="hl">Capital Expenditure</span></td><td>₹10.96 lakh Cr</td><td>₹12.22 lakh Cr (+11.5%)</td></tr>
+<tr><td><span class="hl">Revenue Expenditure</span></td><td>₹38.69 lakh Cr</td><td>₹41.25 lakh Cr</td></tr>
+<tr><td><span class="hl">Fiscal Deficit</span></td><td>4.4% of GDP</td><td><b>4.3% of GDP</b></td></tr>
+<tr><td><span class="hl">Revenue Deficit</span></td><td>1.5% of GDP</td><td>1.5% of GDP</td></tr>
+<tr><td><span class="hl">Gross Tax Revenue</span></td><td>—</td><td>₹44.04 lakh Cr</td></tr>
+<tr><td><span class="hl">Net Tax Revenue</span></td><td>₹26.7 lakh Cr</td><td>₹28.67 lakh Cr</td></tr>
+<tr><td><span class="hl">Gross Borrowing</span></td><td>—</td><td>₹17.20 lakh Cr</td></tr>
+<tr><td><span class="hl">Debt-to-GDP</span></td><td>56.1%</td><td>55.6% (target: 50±1% by 2030-31)</td></tr></table></div></div>
+<div class="fg"><h3>Budget 2026-27 — Key Highlights</h3><div class="fb"><ul>
+<li><span class="ky">Theme:</span> 3 Kartavyas — Sustain Growth, Build Capacity, Sabka Saath Sabka Vikas</li>
+<li><span class="hl">7 Manufacturing Sectors:</span> Biopharma, Semiconductors (ISM 2.0), Electronics, Rare Earth, Chemicals, Capital Goods, Textiles</li>
+<li><span class="hl">₹10,000 Cr SME Growth Fund</span> for champion MSMEs</li>
+<li><span class="hl">₹20,000 Cr for CCUS</span> (Carbon Capture) over 5 years</li>
+<li><span class="hl">7 High-Speed Rail corridors</span> announced</li>
+<li><span class="hl">High Level Committee on Banking for Viksit Bharat</span></li>
+<li><span class="hl">New Income Tax Act, 2025</span> effective from April 1, 2026</li>
+<li><span class="hl">Collateral-free MSME loans</span> doubled to ₹20 lakh</li>
+<li>16th Finance Commission: States' share at 41%</li></ul></div></div>
+</div></div>
+
+<!-- CH11: ACCOUNTING -->
+<div class="ch" id="c11"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">11</div><h2>Accounting & Financial Statements</h2><span class="pr pr-m">Medium</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>Three Core Financial Statements</h3><div class="fb"><table class="ft"><tr><th>Statement</th><th>Shows</th><th>Period</th></tr>
+<tr><td><span class="hl">Balance Sheet</span></td><td>What the company OWNS (Assets) vs OWES (Liabilities) + Owner's Equity</td><td>Snapshot at a point in time</td></tr>
+<tr><td><span class="hl">Profit & Loss (Income Statement)</span></td><td>Revenue − Expenses = Net Profit/Loss</td><td>Over a period (quarter/year)</td></tr>
+<tr><td><span class="hl">Cash Flow Statement</span></td><td>Actual cash inflows & outflows from Operating, Investing, Financing activities</td><td>Over a period</td></tr></table></div></div>
+<div class="fg"><h3>Balance Sheet Equation</h3><div class="fb"><ul>
+<li><span class="hl">Assets = Liabilities + Shareholders' Equity</span></li>
+<li><span class="ky">Assets:</span> Current (Cash, Receivables, Inventory) + Non-Current (Fixed Assets, Intangibles)</li>
+<li><span class="ky">Liabilities:</span> Current (Payables, Short-term loans) + Non-Current (Long-term debt, Bonds)</li>
+<li><span class="ky">Equity:</span> Share Capital + Reserves & Surplus + Retained Earnings</li></ul></div></div>
+<div class="fg"><h3>Cash Flow Statement — 3 Activities</h3><div class="fb"><table class="ft"><tr><th>Activity</th><th>Includes</th><th>Healthy Sign</th></tr>
+<tr><td><span class="hl">Operating (CFO)</span></td><td>Cash from core business (sales, expenses, taxes)</td><td>Positive = business generating cash</td></tr>
+<tr><td><span class="hl">Investing (CFI)</span></td><td>Capex, asset purchases/sales, investments</td><td>Negative = company investing in growth</td></tr>
+<tr><td><span class="hl">Financing (CFF)</span></td><td>Debt raised/repaid, equity issued, dividends paid</td><td>Depends on stage of company</td></tr></table></div></div>
+</div></div>
+
+<!-- CH12: FINANCIAL RATIOS -->
+<div class="ch" id="c12"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">12</div><h2>Financial Ratios — Complete Formulas</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fb"><table class="ft"><tr><th>Category</th><th>Ratio</th><th>Formula</th><th>Meaning</th></tr>
+<tr><td rowspan="3"><b>Profitability</b></td><td><span class="hl">ROE</span></td><td>Net Profit / Shareholders' Equity × 100</td><td>Return generated on owners' investment</td></tr>
+<tr><td><span class="hl">ROA</span></td><td>Net Profit / Total Assets × 100</td><td>How efficiently assets generate profit</td></tr>
+<tr><td><span class="hl">Net Profit Margin</span></td><td>Net Profit / Revenue × 100</td><td>% of revenue that becomes profit</td></tr>
+<tr><td rowspan="3"><b>Liquidity</b></td><td><span class="hl">Current Ratio</span></td><td>Current Assets / Current Liabilities</td><td>Ability to pay short-term obligations. Ideal: >2</td></tr>
+<tr><td><span class="hl">Quick Ratio</span></td><td>(Current Assets − Inventory) / Current Liabilities</td><td>Stricter liquidity test. Ideal: >1</td></tr>
+<tr><td><span class="hl">Cash Ratio</span></td><td>Cash / Current Liabilities</td><td>Most conservative liquidity measure</td></tr>
+<tr><td rowspan="2"><b>Leverage</b></td><td><span class="hl">Debt-to-Equity</span></td><td>Total Debt / Shareholders' Equity</td><td>How much debt vs equity. Lower = safer</td></tr>
+<tr><td><span class="hl">Interest Coverage</span></td><td>EBIT / Interest Expense</td><td>Ability to pay interest. Higher = better</td></tr>
+<tr><td rowspan="3"><b>Efficiency</b></td><td><span class="hl">Inventory Turnover</span></td><td>COGS / Average Inventory</td><td>How fast inventory is sold. Higher = better</td></tr>
+<tr><td><span class="hl">Debtor Days</span></td><td>(Receivables / Revenue) × 365</td><td>Days to collect payment from customers</td></tr>
+<tr><td><span class="hl">Creditor Days</span></td><td>(Payables / COGS) × 365</td><td>Days to pay suppliers</td></tr>
+<tr><td rowspan="2"><b>Banking-Specific</b></td><td><span class="hl">NIM</span></td><td>(Interest Income − Interest Expense) / Avg Earning Assets</td><td>Net Interest Margin — bank's core profitability</td></tr>
+<tr><td><span class="hl">CAR/CRAR</span></td><td>(Tier 1 + Tier 2 Capital) / Risk-Weighted Assets</td><td>Capital Adequacy Ratio. Min 9% in India</td></tr></table></div>
+</div></div>
+
+<!-- CH13: FINANCIAL INCLUSION -->
+<div class="ch" id="c13"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">13</div><h2>Financial Inclusion — Schemes & Concepts</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fb"><table class="ft"><tr><th>Scheme</th><th>Year</th><th>Key Feature</th></tr>
+<tr><td><span class="hl">PM Jan Dhan Yojana (PMJDY)</span></td><td>2014</td><td>Zero-balance bank account for every unbanked adult; RuPay Debit Card; ₹2 lakh accident insurance; overdraft up to ₹10,000</td></tr>
+<tr><td><span class="hl">PM Jeevan Jyoti Bima (PMJJBY)</span></td><td>2015</td><td>Life insurance of ₹2 lakh; premium ₹436/year; age 18–50</td></tr>
+<tr><td><span class="hl">PM Suraksha Bima (PMSBY)</span></td><td>2015</td><td>Accident insurance ₹2 lakh; premium ₹20/year; age 18–70</td></tr>
+<tr><td><span class="hl">Atal Pension Yojana (APY)</span></td><td>2015</td><td>Guaranteed pension ₹1000–5000/month after 60; for unorganised sector</td></tr>
+<tr><td><span class="hl">PM MUDRA Yojana</span></td><td>2015</td><td>Collateral-free loans to micro enterprises: Shishu (≤₹50K), Kishor (₹50K–5L), Tarun (₹5L–10L)</td></tr>
+<tr><td><span class="hl">Stand-Up India</span></td><td>2016</td><td>₹10L–1Cr loans for SC/ST/Women entrepreneurs; at least 1 per bank branch</td></tr>
+<tr><td><span class="hl">Kisan Credit Card (KCC)</span></td><td>1998</td><td>Credit facility for farmers for crops, post-harvest, allied activities; interest subvention @2%</td></tr>
+<tr><td><span class="hl">SHG-Bank Linkage</span></td><td>1992</td><td>Self-Help Groups linked to banks via NABARD; largest microfinance programme globally</td></tr>
+<tr><td><span class="hl">Direct Benefit Transfer (DBT)</span></td><td>2013</td><td>Subsidies/benefits transferred directly to Jan Dhan accounts via Aadhaar; eliminates middlemen</td></tr>
+<tr><td><span class="hl">JAM Trinity</span></td><td>—</td><td>Jan Dhan + Aadhaar + Mobile — backbone of financial inclusion in India</td></tr>
+<tr><td><span class="hl">Ayushman Bharat (PM-JAY)</span></td><td>2018</td><td>Health insurance ₹5 lakh/family/year for bottom 40% families; extended to all 70+ citizens</td></tr></table></div>
+</div></div>
+
+<!-- CH14: DIGITAL PAYMENTS -->
+<div class="ch" id="c14"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">14</div><h2>Digital Payments & FinTech</h2><span class="pr pr-h">Critical</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fb"><table class="ft"><tr><th>System</th><th>Operator</th><th>Feature</th></tr>
+<tr><td><span class="hl">UPI</span></td><td>NPCI</td><td>Real-time mobile payments via VPA; 24x7; inter-bank; India's #1 payment system. Now available in 8+ countries</td></tr>
+<tr><td><span class="hl">RTGS</span></td><td>RBI</td><td>Real Time Gross Settlement; min ₹2 lakh; 24x7 since Dec 2020; for large-value transactions</td></tr>
+<tr><td><span class="hl">NEFT</span></td><td>RBI</td><td>National Electronic Funds Transfer; 24x7 since Dec 2019; no minimum amount; batch processing</td></tr>
+<tr><td><span class="hl">IMPS</span></td><td>NPCI</td><td>Immediate Payment Service; 24x7; up to ₹5 lakh; real-time</td></tr>
+<tr><td><span class="hl">NACH</span></td><td>NPCI</td><td>National Automated Clearing House; bulk payments (salaries, dividends, EMIs)</td></tr>
+<tr><td><span class="hl">BBPS</span></td><td>NPCI</td><td>Bharat Bill Payment System; one-stop bill payment for utilities, insurance, etc.</td></tr>
+<tr><td><span class="hl">FASTag</span></td><td>NPCI/NHAI</td><td>RFID-based electronic toll collection; mandatory on all 4-wheelers</td></tr>
+<tr><td><span class="hl">e₹ (Digital Rupee / CBDC)</span></td><td>RBI</td><td>Central Bank Digital Currency; pilot launched Dec 2022; Wholesale (e₹-W) + Retail (e₹-R)</td></tr>
+<tr><td><span class="hl">e-RUPI</span></td><td>NPCI</td><td>Prepaid digital voucher; cashless, contactless; person & purpose specific; no bank account needed</td></tr>
+<tr><td><span class="hl">RuPay</span></td><td>NPCI</td><td>India's domestic card payment network; alternative to Visa/Mastercard; lower MDR</td></tr>
+<tr><td><span class="hl">AEPS</span></td><td>NPCI</td><td>Aadhaar Enabled Payment System; biometric-based banking at micro-ATMs</td></tr></table></div>
+<div class="tip"><b>💡 NPCI</b> (National Payments Corporation of India) — umbrella org for all retail payment systems in India. Set up by RBI and IBA in 2008.</div>
+</div></div>
+
+<!-- CH15: CORPORATE GOVERNANCE + RISK + BASEL -->
+<div class="ch" id="c15"><div class="ch-hd" onclick="this.parentElement.classList.toggle('open')"><div class="ch-n">15</div><h2>Corporate Governance, Risk Management & Basel Norms</h2><span class="pr pr-m">Medium-High</span><span class="tgl">▼</span></div>
+<div class="ch-bd">
+<div class="fg"><h3>Corporate Governance in Banking</h3><div class="fb"><ul>
+<li><span class="hl">Definition:</span> System of rules, practices & processes by which a company is directed & controlled</li>
+<li><span class="ky">Key Principles:</span> Transparency, Accountability, Fairness, Responsibility, Independence</li>
+<li><span class="hl">Board Committees (mandatory for banks):</span> Audit Committee, Nomination & Remuneration Committee, Risk Management Committee, Stakeholders Relationship Committee, CSR Committee</li>
+<li><span class="ky">Fit & Proper Criteria:</span> RBI's guidelines for directors of banks — integrity, expertise, financial soundness</li>
+<li><span class="ky">Key Regulations:</span> Companies Act 2013, SEBI LODR, RBI Governance Guidelines, Basel Committee guidelines</li></ul></div></div>
+<div class="fg"><h3>Types of Financial Risks</h3><div class="fb"><table class="ft"><tr><th>Risk</th><th>Definition</th><th>Management Tool</th></tr>
+<tr><td><span class="hl">Credit Risk</span></td><td>Borrower fails to repay loan/interest</td><td>Credit scoring, collateral, provisioning, diversification</td></tr>
+<tr><td><span class="hl">Market Risk</span></td><td>Losses from changes in market prices (interest rates, equity, forex)</td><td>VaR, hedging with derivatives, duration management</td></tr>
+<tr><td><span class="hl">Liquidity Risk</span></td><td>Inability to meet short-term obligations</td><td>LCR, NSFR, diversified funding, contingency plans</td></tr>
+<tr><td><span class="hl">Operational Risk</span></td><td>Losses from failed internal processes, people, systems, or external events</td><td>Internal controls, BCP, cyber security, audit</td></tr>
+<tr><td><span class="hl">Interest Rate Risk</span></td><td>Mismatch between rate-sensitive assets & liabilities</td><td>ALM (Asset-Liability Management), gap analysis</td></tr>
+<tr><td><span class="hl">Systemic Risk</span></td><td>Failure of one institution triggers cascading failures across system</td><td>D-SIBs regulation, resolution frameworks</td></tr></table></div></div>
+<div class="fg"><h3>Basel Norms — Evolution</h3><div class="fb"><table class="ft"><tr><th>Framework</th><th>Year</th><th>Focus</th><th>Key Feature</th></tr>
+<tr><td><span class="hl">Basel I</span></td><td>1988</td><td>Credit Risk only</td><td>Min CAR = 8%. Simple risk-weight approach</td></tr>
+<tr><td><span class="hl">Basel II</span></td><td>2004</td><td>3 Pillars</td><td>Pillar 1: Min Capital | Pillar 2: Supervisory Review | Pillar 3: Market Discipline</td></tr>
+<tr><td><span class="hl">Basel III</span></td><td>2010 (post-GFC)</td><td>Quality of Capital + Liquidity</td><td>Higher CET1, Capital Conservation Buffer, Countercyclical Buffer, LCR, NSFR, Leverage Ratio</td></tr></table></div></div>
+<div class="fg"><h3>Basel III Capital Requirements (India)</h3><div class="fb"><table class="ft"><tr><th>Component</th><th>Minimum Requirement</th></tr>
+<tr><td><span class="hl">CET1 (Common Equity Tier 1)</span></td><td>5.5% of RWA</td></tr>
+<tr><td>Additional Tier 1</td><td>1.5%</td></tr>
+<tr><td><span class="hl">Total Tier 1</span></td><td>7.0%</td></tr>
+<tr><td>Tier 2</td><td>2.0%</td></tr>
+<tr><td><span class="hl">Minimum CAR</span></td><td><b>9.0%</b> (India) vs 8% (global)</td></tr>
+<tr><td>Capital Conservation Buffer (CCB)</td><td>2.5%</td></tr>
+<tr><td><span class="hl">Effective Total with CCB</span></td><td><b>11.5%</b></td></tr>
+<tr><td>D-SIB Surcharge (for SBI etc.)</td><td>+0.2% to +0.8%</td></tr></table></div></div>
+<div class="fg"><h3>Basel III Liquidity Ratios</h3><div class="fb"><table class="ft"><tr><th>Ratio</th><th>Formula</th><th>Minimum</th><th>Purpose</th></tr>
+<tr><td><span class="hl">LCR</span></td><td>HQLA / Total Net Cash Outflows (30 days)</td><td>100%</td><td>Survive 30-day liquidity stress</td></tr>
+<tr><td><span class="hl">NSFR</span></td><td>Available Stable Funding / Required Stable Funding</td><td>100%</td><td>Long-term funding stability (1 year horizon)</td></tr>
+<tr><td><span class="hl">Leverage Ratio</span></td><td>Tier 1 Capital / Total Exposure</td><td>3.5% (India)</td><td>Cap on excessive leverage regardless of risk weights</td></tr></table></div></div>
+<div class="fg"><h3>CAMELS Rating System</h3><div class="fb"><ul>
+<li><span class="hl">C</span> — Capital Adequacy (CAR, Tier 1, Leverage)</li>
+<li><span class="hl">A</span> — Asset Quality (NPA ratio, provision coverage)</li>
+<li><span class="hl">M</span> — Management Quality (governance, compliance, strategy)</li>
+<li><span class="hl">E</span> — Earnings (ROA, ROE, NIM, cost-to-income)</li>
+<li><span class="hl">L</span> — Liquidity (LCR, NSFR, CASA ratio)</li>
+<li><span class="hl">S</span> — Sensitivity to Market Risk (interest rate, forex exposure)</li>
+<li class="nt">Rating 1 (Strong) to 5 (Unsatisfactory). Used by RBI for supervisory assessment.</li></ul></div></div>
+</div></div>
+
+<!-- FOOTER -->
+<div class="footer">
+<p><b>Finance (Chapters 1–15)</b> | RBI Grade B Phase 2</p>
+<p>Current Rates as of Feb 2026 MPC | Professional Navy-Gold Theme | Print-Ready</p>
+<br>
+<button class="btn" onclick="window.print()">Print</button>
+<button class="btn" onclick="document.querySelectorAll('.ch').forEach(t=>t.classList.add('open'))"> Expand All</button>
+<button class="btn" onclick="document.querySelectorAll('.ch').forEach(t=>t.classList.remove('open'))"> Collapse All</button>
+</div>
+
+<script>
+window.addEventListener('scroll',function(){document.getElementById('stt').style.display=window.scrollY>500?'block':'none'});
+document.querySelectorAll('.toc a').forEach(l=>{l.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.classList.add('open');t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+</script>
+</body>
+</html>

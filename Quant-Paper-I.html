@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quant Formulae — RBI Grade B</title>
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #ddd;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #fff;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ===== TABLE OF CONTENTS ===== */
+        .toc {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+
+        .toc a {
+            color: #a8b5ff;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: block;
+            font-size: 0.95em;
+        }
+
+        .toc a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .toc a .num {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* ===== TOPIC SECTIONS ===== */
+        .topic {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .topic:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .topic-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            user-select: none;
+        }
+
+        .topic-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .topic-header h2 {
+            font-size: 1.3em;
+            color: #fff;
+            flex-grow: 1;
+        }
+
+        .topic-header .priority {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .priority-high { background: #e74c3c33; color: #ff6b6b; border: 1px solid #e74c3c55; }
+        .priority-medium { background: #f39c1233; color: #feca57; border: 1px solid #f39c1255; }
+        .priority-low { background: #2ecc7133; color: #55efc4; border: 1px solid #2ecc7155; }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+            color: #667eea;
+        }
+
+        .topic.open .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .topic-body {
+            padding: 0 25px 25px;
+            display: none;
+        }
+
+        .topic.open .topic-body {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== FORMULA CARDS ===== */
+        .formula-group {
+            margin-bottom: 20px;
+        }
+
+        .formula-group h3 {
+            color: #a8b5ff;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(168, 181, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .formula-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            line-height: 2;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .formula-box .highlight {
+            color: #feca57;
+            font-weight: bold;
+        }
+
+        .formula-box .key {
+            color: #55efc4;
+            font-weight: bold;
+        }
+
+        .formula-box .note {
+            color: #a29bfe;
+            font-style: italic;
+        }
+
+        .formula-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .formula-box ul li {
+            padding: 3px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .formula-box ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        /* ===== TABLES ===== */
+        .formula-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .formula-table th {
+            background: rgba(102, 126, 234, 0.3);
+            color: #fff;
+            padding: 10px 15px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .formula-table td {
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #ccc;
+        }
+
+        .formula-table tr:nth-child(even) {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .formula-table tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* ===== QUICK REF GRID ===== */
+        .grid-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .grid-item {
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.25);
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .grid-item .val {
+            color: #feca57;
+            font-weight: bold;
+        }
+
+        /* ===== TIP BOX ===== */
+        .tip-box {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.05));
+            border-left: 4px solid #2ecc71;
+            border-radius: 0 10px 10px 0;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-size: 0.92em;
+        }
+
+        .tip-box .tip-title {
+            color: #2ecc71;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.05));
+            border-left: 4px solid #e74c3c;
+            border-radius: 0 10px 10px 0;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-size: 0.92em;
+        }
+
+        .warning-box .warning-title {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* ===== COLOR THEMES FOR TOPICS ===== */
+        .bg-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .bg-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .bg-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .bg-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .bg-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .bg-6 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+        .bg-7 { background: linear-gradient(135deg, #fccb90, #d57eeb); }
+        .bg-8 { background: linear-gradient(135deg, #e0c3fc, #8ec5fc); }
+        .bg-9 { background: linear-gradient(135deg, #f5576c, #ff6b6b); }
+        .bg-10 { background: linear-gradient(135deg, #667eea, #00f2fe); }
+        .bg-11 { background: linear-gradient(135deg, #f093fb, #38f9d7); }
+        .bg-12 { background: linear-gradient(135deg, #fccb90, #4facfe); }
+        .bg-13 { background: linear-gradient(135deg, #43e97b, #764ba2); }
+        .bg-14 { background: linear-gradient(135deg, #fa709a, #a18cd1); }
+        .bg-15 { background: linear-gradient(135deg, #feca57, #ff6b6b); }
+        .bg-16 { background: linear-gradient(135deg, #a8b5ff, #667eea); }
+        .bg-17 { background: linear-gradient(135deg, #55efc4, #00b894); }
+        .bg-18 { background: linear-gradient(135deg, #fd79a8, #e84393); }
+        .bg-19 { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+        .bg-20 { background: linear-gradient(135deg, #00cec9, #81ecec); }
+        .bg-21 { background: linear-gradient(135deg, #636e72, #b2bec3); }
+
+        .border-1 { border-left: 4px solid #667eea; }
+        .border-2 { border-left: 4px solid #f5576c; }
+        .border-3 { border-left: 4px solid #4facfe; }
+        .border-4 { border-left: 4px solid #43e97b; }
+        .border-5 { border-left: 4px solid #fa709a; }
+        .border-6 { border-left: 4px solid #a18cd1; }
+        .border-7 { border-left: 4px solid #fccb90; }
+        .border-8 { border-left: 4px solid #8ec5fc; }
+        .border-9 { border-left: 4px solid #f5576c; }
+        .border-10 { border-left: 4px solid #00f2fe; }
+        .border-11 { border-left: 4px solid #f093fb; }
+        .border-12 { border-left: 4px solid #fccb90; }
+        .border-13 { border-left: 4px solid #43e97b; }
+        .border-14 { border-left: 4px solid #fa709a; }
+        .border-15 { border-left: 4px solid #feca57; }
+        .border-16 { border-left: 4px solid #a8b5ff; }
+        .border-17 { border-left: 4px solid #55efc4; }
+        .border-18 { border-left: 4px solid #fd79a8; }
+        .border-19 { border-left: 4px solid #6c5ce7; }
+        .border-20 { border-left: 4px solid #00cec9; }
+        .border-21 { border-left: 4px solid #636e72; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .footer .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .footer .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        #scrollTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s;
+        }
+
+        #scrollTop:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                padding: 10px;
+            }
+            .header { background: #333; }
+            .topic { border: 1px solid #ccc; break-inside: avoid; }
+            .topic-body { display: block !important; }
+            .formula-box { background: #f5f5f5; border-color: #ccc; color: #000; }
+            .formula-table th { background: #ddd; color: #000; }
+            .formula-table td { color: #000; }
+            #scrollTop, .toggle-icon { display: none !important; }
+            .toc { break-after: page; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.6em; }
+            .toc-grid { grid-template-columns: 1fr; }
+            .topic-header { flex-wrap: wrap; }
+            .topic-header .priority { margin-top: 5px; }
+            .grid-box { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <h1> Quant Formulae</h1>
+        <p>Complete Topic-Wise Quantitative Aptitude Formulas</p>
+        <div class="badge">30 Questions • 30 Marks • 25 Minutes • 21 Topics Covered</div>
+    </div>
+
+    <!-- ===== TABLE OF CONTENTS ===== -->
+    <div class="toc">
+        <h2>Table of Contents (Click to Jump)</h2>
+        <div class="toc-grid">
+            <a href="#t1"><span class="num">01</span> Number System</a>
+            <a href="#t2"><span class="num">02</span> Simplification & Approximation</a>
+            <a href="#t3"><span class="num">03</span> Percentage</a>
+            <a href="#t4"><span class="num">04</span> Profit, Loss & Discount</a>
+            <a href="#t5"><span class="num">05</span> Simple Interest</a>
+            <a href="#t6"><span class="num">06</span> Compound Interest</a>
+            <a href="#t7"><span class="num">07</span> Ratio & Proportion</a>
+            <a href="#t8"><span class="num">08</span> Average</a>
+            <a href="#t9"><span class="num">09</span> Ages</a>
+            <a href="#t10"><span class="num">10</span> Partnership</a>
+            <a href="#t11"><span class="num">11</span> Time & Work</a>
+            <a href="#t12"><span class="num">12</span> Pipes & Cisterns</a>
+            <a href="#t13"><span class="num">13</span> Time, Speed & Distance</a>
+            <a href="#t14"><span class="num">14</span> Trains</a>
+            <a href="#t15"><span class="num">15</span> Boats & Streams</a>
+            <a href="#t16"><span class="num">16</span> Mixture & Alligation</a>
+            <a href="#t17"><span class="num">17</span> Number Series</a>
+            <a href="#t18"><span class="num">18</span> Quadratic Equations</a>
+            <a href="#t19"><span class="num">19</span> Permutation & Combination</a>
+            <a href="#t20"><span class="num">20</span> Probability</a>
+            <a href="#t21"><span class="num">21</span> Mensuration (2D & 3D)</a>
+            <a href="#tref"><span class="num">⚡</span> Quick Reference Tables</a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 1: NUMBER SYSTEM -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic open border-1" id="t1">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-1">01</div>
+            <h2>Number System</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+
+            <div class="formula-group">
+                <h3>📐 HCF & LCM</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">HCF × LCM = Product of two numbers</span></li>
+                        <li>LCM of fractions = LCM of Numerators / HCF of Denominators</li>
+                        <li>HCF of fractions = HCF of Numerators / LCM of Denominators</li>
+                        <li>HCF of co-prime numbers = 1</li>
+                        <li>LCM of co-prime numbers = Product of numbers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Factors & Divisors</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>If <span class="highlight">N = a<sup>p</sup> × b<sup>q</sup> × c<sup>r</sup></span>, then:</li>
+                        <li>&nbsp;&nbsp;→ Total factors = <span class="key">(p+1)(q+1)(r+1)</span></li>
+                        <li>&nbsp;&nbsp;→ Sum of factors = [(a<sup>p+1</sup>−1)/(a−1)] × [(b<sup>q+1</sup>−1)/(b−1)] × [(c<sup>r+1</sup>−1)/(c−1)]</li>
+                        <li>&nbsp;&nbsp;→ Product of all factors = N<sup>(total factors / 2)</sup></li>
+                        <li>&nbsp;&nbsp;→ Number of odd factors: Ignore power of 2</li>
+                        <li>&nbsp;&nbsp;→ Number of even factors: Total − Odd factors</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Divisibility Rules</h3>
+                <div class="formula-box">
+                    <table class="formula-table">
+                        <tr><th>Div. by</th><th>Rule</th></tr>
+                        <tr><td>2</td><td>Last digit is even (0, 2, 4, 6, 8)</td></tr>
+                        <tr><td>3</td><td>Sum of all digits divisible by 3</td></tr>
+                        <tr><td>4</td><td>Last two digits divisible by 4</td></tr>
+                        <tr><td>5</td><td>Last digit is 0 or 5</td></tr>
+                        <tr><td>6</td><td>Divisible by both 2 and 3</td></tr>
+                        <tr><td>7</td><td>Double last digit, subtract from rest → check if divisible by 7</td></tr>
+                        <tr><td>8</td><td>Last three digits divisible by 8</td></tr>
+                        <tr><td>9</td><td>Sum of all digits divisible by 9</td></tr>
+                        <tr><td>11</td><td>Difference of sum of digits at odd & even places = 0 or multiple of 11</td></tr>
+                        <tr><td>12</td><td>Divisible by both 3 and 4</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Unit Digit Cyclicity</h3>
+                <div class="formula-box">
+                    <table class="formula-table">
+                        <tr><th>Digit</th><th>Cycle</th><th>Period</th></tr>
+                        <tr><td>0, 1, 5, 6</td><td>Same always</td><td>1</td></tr>
+                        <tr><td>2</td><td>2, 4, 8, 6</td><td>4</td></tr>
+                        <tr><td>3</td><td>3, 9, 7, 1</td><td>4</td></tr>
+                        <tr><td>4</td><td>4, 6</td><td>2</td></tr>
+                        <tr><td>7</td><td>7, 9, 3, 1</td><td>4</td></tr>
+                        <tr><td>8</td><td>8, 4, 2, 6</td><td>4</td></tr>
+                        <tr><td>9</td><td>9, 1</td><td>2</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Sum Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Sum of first n natural numbers = <span class="highlight">n(n+1)/2</span></li>
+                        <li>Sum of squares = <span class="highlight">n(n+1)(2n+1)/6</span></li>
+                        <li>Sum of cubes = <span class="highlight">[n(n+1)/2]²</span></li>
+                        <li>Sum of first n odd numbers = <span class="key">n²</span></li>
+                        <li>Sum of first n even numbers = <span class="key">n(n+1)</span></li>
+                        <li>AP: Sum = n/2 × [2a + (n−1)d] &nbsp;|&nbsp; nth term = a + (n−1)d</li>
+                        <li>GP: Sum = a(rⁿ−1)/(r−1) &nbsp;|&nbsp; nth term = a × r<sup>(n−1)</sup></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Remainder Theorem</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>(a × b) mod n = [(a mod n) × (b mod n)] mod n</li>
+                        <li>(a + b) mod n = [(a mod n) + (b mod n)] mod n</li>
+                        <li>(a − b) mod n = [(a mod n) − (b mod n)] mod n</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 2: SIMPLIFICATION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-2" id="t2">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-2">02</div>
+            <h2>Simplification & Approximation</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Core Rules</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">BODMAS</span> → Brackets → Orders (powers/roots) → Division → Multiplication → Addition → Subtraction</li>
+                        <li>Vinculum (bar) is solved first inside brackets</li>
+                        <li>Brackets order: () → {} → []</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Useful Approximations</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>√2 ≈ 1.414 &nbsp;&nbsp; √3 ≈ 1.732 &nbsp;&nbsp; √5 ≈ 2.236</li>
+                        <li>√6 ≈ 2.449 &nbsp;&nbsp; √7 ≈ 2.646 &nbsp;&nbsp; √8 ≈ 2.828</li>
+                        <li>π ≈ 22/7 ≈ 3.14159</li>
+                        <li class="note">Trick: For approximation questions, round to nearest 5 or 10, then calculate</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Algebraic Identities (Frequently Used)</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>(a + b)² = a² + 2ab + b²</li>
+                        <li>(a − b)² = a² − 2ab + b²</li>
+                        <li>a² − b² = (a + b)(a − b)</li>
+                        <li>(a + b)³ = a³ + 3a²b + 3ab² + b³</li>
+                        <li>(a − b)³ = a³ − 3a²b + 3ab² − b³</li>
+                        <li>a³ + b³ = (a + b)(a² − ab + b²)</li>
+                        <li>a³ − b³ = (a − b)(a² + ab + b²)</li>
+                        <li>(a + b + c)² = a² + b² + c² + 2(ab + bc + ca)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 3: PERCENTAGE -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-3" id="t3">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-3">03</div>
+            <h2>Percentage</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Basic Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Percentage = <span class="highlight">(Part / Whole) × 100</span></li>
+                        <li>Increase by x% → New = Original × (1 + x/100)</li>
+                        <li>Decrease by x% → New = Original × (1 − x/100)</li>
+                        <li>If A is x% more than B → B is less than A by <span class="key">[x/(100+x)] × 100</span></li>
+                        <li>If A is x% less than B → B is more than A by <span class="key">[x/(100−x)] × 100</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Successive Percentage Change</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Net effect of a% then b% = <span class="highlight">a + b + (ab/100)</span> %</li>
+                        <li>General: [(1 ± p/100)(1 ± q/100) − 1] × 100</li>
+                        <li class="note">Use + for increase, − for decrease</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Population/Depreciation</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>After n years (growth r%) = P × (1 + r/100)<sup>n</sup></li>
+                        <li>n years ago = P / (1 + r/100)<sup>n</sup></li>
+                        <li>Depreciation after n years = P × (1 − r/100)<sup>n</sup></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Fraction ↔ Percentage Reference</h3>
+                <div class="formula-box">
+                    <table class="formula-table">
+                        <tr><th>Fraction</th><th>%</th><th>Fraction</th><th>%</th><th>Fraction</th><th>%</th></tr>
+                        <tr><td>1/2</td><td>50%</td><td>1/7</td><td>14.28%</td><td>1/12</td><td>8.33%</td></tr>
+                        <tr><td>1/3</td><td>33.33%</td><td>1/8</td><td>12.5%</td><td>1/13</td><td>7.69%</td></tr>
+                        <tr><td>1/4</td><td>25%</td><td>1/9</td><td>11.11%</td><td>1/14</td><td>7.14%</td></tr>
+                        <tr><td>1/5</td><td>20%</td><td>1/10</td><td>10%</td><td>1/15</td><td>6.67%</td></tr>
+                        <tr><td>1/6</td><td>16.67%</td><td>1/11</td><td>9.09%</td><td>1/20</td><td>5%</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 4: PROFIT LOSS DISCOUNT -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-4" id="t4">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-4">04</div>
+            <h2>Profit, Loss & Discount</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Basic P&L Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Profit = <span class="highlight">SP − CP</span></li>
+                        <li>Loss = <span class="highlight">CP − SP</span></li>
+                        <li>Profit % = (Profit / CP) × 100</li>
+                        <li>Loss % = (Loss / CP) × 100</li>
+                        <li>SP = CP × (1 + Profit%/100)</li>
+                        <li>SP = CP × (1 − Loss%/100)</li>
+                        <li>CP = SP / (1 + P%/100) &nbsp;or&nbsp; CP = SP / (1 − L%/100)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Marked Price & Discount</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">SP = MP × (1 − Discount%/100)</span></li>
+                        <li>Discount = MP − SP</li>
+                        <li>Discount % = [(MP − SP) / MP] × 100</li>
+                        <li>MP = CP × (1 + Profit%/100) / (1 − Discount%/100)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Special Tricks</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>If CP of <b>x</b> articles = SP of <b>y</b> articles → Profit% = <span class="key">[(x−y)/y] × 100</span></li>
+                        <li>Successive discounts a% and b% → Equivalent = <span class="key">a + b − (ab/100)</span> %</li>
+                        <li>Dishonest shopkeeper (false weight) → Profit% = [(True − False)/False] × 100</li>
+                        <li>Two items sold at same SP, one at x% profit & other at x% loss → <span class="highlight">Always a Net Loss = x²/100 %</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 5: SIMPLE INTEREST -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-5" id="t5">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-5">05</div>
+            <h2>Simple Interest (SI)</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li><span class="highlight">SI = (P × R × T) / 100</span></li>
+                    <li>Amount = P + SI = <span class="key">P(1 + RT/100)</span></li>
+                    <li>P = (SI × 100) / (R × T)</li>
+                    <li>R = (SI × 100) / (P × T)</li>
+                    <li>T = (SI × 100) / (P × R)</li>
+                    <li>Different rates: SI = P × [(r₁t₁ + r₂t₂ + r₃t₃)/100]</li>
+                    <li>If SI = Principal → T = 100/R years</li>
+                    <li>If amount doubles → RT = 100 → T = 100/R</li>
+                    <li>If amount triples → RT = 200 → T = 200/R</li>
+                </ul>
+            </div>
+            <div class="tip-box">
+                <div class="tip-title">💡 Shortcut</div>
+                If SI on a sum for 2 years at 5% = ₹100, then Principal = (100 × 100)/(5 × 2) = ₹1000
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 6: COMPOUND INTEREST -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-6" id="t6">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-6">06</div>
+            <h2>Compound Interest (CI)</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Core Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">Amount = P × (1 + R/100)<sup>T</sup></span></li>
+                        <li>CI = Amount − P = P × [(1 + R/100)<sup>T</sup> − 1]</li>
+                        <li>Half-yearly: A = P × (1 + R/200)<sup>2T</sup></li>
+                        <li>Quarterly: A = P × (1 + R/400)<sup>4T</sup></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 CI vs SI Difference</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>For <b>2 years</b>: CI − SI = <span class="highlight">P × (R/100)²</span></li>
+                        <li>For <b>3 years</b>: CI − SI = P × (R²/10⁴) × (3 + R/100)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Doubling & Rule of 72</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>If amount doubles in n years → 4× in 2n years → 8× in 3n years</li>
+                        <li><span class="highlight">Rule of 72:</span> Doubling time ≈ 72 / Rate%</li>
+                        <li class="note">Example: At 8%, money doubles in ≈ 72/8 = 9 years</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 7: RATIO & PROPORTION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-7" id="t7">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-7">07</div>
+            <h2>Ratio & Proportion</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li>a : b = a/b</li>
+                    <li>If a:b = c:d → <span class="highlight">ad = bc</span> (cross multiplication)</li>
+                    <li>Duplicate ratio of a:b = a² : b²</li>
+                    <li>Sub-duplicate ratio of a:b = √a : √b</li>
+                    <li>Triplicate ratio of a:b = a³ : b³</li>
+                    <li><span class="key">Componendo:</span> (a+b)/b = (c+d)/d</li>
+                    <li><span class="key">Dividendo:</span> (a−b)/b = (c−d)/d</li>
+                    <li><span class="key">Componendo-Dividendo:</span> (a+b)/(a−b) = (c+d)/(c−d)</li>
+                </ul>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Division in Ratio</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Amount A divided in ratio x:y:</li>
+                        <li>&nbsp;&nbsp;→ First part = A × x/(x+y)</li>
+                        <li>&nbsp;&nbsp;→ Second part = A × y/(x+y)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 8: AVERAGE -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-8" id="t8">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-8">08</div>
+            <h2>Average</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li><span class="highlight">Average = Sum of observations / Number of observations</span></li>
+                    <li>Sum = Average × Count</li>
+                    <li>Weighted Average = Σ(value × weight) / Σ(weights)</li>
+                    <li>If 1 number <b>added</b>: New Avg = (nA + x) / (n+1)</li>
+                    <li>If 1 number <b>removed</b>: New Avg = (nA − x) / (n−1)</li>
+                    <li>If 1 number <b>replaced</b> (x by y): New Avg = A + (y−x)/n</li>
+                    <li>Average of first n natural numbers = <span class="key">(n+1)/2</span></li>
+                    <li>Average of first n even numbers = (n+1)</li>
+                    <li>Average of first n odd numbers = n</li>
+                    <li>Average of consecutive numbers a to b = (a+b)/2</li>
+                    <li>Average speed (same distance) = 2S₁S₂/(S₁+S₂)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 9: AGES -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-9" id="t9">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-9">09</div>
+            <h2>Ages</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li>"x years ago" → <span class="highlight">Subtract x</span> from present age</li>
+                    <li>"x years hence/later" → <span class="highlight">Add x</span> to present age</li>
+                    <li><span class="key">Age difference ALWAYS remains constant</span></li>
+                    <li>If present ages ratio = a:b → Let ages = ax and bx</li>
+                    <li>Use linear equations to solve</li>
+                </ul>
+            </div>
+            <div class="tip-box">
+                <div class="tip-title">💡 Tip</div>
+                In ratio-based problems, the difference of ratio terms × multiplier = actual age difference. This helps find the multiplier quickly.
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 10: PARTNERSHIP -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-10" id="t10">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-10">10</div>
+            <h2>Partnership</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li><b>Simple Partnership</b> (same time):</li>
+                    <li>&nbsp;&nbsp;Profit Ratio = <span class="highlight">Investment Ratio = A : B</span></li>
+                    <li><b>Compound Partnership</b> (different time):</li>
+                    <li>&nbsp;&nbsp;Profit Ratio = <span class="highlight">(A × T₁) : (B × T₂)</span></li>
+                    <li>A's Profit = Total Profit × [A's ratio / Sum of ratios]</li>
+                    <li>If A invests ₹x for t₁ months, B invests ₹y for t₂ months:</li>
+                    <li>&nbsp;&nbsp;A's share : B's share = xt₁ : yt₂</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 11: TIME & WORK -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-11" id="t11">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-11">11</div>
+            <h2>Time & Work</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li>If A does work in x days → A's 1 day work = <span class="highlight">1/x</span></li>
+                    <li>If B does work in y days → B's 1 day work = 1/y</li>
+                    <li>Together → 1 day work = 1/x + 1/y</li>
+                    <li>Time together = <span class="key">xy / (x + y)</span></li>
+                    <li>If A is n times as efficient as B, and B takes T days → A takes T/n days</li>
+                    <li>Efficiency ratio a:b → Time ratio = b:a (inverse)</li>
+                </ul>
+            </div>
+            <div class="formula-group">
+                <h3>📐 LCM Method (Best for Exams!)</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Total Work = LCM of individual days</li>
+                        <li>Efficiency of each = Total Work / Individual days</li>
+                        <li>Combined time = Total Work / Sum of efficiencies</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tip-box">
+                <div class="tip-title">💡 Example</div>
+                A does work in 10 days, B in 15 days.<br>
+                LCM(10,15) = 30 units total work.<br>
+                A's efficiency = 30/10 = 3 units/day. B's efficiency = 30/15 = 2 units/day.<br>
+                Together = 5 units/day. Time = 30/5 = <b>6 days</b> ✓
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 12: PIPES & CISTERNS -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-12" id="t12">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-12">12</div>
+            <h2>Pipes & Cisterns</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li>Same concept as Time & Work</li>
+                    <li>Filling pipe → <span class="key">Positive (+) work</span></li>
+                    <li>Draining/leak pipe → <span class="key">Negative (−) work</span></li>
+                    <li>If pipe fills in x hrs, drains in y hrs (y > x):</li>
+                    <li>&nbsp;&nbsp;Net per hr = 1/x − 1/y</li>
+                    <li>&nbsp;&nbsp;Time to fill = <span class="highlight">xy / (y − x)</span></li>
+                    <li>If pipe fills in x hrs, drains in y hrs (x > y):</li>
+                    <li>&nbsp;&nbsp;Tank will never fill (empties in xy/(x−y) hrs)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 13: TIME SPEED DISTANCE -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-13" id="t13">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-13">13</div>
+            <h2>Time, Speed & Distance</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Basic Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">Distance = Speed × Time</span></li>
+                        <li>Speed = Distance / Time</li>
+                        <li>Time = Distance / Speed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Conversions</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>km/h to m/s → <span class="key">Multiply by 5/18</span></li>
+                        <li>m/s to km/h → <span class="key">Multiply by 18/5</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Average & Relative Speed</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Average Speed (same distance) = <span class="highlight">2S₁S₂ / (S₁ + S₂)</span></li>
+                        <li>Average Speed (same time) = (S₁ + S₂) / 2</li>
+                        <li>Relative Speed (same direction) = S₁ − S₂</li>
+                        <li>Relative Speed (opposite direction) = S₁ + S₂</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 14: TRAINS -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-14" id="t14">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-14">14</div>
+            <h2>Problems on Trains</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li>Time to cross a <b>pole/person</b> = <span class="highlight">Length of train / Speed</span></li>
+                    <li>Time to cross a <b>platform/bridge</b> = (L<sub>train</sub> + L<sub>platform</sub>) / Speed</li>
+                    <li>Two trains, <b>same direction</b>:</li>
+                    <li>&nbsp;&nbsp;Time = (L₁ + L₂) / (S₁ − S₂)</li>
+                    <li>Two trains, <b>opposite direction</b>:</li>
+                    <li>&nbsp;&nbsp;Time = (L₁ + L₂) / (S₁ + S₂)</li>
+                    <li>If a train passes a man on another train:</li>
+                    <li>&nbsp;&nbsp;Distance = Length of the passing train only</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 15: BOATS & STREAMS -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-15" id="t15">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-15">15</div>
+            <h2>Boats & Streams</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li>Let B = speed of boat in still water, S = speed of stream</li>
+                    <li><span class="highlight">Downstream speed = B + S</span></li>
+                    <li><span class="highlight">Upstream speed = B − S</span></li>
+                    <li><span class="key">B = (Downstream + Upstream) / 2</span></li>
+                    <li><span class="key">S = (Downstream − Upstream) / 2</span></li>
+                    <li>Time = Distance / Speed</li>
+                    <li>Average speed (equal dist. up & down) = (B² − S²) / B</li>
+                    <li>If speed of current = S and B = S → cannot go upstream</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 16: MIXTURE & ALLIGATION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-16" id="t16">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-16">16</div>
+            <h2>Mixture & Alligation</h2>
+            <span class="priority priority-medium">Medium</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Alligation Rule</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Two items of price A and B mixed to get price M:</li>
+                        <li>&nbsp;&nbsp;<span class="highlight">Ratio = (B − M) : (M − A)</span></li>
+                        <li class="note">Cheaper quantity : Dearer quantity</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Repeated Dilution / Replacement</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Container has x litres. y litres replaced n times:</li>
+                        <li><span class="highlight">Remaining original = x × (1 − y/x)<sup>n</sup></span></li>
+                        <li>Final concentration = Initial × (1 − y/x)<sup>n</sup></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Weighted Average of Mixtures</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Mixture concentration = (C₁Q₁ + C₂Q₂) / (Q₁ + Q₂)</li>
+                        <li class="note">C = concentration, Q = quantity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 17: NUMBER SERIES -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-17" id="t17">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-17">17</div>
+            <h2>Number Series</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-box">
+                <ul>
+                    <li><b>Common Patterns to Identify:</b></li>
+                    <li><span class="key">Arithmetic:</span> +c, +c, +c... (constant difference)</li>
+                    <li><span class="key">Geometric:</span> ×r, ×r, ×r... (constant ratio)</li>
+                    <li><span class="key">Square-based:</span> +1², +2², +3², +4²... or 1², 2², 3²...</li>
+                    <li><span class="key">Cube-based:</span> +1³, +2³, +3³... or 1³, 2³, 3³...</li>
+                    <li><span class="key">Prime numbers:</span> 2, 3, 5, 7, 11, 13...</li>
+                    <li><span class="key">Fibonacci:</span> Each term = sum of previous two</li>
+                    <li><span class="key">Mixed:</span> Alternating +, ×, or odd/even position patterns</li>
+                    <li><span class="key">Difference of differences:</span> Find pattern in gaps of gaps</li>
+                    <li><span class="key">×n then ±c:</span> ×2+1, ×2+3, ×2+5...</li>
+                </ul>
+            </div>
+            <div class="tip-box">
+                <div class="tip-title">💡 Strategy</div>
+                Always compute the <b>differences</b> first. If differences don't show a pattern, compute <b>differences of differences</b>. Also check <b>ratios</b> between consecutive terms.
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 18: QUADRATIC EQUATIONS -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-18" id="t18">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-18">18</div>
+            <h2>Quadratic Equations</h2>
+            <span class="priority priority-high">High</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Core Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Standard form: <span class="highlight">ax² + bx + c = 0</span></li>
+                        <li>Roots: x = <span class="key">[−b ± √(b² − 4ac)] / 2a</span></li>
+                        <li>Sum of roots (α + β) = −b/a</li>
+                        <li>Product of roots (α × β) = c/a</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Nature of Roots (Discriminant D)</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">D = b² − 4ac</span></li>
+                        <li>D > 0 → Two distinct real roots</li>
+                        <li>D = 0 → Two equal real roots</li>
+                        <li>D < 0 → No real roots (imaginary)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Sign Method (Exam Shortcut)</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Both roots <b>positive</b> → c positive, b negative</li>
+                        <li>Both roots <b>negative</b> → both b and c positive</li>
+                        <li>Roots of <b>opposite signs</b> → c is negative</li>
+                        <li class="note">Compare x and y values to determine the relationship (x > y, x < y, etc.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 19: PERMUTATION & COMBINATION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-19" id="t19">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-19">19</div>
+            <h2>Permutation & Combination</h2>
+            <span class="priority priority-low">Low</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Fundamental Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>Factorial: <span class="highlight">n! = n × (n−1) × (n−2) × ... × 1</span></li>
+                        <li>0! = 1 &nbsp;&nbsp; 1! = 1</li>
+                        <li><b>Permutation</b> (arrangement, order matters):</li>
+                        <li>&nbsp;&nbsp;<span class="key">ⁿPᵣ = n! / (n−r)!</span></li>
+                        <li><b>Combination</b> (selection, order doesn't matter):</li>
+                        <li>&nbsp;&nbsp;<span class="key">ⁿCᵣ = n! / [r! × (n−r)!]</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Key Identities</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li>ⁿC₀ = ⁿCₙ = 1</li>
+                        <li>ⁿCᵣ = ⁿCₙ₋ᵣ</li>
+                        <li>ⁿPᵣ = ⁿCᵣ × r!</li>
+                        <li>Circular permutation = (n−1)!</li>
+                        <li>Identical items: n! / (p! × q! × r!)</li>
+                        <li>Fundamental Counting: If event A can be done in m ways and event B in n ways → Total = m × n</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 20: PROBABILITY -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-20" id="t20">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-20">20</div>
+            <h2>Probability</h2>
+            <span class="priority priority-low">Low</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+            <div class="formula-group">
+                <h3>📐 Core Formulas</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="highlight">P(E) = Favourable outcomes / Total outcomes</span></li>
+                        <li>0 ≤ P(E) ≤ 1</li>
+                        <li>P(E) + P(not E) = 1</li>
+                        <li>P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</li>
+                        <li>If A & B are mutually exclusive: P(A ∪ B) = P(A) + P(B)</li>
+                        <li>If A & B are independent: P(A ∩ B) = P(A) × P(B)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula-group">
+                <h3>📐 Quick References</h3>
+                <div class="formula-box">
+                    <ul>
+                        <li><b>Deck of Cards:</b> Total = 52 | 4 Suits × 13 each | Face cards = 12 | Aces = 4</li>
+                        <li><b>Single Die:</b> 6 outcomes</li>
+                        <li><b>Two Dice:</b> 36 outcomes | P(sum=7) = 6/36 = 1/6</li>
+                        <li><b>Coin:</b> P(Head) = P(Tail) = 1/2 | n coins → 2ⁿ outcomes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOPIC 21: MENSURATION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic border-21" id="t21">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-21">21</div>
+            <h2>Mensuration (2D & 3D)</h2>
+            <span class="priority priority-low">Low</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+
+            <div class="formula-group">
+                <h3>📐 2D Shapes</h3>
+                <div class="formula-box" style="overflow-x: auto;">
+                    <table class="formula-table">
+                        <tr><th>Shape</th><th>Area</th><th>Perimeter</th></tr>
+                        <tr><td>Square (side a)</td><td>a²</td><td>4a</td></tr>
+                        <tr><td>Rectangle (l × b)</td><td>l × b</td><td>2(l + b)</td></tr>
+                        <tr><td>Triangle</td><td>½ × base × height</td><td>a + b + c</td></tr>
+                        <tr><td>Equilateral △ (a)</td><td>(√3/4) × a²</td><td>3a</td></tr>
+                        <tr><td>Right Triangle (b, h)</td><td>½ × b × h</td><td>a + b + √(a²+b²)</td></tr>
+                        <tr><td>Circle (r)</td><td>πr²</td><td>2πr</td></tr>
+                        <tr><td>Semi-circle (r)</td><td>πr²/2</td><td>πr + 2r</td></tr>
+                        <tr><td>Parallelogram (b, h)</td><td>b × h</td><td>2(a + b)</td></tr>
+                        <tr><td>Rhombus (d₁, d₂)</td><td>½ × d₁ × d₂</td><td>4 × side</td></tr>
+                        <tr><td>Trapezium (a, b, h)</td><td>½(a+b) × h</td><td>a + b + c + d</td></tr>
+                    </table>
+                </div>
+                <div class="formula-box">
+                    <ul>
+                        <li><span class="key">Heron's Formula:</span> Area = √[s(s−a)(s−b)(s−c)] &nbsp; where s = (a+b+c)/2</li>
+                        <li>Diagonal of square = a√2</li>
+                        <li>Diagonal of rectangle = √(l² + b²)</li>
+                        <li>Area of sector = (θ/360) × πr²</li>
+                        <li>Arc length = (θ/360) × 2πr</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 3D Shapes</h3>
+                <div class="formula-box" style="overflow-x: auto;">
+                    <table class="formula-table">
+                        <tr><th>Shape</th><th>Volume</th><th>CSA</th><th>TSA</th></tr>
+                        <tr><td>Cube (a)</td><td>a³</td><td>4a²</td><td>6a²</td></tr>
+                        <tr><td>Cuboid (l,b,h)</td><td>lbh</td><td>2h(l+b)</td><td>2(lb+bh+lh)</td></tr>
+                        <tr><td>Cylinder (r, h)</td><td>πr²h</td><td>2πrh</td><td>2πr(r+h)</td></tr>
+                        <tr><td>Cone (r, h, l)</td><td>⅓πr²h</td><td>πrl</td><td>πr(r+l)</td></tr>
+                        <tr><td>Sphere (r)</td><td>(4/3)πr³</td><td>4πr²</td><td>4πr²</td></tr>
+                        <tr><td>Hemisphere (r)</td><td>(2/3)πr³</td><td>2πr²</td><td>3πr²</td></tr>
+                    </table>
+                </div>
+                <div class="formula-box">
+                    <ul>
+                        <li>Slant height of cone: <span class="key">l = √(r² + h²)</span></li>
+                        <li>Diagonal of cube = a√3</li>
+                        <li>Diagonal of cuboid = √(l² + b² + h²)</li>
+                        <li>Frustum of cone: V = (πh/3)(R² + r² + Rr)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- QUICK REFERENCE TABLES -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="topic open border-1" id="tref">
+        <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="topic-number bg-1">⚡</div>
+            <h2>Quick Reference — Squares, Cubes & Primes</h2>
+            <span class="priority priority-high">Must Memorize</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="topic-body">
+
+            <div class="formula-group">
+                <h3>📐 Squares (11² to 30²)</h3>
+                <div class="grid-box">
+                    <div class="grid-item">11² = <span class="val">121</span></div>
+                    <div class="grid-item">12² = <span class="val">144</span></div>
+                    <div class="grid-item">13² = <span class="val">169</span></div>
+                    <div class="grid-item">14² = <span class="val">196</span></div>
+                    <div class="grid-item">15² = <span class="val">225</span></div>
+                    <div class="grid-item">16² = <span class="val">256</span></div>
+                    <div class="grid-item">17² = <span class="val">289</span></div>
+                    <div class="grid-item">18² = <span class="val">324</span></div>
+                    <div class="grid-item">19² = <span class="val">361</span></div>
+                    <div class="grid-item">20² = <span class="val">400</span></div>
+                    <div class="grid-item">21² = <span class="val">441</span></div>
+                    <div class="grid-item">22² = <span class="val">484</span></div>
+                    <div class="grid-item">23² = <span class="val">529</span></div>
+                    <div class="grid-item">24² = <span class="val">576</span></div>
+                    <div class="grid-item">25² = <span class="val">625</span></div>
+                    <div class="grid-item">26² = <span class="val">676</span></div>
+                    <div class="grid-item">27² = <span class="val">729</span></div>
+                    <div class="grid-item">28² = <span class="val">784</span></div>
+                    <div class="grid-item">29² = <span class="val">841</span></div>
+                    <div class="grid-item">30² = <span class="val">900</span></div>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Cubes (1³ to 15³)</h3>
+                <div class="grid-box">
+                    <div class="grid-item">1³ = <span class="val">1</span></div>
+                    <div class="grid-item">2³ = <span class="val">8</span></div>
+                    <div class="grid-item">3³ = <span class="val">27</span></div>
+                    <div class="grid-item">4³ = <span class="val">64</span></div>
+                    <div class="grid-item">5³ = <span class="val">125</span></div>
+                    <div class="grid-item">6³ = <span class="val">216</span></div>
+                    <div class="grid-item">7³ = <span class="val">343</span></div>
+                    <div class="grid-item">8³ = <span class="val">512</span></div>
+                    <div class="grid-item">9³ = <span class="val">729</span></div>
+                    <div class="grid-item">10³ = <span class="val">1000</span></div>
+                    <div class="grid-item">11³ = <span class="val">1331</span></div>
+                    <div class="grid-item">12³ = <span class="val">1728</span></div>
+                    <div class="grid-item">13³ = <span class="val">2197</span></div>
+                    <div class="grid-item">14³ = <span class="val">2744</span></div>
+                    <div class="grid-item">15³ = <span class="val">3375</span></div>
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Prime Numbers (1 to 100) — Total: 25</h3>
+                <div class="formula-box">
+                    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+                </div>
+            </div>
+
+            <div class="formula-group">
+                <h3>📐 Percentage ↔ Fraction Quick Reference</h3>
+                <div class="formula-box">
+                    <table class="formula-table">
+                        <tr><th>Fraction</th><th>%</th><th>Fraction</th><th>%</th><th>Fraction</th><th>%</th></tr>
+                        <tr><td>1/2</td><td><b>50%</b></td><td>1/8</td><td><b>12.5%</b></td><td>1/14</td><td><b>7.14%</b></td></tr>
+                        <tr><td>1/3</td><td><b>33.33%</b></td><td>1/9</td><td><b>11.11%</b></td><td>1/15</td><td><b>6.67%</b></td></tr>
+                        <tr><td>1/4</td><td><b>25%</b></td><td>1/10</td><td><b>10%</b></td><td>1/16</td><td><b>6.25%</b></td></tr>
+                        <tr><td>1/5</td><td><b>20%</b></td><td>1/11</td><td><b>9.09%</b></td><td>1/20</td><td><b>5%</b></td></tr>
+                        <tr><td>1/6</td><td><b>16.67%</b></td><td>1/12</td><td><b>8.33%</b></td><td>1/25</td><td><b>4%</b></td></tr>
+                        <tr><td>1/7</td><td><b>14.28%</b></td><td>1/13</td><td><b>7.69%</b></td><td>1/50</td><td><b>2%</b></td></tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <p><b>Quant Formulae</b></p>
+        <p>21 Topics • 200+ Formulas • Print-Ready • Mobile-Friendly</p>
+        <br>
+        <button class="btn" onclick="window.print()">Print</button>
+        <button class="btn" onclick="document.querySelectorAll('.topic').forEach(t=>t.classList.add('open'))">Expand All</button>
+        <button class="btn" onclick="document.querySelectorAll('.topic').forEach(t=>t.classList.remove('open'))">Collapse All</button>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Scroll to top button visibility
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('scrollTop');
+            btn.style.display = window.scrollY > 500 ? 'block' : 'none';
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.classList.add('open');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

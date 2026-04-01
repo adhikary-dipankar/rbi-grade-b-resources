@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESI  — RBI Grade B</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#101820;color:#d4d4d4;line-height:1.75;padding:20px;min-height:100vh}.header{text-align:center;padding:42px 20px;background:linear-gradient(135deg,#1b5e20,#004d40,#1b5e20);border:1px solid #2e7d32;border-radius:20px;margin-bottom:28px}.header h1{font-size:2.4em;color:#a5d6a7;margin-bottom:8px}.header p{color:#81c784;max-width:780px;margin:0 auto;font-size:1em}.header .badge{display:inline-block;background:rgba(165,214,167,0.15);padding:5px 16px;border-radius:20px;margin-top:12px;font-size:0.88em;color:#a5d6a7;border:1px solid rgba(165,214,167,0.3)}.dp{background:linear-gradient(135deg,#0a1f14,#12302a);border:1px solid #2e7d32;border-radius:15px;padding:22px;margin-bottom:22px}.dp h2{color:#a5d6a7;margin-bottom:14px;font-size:1.2em;text-align:center}.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}.dc{background:rgba(165,214,167,0.06);border:1px solid rgba(165,214,167,0.15);border-radius:10px;padding:11px 14px;text-align:center}.dc .lb{color:#66bb6a;font-size:0.78em;text-transform:uppercase;letter-spacing:0.5px}.dc .vl{color:#a5d6a7;font-size:1.3em;font-weight:bold;margin-top:3px}.dc .sr{color:#4a7a5a;font-size:0.7em;margin-top:2px}.toc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:15px;padding:22px 28px;margin-bottom:25px}.toc h2{color:#a5d6a7;margin-bottom:12px;font-size:1.25em}.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:7px}.toc a{color:#81c784;text-decoration:none;padding:5px 10px;border-radius:8px;transition:all 0.3s;display:block;font-size:0.92em}.toc a:hover{background:rgba(165,214,167,0.1);color:#a5d6a7;transform:translateX(5px)}.toc a .n{color:#a5d6a7;font-weight:bold;margin-right:8px}.ch{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:15px;margin-bottom:20px;overflow:hidden}.chd{padding:16px 22px;cursor:pointer;display:flex;align-items:center;gap:13px;user-select:none;flex-wrap:wrap}.cn{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.95em;color:#101820;flex-shrink:0;background:#a5d6a7}.chd h2{font-size:1.12em;color:#e0e0d0;flex-grow:1}.pr{padding:4px 11px;border-radius:20px;font-size:0.7em;font-weight:bold;text-transform:uppercase;letter-spacing:1px}.ph{background:rgba(240,80,60,0.15);color:#ff8a75;border:1px solid rgba(240,80,60,0.3)}.pm{background:rgba(165,214,167,0.15);color:#a5d6a7;border:1px solid rgba(165,214,167,0.3)}.tl{font-size:1.3em;color:#a5d6a7;transition:transform 0.3s}.ch.open .tl{transform:rotate(180deg)}.cb{padding:0 22px 22px;display:none}.ch.open .cb{display:block;animation:fi 0.3s ease}@keyframes fi{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}.fg{margin-bottom:15px}.fg h3{color:#a5d6a7;font-size:0.95em;margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid rgba(165,214,167,0.15)}.fb{background:rgba(0,0,0,0.25);border:1px solid rgba(46,125,50,0.3);border-radius:10px;padding:13px 17px;margin-bottom:9px;font-size:0.89em;line-height:1.9;overflow-x:auto}.fb .hl{color:#a5d6a7;font-weight:bold}.fb .ky{color:#80cbc4;font-weight:bold}.fb .nt{color:#81c784;font-style:italic}.fb .rd{color:#ff8a75;font-weight:bold}.fb ul{list-style:none;padding-left:0}.fb ul li{padding:2px 0 2px 18px;position:relative}.fb ul li::before{content:"▹";position:absolute;left:0;color:#a5d6a7}.ft{width:100%;border-collapse:collapse;margin:7px 0;font-size:0.85em}.ft th{background:rgba(165,214,167,0.2);color:#a5d6a7;padding:9px 12px;text-align:left;border:1px solid rgba(255,255,255,0.08)}.ft td{padding:7px 12px;border:1px solid rgba(255,255,255,0.04);color:#bbb}.ft tr:nth-child(even){background:rgba(255,255,255,0.02)}.ft tr:hover{background:rgba(165,214,167,0.05)}.tip{background:linear-gradient(135deg,rgba(100,200,140,0.08),rgba(80,180,120,0.03));border-left:4px solid #66bb6a;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0;font-size:0.87em}.tip b{color:#66bb6a}.footer{text-align:center;padding:28px;margin-top:28px;color:#4a7a5a;font-size:0.85em}.footer .btn{display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#a5d6a7;border:1px solid #2e7d32;border-radius:25px;font-size:0.9em;cursor:pointer;margin:6px;transition:transform 0.3s}.footer .btn:hover{transform:scale(1.05)}#stt{position:fixed;bottom:28px;right:28px;width:46px;height:46px;background:#1b5e20;color:#a5d6a7;border:1px solid #2e7d32;border-radius:50%;font-size:1.3em;cursor:pointer;display:none;z-index:1000}@media print{body{background:#fff;color:#000}.ch-bd,.cb{display:block!important}.fb{background:#f5f5f5;color:#000}.ft th{background:#ddd;color:#000}.ft td{color:#000}#stt,.tl{display:none!important}}@media(max-width:768px){.header h1{font-size:1.4em}.tg{grid-template-columns:1fr}.dg{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="header">
+<h1>ESI </h1>
+<p>Economic Issues: Growth, National Income, Poverty, Employment, Indian Economy Reforms, Agriculture, Industry, Services, Monetary & Fiscal Policy</p>
+<div class="badge">Paper 1: 100 Marks | 50 Objective + 50 Descriptive | Chapters 1–16</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dp">
+<h2>India's Key Economic Indicators — Economic Survey 2025-26</h2>
+<div class="dg">
+<div class="dc"><div class="lb">Real GDP Growth FY26</div><div class="vl">7.4%</div><div class="sr">FAE | 4th year as fastest growing</div></div>
+<div class="dc"><div class="lb">GDP Projection FY27</div><div class="vl">6.8–7.2%</div><div class="sr">Eco Survey 2025-26</div></div>
+<div class="dc"><div class="lb">CPI Inflation FY26</div><div class="vl">1.7%</div><div class="sr">Apr-Dec 2025 average</div></div>
+<div class="dc"><div class="lb">Fiscal Deficit FY27</div><div class="vl">4.3%</div><div class="sr">Budget 2026-27 target</div></div>
+<div class="dc"><div class="lb">Forex Reserves</div><div class="vl">$701.4B</div><div class="sr">Jan 16, 2026 | 11 months import cover</div></div>
+<div class="dc"><div class="lb">Services % of GVA</div><div class="vl">56.4%</div><div class="sr">Highest ever | FY26 FAE</div></div>
+<div class="dc"><div class="lb">GNPA Ratio (SCBs)</div><div class="vl">2.2%</div><div class="sr">Sep 2025 | Multi-decadal low</div></div>
+<div class="dc"><div class="lb">MPI Poverty</div><div class="vl">11.28%</div><div class="sr">Down from 55.3% in 2005-06</div></div>
+<div class="dc"><div class="lb">Global Innovation Index</div><div class="vl">38th</div><div class="sr">Up from 66th in 2019</div></div>
+<div class="dc"><div class="lb">Services Exports FY25</div><div class="vl">$387.6B</div><div class="sr">All-time high | +13.6% YoY</div></div>
+<div class="dc"><div class="lb">Remittances FY25</div><div class="vl">$135.4B</div><div class="sr">World's largest recipient</div></div>
+<div class="dc"><div class="lb">Jan Dhan Accounts</div><div class="vl">55.02 Cr</div><div class="sr">As of March 2025</div></div>
+</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+<h2>Chapters (Economic Issues)</h2>
+<div class="tg">
+<a href="#c1"><span class="n">01</span> National Income & Growth Measurement</a>
+<a href="#c2"><span class="n">02</span> Poverty & Inequality</a>
+<a href="#c3"><span class="n">03</span> Employment & Unemployment</a>
+<a href="#c4"><span class="n">04</span> Economic Reforms since 1991 (LPG)</a>
+<a href="#c5"><span class="n">05</span> Agriculture — Structure & Challenges</a>
+<a href="#c6"><span class="n">06</span> Industry & Manufacturing</a>
+<a href="#c7"><span class="n">07</span> Services Sector</a>
+<a href="#c8"><span class="n">08</span> Economic Survey 2025-26 & Budget 2026-27 Key Data</a>
+<a href="#c9"><span class="n">09</span> Globalization & Opening of Indian Economy</a>
+<a href="#c10"><span class="n">10</span> Balance of Payments & Trade Policy</a>
+<a href="#c11"><span class="n">11</span> International Institutions — IMF, WB, WTO</a>
+<a href="#c12"><span class="n">12</span> Demographics, Urbanization & Migration</a>
+<a href="#c13"><span class="n">13</span> Gender Issues & Women Empowerment</a>
+<a href="#c14"><span class="n">14</span> Education & Health — Human Development</a>
+<a href="#c15"><span class="n">15</span> Sustainable Development Goals (SDGs)</a>
+<a href="#c16"><span class="n">16</span> Environment & Climate Change</a>
+</div>
+</div>
+
+<!-- CH1: NATIONAL INCOME -->
+<div class="ch open" id="c1"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">01</div><h2>National Income & Growth Measurement</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Key Concepts</h3><div class="fb"><table class="ft">
+<tr><th>Term</th><th>Formula / Meaning</th></tr>
+<tr><td><span class="hl">GDP (Gross Domestic Product)</span></td><td>Total value of all final goods & services produced within a country's borders in a year. Includes output by foreigners in India.</td></tr>
+<tr><td><span class="hl">GNP (Gross National Product)</span></td><td>GDP + NFIA (Net Factor Income from Abroad). Includes income earned by Indians abroad, excludes foreigners' income in India.</td></tr>
+<tr><td><span class="hl">NNP (Net National Product)</span></td><td>GNP − Depreciation. Also called National Income at market price.</td></tr>
+<tr><td><span class="hl">National Income (NI)</span></td><td>NNP at Factor Cost = NNP<sub>MP</sub> − Indirect Taxes + Subsidies</td></tr>
+<tr><td><span class="hl">Per Capita Income</span></td><td>National Income / Total Population</td></tr>
+<tr><td><span class="hl">GVA (Gross Value Added)</span></td><td>GDP at basic prices. GVA = GDP − Product Taxes + Product Subsidies. New methodology since 2015.</td></tr>
+<tr><td><span class="hl">NFIA</span></td><td>Net Factor Income from Abroad = Factor income earned abroad by residents − Factor income earned by foreigners domestically</td></tr>
+<tr><td><span class="hl">Nominal GDP</span></td><td>GDP at current year prices (includes inflation effect)</td></tr>
+<tr><td><span class="hl">Real GDP</span></td><td>GDP at constant/base year prices (inflation removed). Measures actual growth.</td></tr>
+<tr><td><span class="hl">GDP Deflator</span></td><td>(Nominal GDP / Real GDP) × 100. Broader measure of inflation than CPI.</td></tr>
+</table></div></div>
+<div class="fg"><h3>Methods of Calculating National Income</h3><div class="fb"><table class="ft">
+<tr><th>Method</th><th>What It Measures</th><th>Formula</th></tr>
+<tr><td><span class="hl">Production / Output Method</span></td><td>Value added at each stage of production</td><td>Σ (Value of Output − Value of Intermediate Consumption)</td></tr>
+<tr><td><span class="hl">Income Method</span></td><td>Total income earned by factors of production</td><td>Wages + Rent + Interest + Profit</td></tr>
+<tr><td><span class="hl">Expenditure Method</span></td><td>Total spending in the economy</td><td>C + I + G + (X − M) where C=Consumption, I=Investment, G=Govt, X=Exports, M=Imports</td></tr>
+</table></div></div>
+<div class="fg"><h3>India's GDP — Current Data (FY26)</h3><div class="fb"><ul>
+<li><span class="hl">Base Year:</span> 2011-12 (current series)</li>
+<li><span class="hl">Compiled by:</span> NSO (National Statistical Office) under MoSPI</li>
+<li><span class="hl">Real GDP Growth FY26:</span> 7.4% (First Advance Estimate)</li>
+<li><span class="hl">GVA Growth FY26:</span> 7.3%</li>
+<li><span class="hl">Sectoral Share in GVA (FY26):</span> Services 56.4% | Industry ~25.5% | Agriculture ~18.1%</li>
+<li><span class="hl">India:</span> Fastest growing major economy for 4th consecutive year</li>
+<li><span class="hl">Private Consumption:</span> 61.5% of GDP (highest since FY12)</li>
+</ul></div></div>
+</div></div>
+
+<!-- CH2: POVERTY -->
+<div class="ch" id="c2"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">02</div><h2>Poverty & Inequality</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Key Poverty Concepts</h3><div class="fb"><table class="ft">
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td><span class="hl">Absolute Poverty</span></td><td>Unable to meet minimum basic needs (food, shelter, clothing)</td></tr>
+<tr><td><span class="hl">Relative Poverty</span></td><td>Income below a certain % of average income in society (inequality measure)</td></tr>
+<tr><td><span class="hl">Poverty Line (India)</span></td><td>Tendulkar Committee (2011-12): ₹816/month (rural), ₹1000/month (urban). Based on calorie intake + other needs.</td></tr>
+<tr><td><span class="hl">Poverty Gap</span></td><td>Difference between actual income of poor and the poverty line. Measures depth of poverty.</td></tr>
+<tr><td><span class="hl">Poverty Ratio / HCR</span></td><td>Head Count Ratio = % of population below poverty line</td></tr>
+<tr><td><span class="hl">MPI (Multidimensional Poverty Index)</span></td><td>NITI Aayog / UNDP. 3 dimensions (Health, Education, Living Standards) × 10 indicators. Score ≥ 0.33 = multidimensionally poor</td></tr>
+</table></div></div>
+<div class="fg"><h3>Important Committees on Poverty</h3><div class="fb"><table class="ft">
+<tr><th>Committee</th><th>Year</th><th>Key Contribution</th></tr>
+<tr><td>Alagh Committee</td><td>1979</td><td>First official poverty line based on calorie intake (2400 cal rural, 2100 cal urban)</td></tr>
+<tr><td>Lakdawala Committee</td><td>1993</td><td>State-specific poverty lines using CPI-AL and CPI-IW</td></tr>
+<tr><td><span class="hl">Tendulkar Committee</span></td><td>2009</td><td>Shifted from calorie to consumption-based poverty line. Currently used officially.</td></tr>
+<tr><td>Rangarajan Committee</td><td>2014</td><td>Higher poverty line: ₹972 (rural), ₹1407 (urban). Estimated 29.5% poverty (2011-12)</td></tr>
+</table></div></div>
+<div class="fg"><h3>Current Poverty Data (NITI Aayog MPI 2023)</h3><div class="fb"><ul>
+<li><span class="hl">MPI poverty declined from 55.3% (2005-06) to 11.28% (2022-23)</span></li>
+<li>~24.82 crore people escaped multidimensional poverty in 9 years</li>
+<li>Largest reduction in: Nutrition, cooking fuel, sanitation, housing</li>
+<li>India's Global MPI rank improved significantly</li>
+<li><span class="ky">Gini Coefficient (India):</span> ~0.35 (Consumption-based). Higher = more inequality. Range: 0 (perfect equality) to 1.</li>
+</ul></div></div>
+<div class="fg"><h3>Key Poverty Alleviation Schemes</h3><div class="fb"><table class="ft">
+<tr><th>Scheme</th><th>Year</th><th>Focus</th></tr>
+<tr><td><span class="hl">MGNREGS (NREGA)</span></td><td>2006</td><td>100 days guaranteed unskilled employment to rural households. Demand-driven. Largest employment programme globally.</td></tr>
+<tr><td><span class="hl">NRLM / DAY-NRLM</span></td><td>2011/2015</td><td>Self-employment through SHGs; skill development; financial literacy</td></tr>
+<tr><td><span class="hl">PM Garib Kalyan Anna Yojana</span></td><td>2020</td><td>Free foodgrains to 81.35 crore people. Extended as universal food security.</td></tr>
+<tr><td><span class="hl">PM Awas Yojana</span></td><td>2015</td><td>Housing for All — pucca houses for BPL families (Rural + Urban)</td></tr>
+<tr><td><span class="hl">National Food Security Act</span></td><td>2013</td><td>Legal right to subsidized food for 75% rural & 50% urban population</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH3: EMPLOYMENT -->
+<div class="ch" id="c3"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">03</div><h2>Employment & Unemployment</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Key Employment Terms</h3><div class="fb"><table class="ft">
+<tr><th>Term</th><th>Definition</th></tr>
+<tr><td><span class="hl">LFPR (Labour Force Participation Rate)</span></td><td>% of working-age population that is either employed or seeking employment</td></tr>
+<tr><td><span class="hl">WPR (Worker Population Ratio)</span></td><td>% of population that is employed</td></tr>
+<tr><td><span class="hl">UR (Unemployment Rate)</span></td><td>% of labour force that is unemployed but seeking work</td></tr>
+<tr><td><span class="hl">Structural Unemployment</span></td><td>Mismatch between workers' skills and job requirements</td></tr>
+<tr><td><span class="hl">Disguised Unemployment</span></td><td>More people employed than needed; removing some won't reduce output (common in Indian agriculture)</td></tr>
+<tr><td><span class="hl">Seasonal Unemployment</span></td><td>Jobless during off-seasons (agriculture, tourism)</td></tr>
+<tr><td><span class="hl">Frictional Unemployment</span></td><td>Short-term unemployment when transitioning between jobs</td></tr>
+<tr><td><span class="hl">Formal Sector</span></td><td>Organized; social security, contracts, regulated. ~10% of India's workforce</td></tr>
+<tr><td><span class="hl">Informal Sector</span></td><td>Unorganized; no social security, no contracts. ~90% of India's workforce</td></tr>
+</table></div></div>
+<div class="fg"><h3>Data Sources for Employment</h3><div class="fb"><table class="ft">
+<tr><th>Survey</th><th>By</th><th>Key Feature</th></tr>
+<tr><td><span class="hl">PLFS (Periodic Labour Force Survey)</span></td><td>NSO / MoSPI</td><td>Annual + Quarterly. Primary source of employment data in India since 2017-18.</td></tr>
+<tr><td>Census</td><td>Registrar General</td><td>Decennial. Last: 2011.</td></tr>
+<tr><td>e-Shram Portal</td><td>Ministry of Labour</td><td>Registration of unorganised workers. 31+ crore registered (Jan 2026), 54% women.</td></tr>
+<tr><td>EPFO Payroll Data</td><td>EPFO</td><td>Monthly data on formal employment additions via EPF enrolments.</td></tr>
+</table></div></div>
+<div class="fg"><h3>Employment Generation Schemes</h3><div class="fb"><table class="ft">
+<tr><th>Scheme</th><th>Focus</th></tr>
+<tr><td><span class="hl">PM MUDRA Yojana</span></td><td>Micro-enterprise loans for self-employment (Shishu/Kishor/Tarun)</td></tr>
+<tr><td><span class="hl">PM Vishwakarma</span></td><td>Support traditional artisans & craftsmen with training, credit, market access</td></tr>
+<tr><td><span class="hl">Skill India Mission</span></td><td>Umbrella for skilling programmes: PMKVY, ITIs, Apprenticeships</td></tr>
+<tr><td><span class="hl">Start-Up India</span></td><td>Promote entrepreneurship; tax benefits; self-certification; Fund of Funds</td></tr>
+<tr><td><span class="hl">PLI Schemes (14 sectors)</span></td><td>₹2+ lakh crore investment attracted; 12.6+ lakh jobs created (Sep 2025)</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH4: ECONOMIC REFORMS -->
+<div class="ch" id="c4"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">04</div><h2>Economic Reforms since 1991 (LPG)</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Pre-Reform Era (1947–1991)</h3><div class="fb"><ul>
+<li><span class="hl">License Raj:</span> Industrial licensing for almost all sectors; govt controlled production, prices, imports</li>
+<li><span class="hl">Import Substitution:</span> High tariffs, quantitative restrictions to protect domestic industry</li>
+<li><span class="hl">Public Sector Dominance:</span> Heavy industries reserved for government (Nehruvian socialism)</li>
+<li><span class="hl">Hindu Rate of Growth:</span> 3.5% GDP growth (1950s–1980s) — low by global standards</li>
+<li><span class="hl">1991 BOP Crisis:</span> Forex reserves fell to $1.2 billion (2 weeks of imports). India pledged gold to IMF. Triggered reforms.</li>
+</ul></div></div>
+<div class="fg"><h3>LPG Reforms (1991) — The Big Bang</h3><div class="fb"><table class="ft">
+<tr><th>Reform</th><th>What Changed</th></tr>
+<tr><td><span class="hl">Liberalization</span></td><td>Abolished License Raj (except 5 sectors); reduced govt control on industry; de-reserved sectors for private</td></tr>
+<tr><td><span class="hl">Privatization</span></td><td>Disinvestment of PSUs; strategic sale; allowed private entry in banking, telecom, aviation, insurance</td></tr>
+<tr><td><span class="hl">Globalization</span></td><td>Reduced import tariffs (from 300%+ to ~10%); welcomed FDI; joined WTO (1995); FEMA replaced FERA</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Reforms Timeline</h3><div class="fb"><table class="ft">
+<tr><th>Year</th><th>Reform</th></tr>
+<tr><td>1991</td><td>Industrial Policy Statement, New Trade Policy, Rupee devaluation</td></tr>
+<tr><td>1992</td><td>SEBI Act; Narasimham Committee (Banking reforms)</td></tr>
+<tr><td>1994</td><td>Telecom liberalization; TRAI established 1997</td></tr>
+<tr><td>1999</td><td>FEMA replaces FERA; Insurance sector opened (IRDAI)</td></tr>
+<tr><td>2003</td><td>FRBM Act (Fiscal discipline)</td></tr>
+<tr><td>2005</td><td>VAT introduced (replaced by GST in 2017)</td></tr>
+<tr><td>2014-16</td><td>Make in India, Startup India, FDI liberalization, IBC 2016</td></tr>
+<tr><td>2016</td><td>Demonetization (Nov 8)</td></tr>
+<tr><td>2017</td><td><span class="hl">GST (July 1)</span> — One Nation One Tax; merged 17 taxes</td></tr>
+<tr><td>2020</td><td>Atmanirbhar Bharat; Farm laws (later repealed); PLI Schemes; Labour Code reforms</td></tr>
+<tr><td>2021</td><td>NaBFID; Asset Monetization Pipeline; Bad Bank (NARCL)</td></tr>
+<tr><td>2023-26</td><td>ISM 2.0 (Semiconductors), New Income Tax Act 2025, Digital India expansion, CBDC pilot</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH5: AGRICULTURE -->
+<div class="ch" id="c5"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">05</div><h2>Agriculture — Structure, Challenges & Reforms</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Agriculture's Role in Indian Economy</h3><div class="fb"><ul>
+<li><span class="hl">Share in GVA:</span> ~18.1% (FY26) but employs ~42% of workforce</li>
+<li><span class="hl">Foodgrain production FY25:</span> 357.73 lakh MT (record)</li>
+<li><span class="hl">Horticulture production FY25:</span> 362.08 MT — surpassed foodgrains for first time</li>
+<li><span class="hl">Avg growth (last 5 years):</span> 4.4% per annum</li>
+<li><span class="hl">Cropping pattern:</span> Kharif (monsoon: June-Oct) + Rabi (winter: Oct-Mar) + Zaid (summer)</li>
+</ul></div></div>
+<div class="fg"><h3>Key Agricultural Issues</h3><div class="fb"><ul>
+<li><span class="rd">Small & marginal farmers:</span> 86% of holdings are &lt;2 hectares</li>
+<li><span class="rd">Disguised unemployment:</span> Too many people on too little land</li>
+<li><span class="rd">Fragmentation:</span> Average holding size declining (now ~1.08 ha)</li>
+<li><span class="rd">Dependence on monsoon:</span> ~52% of net sown area is rain-fed</li>
+<li><span class="rd">Low productivity:</span> India's rice yield ~4 tonnes/ha vs China's ~7 tonnes/ha</li>
+<li><span class="rd">Indebtedness:</span> Farmer suicides; credit access issues; informal lending</li>
+<li><span class="rd">Post-harvest losses:</span> 10-15% of foodgrains; cold chain infrastructure gaps</li>
+</ul></div></div>
+<div class="fg"><h3>Major Agricultural Schemes & Reforms</h3><div class="fb"><table class="ft">
+<tr><th>Scheme</th><th>Year</th><th>Feature</th></tr>
+<tr><td><span class="hl">PM-KISAN</span></td><td>2019</td><td>₹6000/year to all farmers in 3 installments. ₹4.09 lakh crore released since inception.</td></tr>
+<tr><td><span class="hl">PM Fasal Bima (PMFBY)</span></td><td>2016</td><td>Crop insurance at 1.5-5% premium (rest by govt). Largest crop insurance scheme globally.</td></tr>
+<tr><td><span class="hl">Kisan Credit Card</span></td><td>1998</td><td>Easy credit for crops + allied activities. 2% interest subvention for timely repayment.</td></tr>
+<tr><td><span class="hl">e-NAM</span></td><td>2016</td><td>National Agriculture Market — online trading of farm produce. 1,522 mandis in 23 states.</td></tr>
+<tr><td><span class="hl">MSP (Minimum Support Price)</span></td><td>Since 1960s</td><td>Govt buys crops at guaranteed price. CACP recommends. 23 crops currently covered.</td></tr>
+<tr><td><span class="hl">Soil Health Card</span></td><td>2015</td><td>Nutrient status of soil; crop-wise fertilizer recommendations</td></tr>
+<tr><td><span class="hl">PM Krishi Sinchai Yojana</span></td><td>2015</td><td>"Har Khet Ko Paani" — micro irrigation, drip irrigation, watershed management</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH6: INDUSTRY -->
+<div class="ch" id="c6"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">06</div><h2>Industry & Manufacturing Sector</h2><span class="pr pm">High</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Industrial Sector — Current Data</h3><div class="fb"><ul>
+<li><span class="hl">Industry GVA growth:</span> 7.0% in H1 FY26</li>
+<li><span class="hl">Manufacturing GVA:</span> +7.72% (Q1) → +9.13% (Q2) FY26 — structural recovery</li>
+<li><span class="hl">IIP Base Year:</span> 2011-12 | Published by: MOSPI</li>
+<li><span class="hl">8 Core Industries:</span> Coal, Crude Oil, Natural Gas, Refinery, Fertilizers, Steel, Cement, Electricity (40.27% of IIP weight)</li>
+<li><span class="hl">PLI schemes:</span> 14 sectors; ₹2+ lakh crore investment; ₹18.7 lakh crore production; 12.6 lakh jobs</li>
+</ul></div></div>
+<div class="fg"><h3>MSME Sector</h3><div class="fb"><ul>
+<li><span class="hl">Definition (Revised 2020):</span> Based on Investment + Annual Turnover</li>
+<li>Micro: Inv ≤₹1Cr, TO ≤₹5Cr | Small: Inv ≤₹10Cr, TO ≤₹50Cr | Medium: Inv ≤₹50Cr, TO ≤₹250Cr</li>
+<li><span class="ky">Contribution:</span> 35.4% of manufacturing, 48.58% of exports, 31.1% of GDP</li>
+<li><span class="ky">Collateral-free loans (Budget 2026-27):</span> Doubled to ₹20 lakh</li>
+<li><span class="ky">₹10,000 Cr SME Growth Fund</span> announced for champion MSMEs</li>
+</ul></div></div>
+<div class="fg"><h3>Key Industrial Policies & Initiatives</h3><div class="fb"><table class="ft">
+<tr><th>Initiative</th><th>Year</th><th>Focus</th></tr>
+<tr><td><span class="hl">Make in India</span></td><td>2014</td><td>25 sectors; ease of doing business; FDI liberalization</td></tr>
+<tr><td><span class="hl">PLI (Production Linked Incentive)</span></td><td>2020</td><td>14 sectors — Electronics, Pharma, Auto, Textiles, Semiconductors etc.</td></tr>
+<tr><td><span class="hl">India Semiconductor Mission</span></td><td>2021</td><td>10 projects, ~₹1.60 lakh crore investment. ISM 2.0 announced 2026.</td></tr>
+<tr><td><span class="hl">National Logistics Policy</span></td><td>2022</td><td>Reduce logistics cost from 13-14% to ~8% of GDP; PM Gati Shakti integration</td></tr>
+<tr><td><span class="hl">One District One Product</span></td><td>2018</td><td>Promote local products of each district for export & employment</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH7: SERVICES -->
+<div class="ch" id="c7"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">07</div><h2>Services Sector</h2><span class="pr pm">High</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Services — The Dominant Engine</h3><div class="fb"><ul>
+<li><span class="hl">Services share in GVA:</span> 56.4% (FY26 FAE) — highest ever</li>
+<li><span class="hl">Services GVA growth:</span> 9.3% in H1 FY26; 9.1% full year estimate</li>
+<li><span class="hl">Services exports:</span> $387.6 billion in FY25 (all-time high, +13.6%)</li>
+<li><span class="hl">India's rank:</span> 7th largest exporter of services globally</li>
+<li><span class="hl">Share in global services trade:</span> 4.3% (2024) — up from 2% in 2005</li>
+<li><span class="hl">FDI attraction:</span> Services = 80.2% of total FDI inflows (avg FY23-FY25)</li>
+<li>Services export growth doubled: 7.6% (FY16-FY20) → 14% (FY23-FY25)</li>
+</ul></div></div>
+<div class="fg"><h3>Sub-sectors of Services</h3><div class="fb"><table class="ft">
+<tr><th>Sub-sector</th><th>Key Facts</th></tr>
+<tr><td><span class="hl">IT & Business Services</span></td><td>India's flagship export. $254B revenue (FY24). 5.4 million direct employees. TCS, Infosys, Wipro, HCL.</td></tr>
+<tr><td><span class="hl">Telecom</span></td><td>Tele-density: 86.76%. 5G in 99.9% districts. World's cheapest data.</td></tr>
+<tr><td><span class="hl">Tourism</span></td><td>India ranks 39th in TTDI (Travel & Tourism Development Index). $30B forex earnings.</td></tr>
+<tr><td><span class="hl">Aviation</span></td><td>India = 3rd largest domestic aviation market. Airports: 74 (2014) → 164 (2025).</td></tr>
+<tr><td><span class="hl">Banking & Financial</span></td><td>Digital payments boom. UPI ~16 billion txns/month. FinTech unicorns.</td></tr>
+<tr><td><span class="hl">Real Estate & Construction</span></td><td>2nd largest employer. RERA regulation. Smart Cities Mission.</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH8: ECO SURVEY + BUDGET DATA -->
+<div class="ch" id="c8"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">08</div><h2>Economic Survey 2025-26 & Budget 2026-27 — Key Data Bank</h2><span class="pr ph">Most Tested</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Economic Survey 2025-26 Highlights</h3><div class="fb"><table class="ft">
+<tr><th>Indicator</th><th>Data</th></tr>
+<tr><td>Theme</td><td>"Sprint and Marathon Together"</td></tr>
+<tr><td>FY26 Real GDP Growth</td><td>7.4% (FAE)</td></tr>
+<tr><td>FY27 GDP Projection</td><td>6.8–7.2%</td></tr>
+<tr><td>Potential Growth Rate</td><td>~7%</td></tr>
+<tr><td>CPI Inflation (Apr-Dec 2025)</td><td>1.7% average</td></tr>
+<tr><td>GNPA Ratio (Sep 2025)</td><td>2.2% (multi-decadal low)</td></tr>
+<tr><td>NPA Recovery Rate</td><td>26.2% (FY25) — doubled from 13.2% (FY18)</td></tr>
+<tr><td>Forex Reserves (Jan 2026)</td><td>$701.4 billion (11 months import cover)</td></tr>
+<tr><td>India Merchandise Export Share</td><td>1.8% of global (doubled from 1% in 2005)</td></tr>
+<tr><td>Services Exports FY25</td><td>$387.6 billion (all-time high)</td></tr>
+<tr><td>Remittances FY25</td><td>$135.4 billion (world's largest)</td></tr>
+<tr><td>Jan Dhan Accounts</td><td>55.02 crore (36.63 Cr rural/semi-urban)</td></tr>
+<tr><td>Unique Investors in Markets</td><td>12+ crore (25% women)</td></tr>
+<tr><td>MPI Poverty</td><td>Declined to 11.28% (2022-23) from 55.3% (2005-06)</td></tr>
+<tr><td>e-Shram Registrations</td><td>31+ crore unorganised workers (54% women)</td></tr>
+<tr><td>GII Rank</td><td>38th (2025) — up from 66th (2019)</td></tr>
+<tr><td>MGNREGS Assessment</td><td>Reached its limits; reassessment warranted → Vikshit Bharat-GramG</td></tr>
+</table></div></div>
+<div class="fg"><h3>Union Budget 2026-27 Key Numbers</h3><div class="fb"><table class="ft">
+<tr><th>Parameter</th><th>FY27 BE</th></tr>
+<tr><td>Total Expenditure</td><td>₹53.47 lakh Cr</td></tr>
+<tr><td>Capital Expenditure</td><td>₹12.22 lakh Cr (+11.5%)</td></tr>
+<tr><td>Fiscal Deficit</td><td>4.3% of GDP</td></tr>
+<tr><td>Revenue Deficit</td><td>1.5% of GDP</td></tr>
+<tr><td>Gross Tax Revenue</td><td>₹44.04 lakh Cr</td></tr>
+<tr><td>Gross Borrowing</td><td>₹17.20 lakh Cr</td></tr>
+<tr><td>Debt-to-GDP Target</td><td>50±1% by 2030-31</td></tr>
+<tr><td>Theme</td><td>3 Kartavyas — Sustain Growth, Build Capacity, Sabka Saath</td></tr>
+<tr><td>New Income Tax Act</td><td>Effective April 1, 2026</td></tr>
+<tr><td>MSME Loans</td><td>Collateral-free doubled to ₹20 lakh</td></tr>
+<tr><td>SME Growth Fund</td><td>₹10,000 Cr</td></tr>
+<tr><td>CCUS Investment</td><td>₹20,000 Cr over 5 years</td></tr>
+<tr><td>High-Speed Rail Corridors</td><td>7 new corridors announced</td></tr>
+</table></div></div>
+<div class="tip"><b>💡 Exam Tip:</b> Economic Survey & Budget data is the MOST tested area in ESI Objective (30-40% questions). Memorize all key numbers above. Also read the Budget speech highlights and Economic Survey summary chapters.</div>
+</div></div>
+
+
+<!-- CH9: GLOBALIZATION -->
+<div class="ch open" id="c9"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">09</div><h2>Globalization & Opening of Indian Economy</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>What is Globalization?</h3><div class="fb"><ul>
+<li><span class="hl">Globalization</span> = Integration of national economies through trade, capital flows, technology, migration & cultural exchange</li>
+<li><span class="ky">Economic Globalization:</span> Free movement of goods, services, capital & labour across borders</li>
+<li><span class="ky">Triggers for India:</span> 1991 BOP crisis → LPG reforms → WTO membership (1995) → FDI liberalization</li>
+</ul></div></div>
+<div class="fg"><h3>Indicators of India's Globalization</h3><div class="fb"><table class="ft">
+<tr><th>Indicator</th><th>Before Reforms</th><th>Now (FY25-26)</th></tr>
+<tr><td>Trade-to-GDP Ratio</td><td>~15% (1991)</td><td>~48% (FY25)</td></tr>
+<tr><td>Average Tariff</td><td>~300% (1991)</td><td>~15% (2025)</td></tr>
+<tr><td>FDI Inflows</td><td>$132M (1991-92)</td><td>~$70B annually</td></tr>
+<tr><td>Forex Reserves</td><td>$1.2B (1991)</td><td>$701.4B (Jan 2026)</td></tr>
+<tr><td>Merchandise Export Share</td><td>~0.5% of world</td><td>1.8% of world (2024)</td></tr>
+<tr><td>Services Export Share</td><td>Negligible</td><td>4.3% of world (2024)</td></tr>
+</table></div></div>
+<div class="fg"><h3>Pros & Cons of Globalization for India</h3><div class="fb"><table class="ft">
+<tr><th>Advantages ✅</th><th>Challenges ❌</th></tr>
+<tr><td>Access to global markets & technology</td><td>Rising inequality — urban-rural, rich-poor divide</td></tr>
+<tr><td>FDI inflows → jobs, infrastructure</td><td>Agriculture exposed to cheap imports</td></tr>
+<tr><td>IT/services export boom</td><td>Environmental degradation from industrialization</td></tr>
+<tr><td>Consumer choice & competition</td><td>Loss of domestic small industries</td></tr>
+<tr><td>Integration into global value chains</td><td>Vulnerability to global shocks (2008 crisis, COVID)</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH10: BOP -->
+<div class="ch" id="c10"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">10</div><h2>Balance of Payments (BOP) & Trade Policy</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>BOP Structure</h3><div class="fb"><table class="ft">
+<tr><th>Account</th><th>Components</th><th>Nature</th></tr>
+<tr><td><span class="hl">Current Account</span></td><td>Trade Balance (Exports − Imports of goods) + Services Balance + Primary Income (wages, investment income) + Secondary Income (remittances, grants)</td><td>Day-to-day transactions. Deficit = importing more than exporting.</td></tr>
+<tr><td><span class="hl">Capital Account</span></td><td>FDI + FPI + ECB + NRI Deposits + Banking Capital + Govt borrowings</td><td>Asset transactions. Surplus = capital inflows > outflows.</td></tr>
+<tr><td><span class="hl">Errors & Omissions</span></td><td>Statistical discrepancy</td><td>Balancing item</td></tr>
+<tr><td><span class="hl">Overall BOP</span></td><td>Current A/c + Capital A/c + E&O = Change in Forex Reserves</td><td>Surplus → Forex reserves increase</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key BOP Terms</h3><div class="fb"><ul>
+<li><span class="hl">CAD (Current Account Deficit):</span> Imports > Exports on current account. India's CAD typically 1-3% of GDP.</li>
+<li><span class="hl">Trade Deficit:</span> Merchandise imports > exports. India = structural trade deficit (oil imports).</li>
+<li><span class="hl">Invisible Surplus:</span> India earns surplus from services (IT), remittances — partially offsets trade deficit.</li>
+<li><span class="hl">FDI (Foreign Direct Investment):</span> Long-term; 10%+ stake in company. Stable, productive.</li>
+<li><span class="hl">FPI (Foreign Portfolio Investment):</span> Short-term; stocks & bonds. Volatile, "hot money".</li>
+<li><span class="hl">ECB (External Commercial Borrowing):</span> Loans raised by Indian firms from abroad.</li>
+<li><span class="hl">NEER / REER:</span> Nominal/Real Effective Exchange Rate — weighted average of INR vs basket of currencies.</li>
+</ul></div></div>
+<div class="fg"><h3>India's External Sector — Current Data</h3><div class="fb"><ul>
+<li><span class="ky">Remittances FY25:</span> $135.4 billion — world's largest recipient</li>
+<li><span class="ky">Forex Reserves:</span> $701.4 billion (Jan 2026) — covers 11 months of imports & 94% of external debt</li>
+<li><span class="ky">Exchange Rate System:</span> Managed Float (RBI intervenes to reduce volatility)</li>
+<li><span class="ky">Top Export Destinations:</span> USA, UAE, Netherlands, China, Bangladesh</li>
+<li><span class="ky">Top Import Sources:</span> China, UAE, USA, Saudi Arabia, Russia</li>
+<li><span class="ky">India's Export-Import Policy:</span> Foreign Trade Policy 2023 (FTP 2023) — focus on Rupee trade, e-commerce exports, Districts as Export Hubs</li>
+</ul></div></div>
+</div></div>
+
+<!-- CH11: INTL INSTITUTIONS -->
+<div class="ch" id="c11"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">11</div><h2>International Economic Institutions — IMF, World Bank, WTO</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fb"><table class="ft">
+<tr><th>Institution</th><th>Estd.</th><th>HQ</th><th>Members</th><th>Function</th><th>India's Role</th></tr>
+<tr><td><span class="hl">IMF</span></td><td>1945</td><td>Washington DC</td><td>190</td><td>Global monetary stability; BOP assistance; surveillance; SDR allocation; capacity development</td><td>Founding member. ED: Krishnamurthy Subramanian. Quota: ~2.75%. SDR allocation: $17.86B</td></tr>
+<tr><td><span class="hl">World Bank (IBRD+IDA)</span></td><td>1945</td><td>Washington DC</td><td>189</td><td>Long-term development loans; poverty reduction; project financing; technical assistance</td><td>Founding member. India = largest IDA borrower historically. Projects in health, infra, energy.</td></tr>
+<tr><td><span class="hl">WTO</span></td><td>1995</td><td>Geneva</td><td>164</td><td>Global trade rules; dispute settlement; trade negotiations (rounds); MFN, National Treatment principles</td><td>Founding member. Doha Round (ongoing). Key issues: agriculture subsidies, fisheries, e-commerce.</td></tr>
+<tr><td><span class="hl">ADB</span></td><td>1966</td><td>Manila</td><td>68</td><td>Regional development bank for Asia-Pacific. Infrastructure, climate, social development loans.</td><td>Founding member. Japan + USA = largest shareholders. India = 4th largest.</td></tr>
+<tr><td><span class="hl">NDB (New Development Bank)</span></td><td>2015</td><td>Shanghai</td><td>BRICS+</td><td>Development bank by BRICS nations. Infrastructure & sustainable development.</td><td>India = founding member. President rotates among BRICS.</td></tr>
+<tr><td><span class="hl">AIIB</span></td><td>2016</td><td>Beijing</td><td>109</td><td>Infrastructure investment bank. China-led. Asia focus.</td><td>India = 2nd largest shareholder. Largest borrower.</td></tr>
+</table></div>
+<div class="fg"><h3>Regional Economic Cooperation</h3><div class="fb"><table class="ft">
+<tr><th>Grouping</th><th>Members</th><th>India's Role</th></tr>
+<tr><td><span class="hl">BRICS</span></td><td>Brazil, Russia, India, China, South Africa + 5 new (2024)</td><td>Founding member. NDB HQ agreement. De-dollarization push.</td></tr>
+<tr><td><span class="hl">G20</span></td><td>19 countries + EU + AU</td><td>India held Presidency 2023. "One Earth, One Family, One Future"</td></tr>
+<tr><td><span class="hl">SAARC</span></td><td>8 South Asian nations</td><td>Founding member. HQ: Kathmandu. Largely inactive since 2016.</td></tr>
+<tr><td><span class="hl">ASEAN</span></td><td>10 SE Asian nations</td><td>India = Dialogue Partner. Act East Policy. RCEP — India opted out (2019).</td></tr>
+<tr><td><span class="hl">SCO</span></td><td>9 members</td><td>Full member since 2017. Security + economic cooperation.</td></tr>
+<tr><td><span class="hl">Quad</span></td><td>India, USA, Japan, Australia</td><td>Indo-Pacific security, tech, climate, health cooperation.</td></tr>
+</table></div></div>
+</div></div>
+
+<!-- CH12: DEMOGRAPHICS -->
+<div class="ch" id="c12"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">12</div><h2>Demographics, Urbanization & Migration</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>India's Demographic Profile</h3><div class="fb"><table class="ft">
+<tr><th>Indicator</th><th>Data</th></tr>
+<tr><td><span class="hl">Population (2024 UNFPA est.)</span></td><td>~1.45 billion — World's most populous country (surpassed China in 2023)</td></tr>
+<tr><td>Decadal Growth (2001-2011)</td><td>17.7%</td></tr>
+<tr><td><span class="hl">Total Fertility Rate (TFR)</span></td><td>2.0 (NFHS-5, 2019-21) — below replacement level of 2.1</td></tr>
+<tr><td>Sex Ratio (Census 2011)</td><td>943 females per 1000 males</td></tr>
+<tr><td>Child Sex Ratio (0-6)</td><td>914 (Census 2011) — worrying decline</td></tr>
+<tr><td>Literacy Rate (Census 2011)</td><td>74.04% (Male: 82.1%, Female: 65.5%)</td></tr>
+<tr><td><span class="hl">Median Age</span></td><td>~28 years (world avg: 30). India has a youth bulge.</td></tr>
+<tr><td><span class="hl">Demographic Dividend</span></td><td>65% population below 35 years. Window: 2020–2055 approx.</td></tr>
+<tr><td>Life Expectancy</td><td>~70.8 years (Male: 69.4, Female: 72.2)</td></tr>
+</table></div></div>
+<div class="fg"><h3>Urbanization</h3><div class="fb"><ul>
+<li><span class="hl">Urban population:</span> ~35% (Census 2011). Estimated ~37-40% (2025). Eco Survey: "India far more urban functionally than definitions suggest"</li>
+<li><span class="hl">Mega cities (>10M):</span> Mumbai, Delhi, Kolkata, Bangalore, Chennai, Hyderabad</li>
+<li><span class="hl">Challenges:</span> Slums, inadequate housing, water/sanitation, pollution, transport, informal economy</li>
+<li><span class="ky">Smart Cities Mission:</span> 100 cities selected. ₹48,000 Cr investment. Focus on e-governance, sustainable infra.</li>
+<li><span class="ky">AMRUT 2.0:</span> Water supply & sewerage for all urban households. 500 cities.</li>
+<li><span class="ky">PM Awas Yojana-Urban 2.0:</span> 1 crore additional houses for urban poor.</li>
+</ul></div></div>
+<div class="fg"><h3>Migration</h3><div class="fb"><ul>
+<li><span class="hl">Internal Migration:</span> ~450 million (Census 2011 data). Primarily rural-to-urban for employment.</li>
+<li><span class="hl">Interstate Migration:</span> UP, Bihar, Rajasthan → Maharashtra, Delhi, Gujarat, Karnataka</li>
+<li><span class="hl">Push Factors:</span> Rural poverty, unemployment, lack of services, natural disasters</li>
+<li><span class="hl">Pull Factors:</span> Better jobs, education, healthcare, infrastructure in cities</li>
+<li><span class="hl">International Migration:</span> Indian diaspora = ~32 million (largest globally). Remittances = $135.4B (FY25)</li>
+<li><span class="ky">One Nation One Ration Card:</span> Portability of PDS benefits for migrant workers across states</li>
+<li><span class="ky">e-Shram Portal:</span> 31+ crore unorganized workers registered for social security</li>
+</ul></div></div>
+</div></div>
+
+<!-- CH13: GENDER -->
+<div class="ch" id="c13"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">13</div><h2>Gender Issues & Women Empowerment</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Key Gender Indicators — India</h3><div class="fb"><table class="ft">
+<tr><th>Indicator</th><th>Data</th></tr>
+<tr><td><span class="hl">Female LFPR</span></td><td>~37% (PLFS 2023-24) — rising but still among lowest globally</td></tr>
+<tr><td>Gender Gap Index (WEF 2024)</td><td>India ranked 129 out of 146 countries</td></tr>
+<tr><td>Female Literacy</td><td>65.5% (Census 2011) vs Male 82.1%</td></tr>
+<tr><td>Maternal Mortality Ratio (MMR)</td><td>97 per 100,000 live births (SRS 2018-20) — declining</td></tr>
+<tr><td>Sex Ratio at Birth</td><td>929 (NFHS-5) — improving from 919 (NFHS-4)</td></tr>
+<tr><td>Women in Parliament (LS)</td><td>~15% (17th Lok Sabha). Women's Reservation Act 2023 → 33% reservation.</td></tr>
+<tr><td>Women in Judiciary</td><td>~12% of High Court judges; 3 women SC judges (as of 2025)</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Schemes for Women Empowerment</h3><div class="fb"><table class="ft">
+<tr><th>Scheme</th><th>Focus</th></tr>
+<tr><td><span class="hl">Beti Bachao Beti Padhao</span></td><td>Prevent female foeticide; promote girl child education & participation</td></tr>
+<tr><td><span class="hl">PM Matru Vandana Yojana</span></td><td>₹11,000 maternity benefit for first 2 live births; nutrition support</td></tr>
+<tr><td><span class="hl">Sukanya Samriddhi Yojana</span></td><td>Savings scheme for girl child; high interest; tax-free</td></tr>
+<tr><td><span class="hl">One Stop Centre (Sakhi)</span></td><td>Shelter, legal aid, counselling for women affected by violence</td></tr>
+<tr><td><span class="hl">Women's Reservation Act 2023</span></td><td>33% seats reserved in Lok Sabha & State Assemblies for women (effective after delimitation)</td></tr>
+<tr><td><span class="hl">Stand-Up India</span></td><td>₹10L–1Cr loans for SC/ST/Women entrepreneurs per bank branch</td></tr>
+<tr><td><span class="hl">MUDRA for Women</span></td><td>68% of MUDRA loans disbursed to women entrepreneurs</td></tr>
+<tr><td><span class="hl">SHG-Bank Linkage</span></td><td>~90 lakh SHGs; mostly women-led. Largest microfinance programme globally.</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Gender Concepts for Descriptive</h3><div class="fb"><ul>
+<li><span class="hl">Glass Ceiling:</span> Invisible barrier preventing women from reaching top positions</li>
+<li><span class="hl">Pay Gap:</span> Women earn ~19% less than men for same work globally</li>
+<li><span class="hl">Care Economy:</span> Unpaid domestic work disproportionately done by women (5–6 hrs/day vs 0.5 hrs for men)</li>
+<li><span class="hl">Feminization of Agriculture:</span> Women = 70% of agricultural workforce but own &lt;13% of land</li>
+<li><span class="hl">Triple Burden:</span> Reproductive + Productive + Community management — all on women</li>
+<li><span class="hl">Intersectionality:</span> Gender discrimination compounds with caste, class, religion, disability</li>
+</ul></div></div>
+</div></div>
+
+<!-- CH14: EDUCATION & HEALTH -->
+<div class="ch" id="c14"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">14</div><h2>Education & Health — Human Development</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Education in India</h3><div class="fb"><table class="ft">
+<tr><th>Indicator</th><th>Data</th></tr>
+<tr><td><span class="hl">Literacy Rate</span></td><td>74.04% (Census 2011). Kerala: 93.91%. Bihar: 63.82%.</td></tr>
+<tr><td>GER Primary</td><td>90.9%</td></tr>
+<tr><td>GER Secondary</td><td>78.7%</td></tr>
+<tr><td>GER Higher Education</td><td>~28.4% (AISHE 2021-22)</td></tr>
+<tr><td>Institutions</td><td>23 IITs, 21 IIMs, 20 AIIMS + 2 international IIT campuses (Zanzibar, Abu Dhabi)</td></tr>
+<tr><td>Budget allocation (FY27)</td><td>~₹1.28 lakh crore for education</td></tr>
+</table></div></div>
+<div class="fg"><h3>National Education Policy (NEP) 2020</h3><div class="fb"><ul>
+<li><span class="hl">Structure:</span> 5+3+3+4 replaces 10+2 system</li>
+<li><span class="hl">Target:</span> GER 50% by 2035; 6% GDP on education</li>
+<li><span class="hl">Key changes:</span> Mother tongue instruction till Class 5; multidisciplinary education; academic credit bank; single regulator (HECI); coding from Class 6; no rigid stream separation</li>
+<li>Board exams reformed: Focus on competency, not rote learning</li>
+</ul></div></div>
+<div class="fg"><h3>Health in India</h3><div class="fb"><table class="ft">
+<tr><th>Indicator</th><th>Data</th></tr>
+<tr><td><span class="hl">IMR (Infant Mortality Rate)</span></td><td>28 per 1000 live births (SRS 2020)</td></tr>
+<tr><td>Under-5 Mortality</td><td>35 per 1000 (declining)</td></tr>
+<tr><td>MMR (Maternal Mortality)</td><td>97 per 100,000 (target: 70 by 2030)</td></tr>
+<tr><td>TFR</td><td>2.0 (below replacement level)</td></tr>
+<tr><td>Life Expectancy</td><td>~70.8 years</td></tr>
+<tr><td>Stunting (under 5)</td><td>35.5% (NFHS-5) — declining but high</td></tr>
+<tr><td>Health Expenditure</td><td>~2.1% of GDP (target: 2.5% by 2025)</td></tr>
+<tr><td>Doctor:Population Ratio</td><td>1:834 (WHO norm: 1:1000) — improving</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Health Schemes</h3><div class="fb"><table class="ft">
+<tr><th>Scheme</th><th>Feature</th></tr>
+<tr><td><span class="hl">Ayushman Bharat — PM-JAY</span></td><td>₹5 lakh/family/year health insurance for bottom 40%. Now extended to all 70+ citizens.</td></tr>
+<tr><td><span class="hl">Ayushman Bharat — HWCs</span></td><td>1.5 lakh Health & Wellness Centres for primary care. Free medicines & diagnostics.</td></tr>
+<tr><td><span class="hl">PM-ABHIM</span></td><td>Ayushman Bharat Health Infrastructure Mission — strengthen public health infra in urban/rural</td></tr>
+<tr><td><span class="hl">POSHAN Abhiyaan</span></td><td>National Nutrition Mission — reduce stunting, malnutrition, anaemia, low birth weight</td></tr>
+<tr><td><span class="hl">Mission Indradhanush</span></td><td>Full immunization for all children under 2 + pregnant women. 12 vaccines.</td></tr>
+</table></div></div>
+<div class="fg"><h3>Human Development Index (HDI)</h3><div class="fb"><ul>
+<li><span class="hl">HDI</span> = Composite index by UNDP measuring: Health (life expectancy) + Education (mean & expected years of schooling) + Income (GNI per capita PPP)</li>
+<li><span class="hl">India's HDI Rank:</span> 134 out of 193 (HDR 2024) — "Medium Human Development" category</li>
+<li><span class="hl">HDI Value:</span> 0.644</li>
+<li><span class="ky">IHDI (Inequality-adjusted HDI):</span> India's value drops significantly due to inequality</li>
+<li><span class="ky">GII (Gender Inequality Index):</span> India ranked 108/193</li>
+<li><span class="ky">MPI (Multidimensional Poverty Index):</span> India: 11.28% (2022-23) — dramatic improvement</li>
+</ul></div></div>
+</div></div>
+
+<!-- CH15: SDGs -->
+<div class="ch" id="c15"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">15</div><h2>Sustainable Development Goals (SDGs)</h2><span class="pr pm">High</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>What are SDGs?</h3><div class="fb"><ul>
+<li><span class="hl">Adopted:</span> September 2015 by UN General Assembly</li>
+<li><span class="hl">Goals:</span> 17 Goals + 169 Targets</li>
+<li><span class="hl">Timeline:</span> 2015–2030 (Agenda 2030)</li>
+<li><span class="hl">Predecessor:</span> Millennium Development Goals (MDGs) — 8 goals, 2000–2015</li>
+<li><span class="hl">Principle:</span> "Leave No One Behind"</li>
+<li><span class="hl">India's nodal body:</span> NITI Aayog monitors SDG implementation</li>
+</ul></div></div>
+<div class="fg"><h3>All 17 SDGs</h3><div class="fb"><table class="ft">
+<tr><th>#</th><th>Goal</th><th>#</th><th>Goal</th></tr>
+<tr><td>1</td><td>No Poverty</td><td>10</td><td>Reduced Inequalities</td></tr>
+<tr><td>2</td><td>Zero Hunger</td><td>11</td><td>Sustainable Cities & Communities</td></tr>
+<tr><td>3</td><td>Good Health & Well-being</td><td>12</td><td>Responsible Consumption & Production</td></tr>
+<tr><td>4</td><td>Quality Education</td><td>13</td><td>Climate Action</td></tr>
+<tr><td>5</td><td>Gender Equality</td><td>14</td><td>Life Below Water</td></tr>
+<tr><td>6</td><td>Clean Water & Sanitation</td><td>15</td><td>Life on Land</td></tr>
+<tr><td>7</td><td>Affordable & Clean Energy</td><td>16</td><td>Peace, Justice & Strong Institutions</td></tr>
+<tr><td>8</td><td>Decent Work & Economic Growth</td><td>17</td><td>Partnerships for the Goals</td></tr>
+<tr><td>9</td><td>Industry, Innovation & Infrastructure</td><td></td><td></td></tr>
+</table></div></div>
+<div class="fg"><h3>India's SDG Performance</h3><div class="fb"><ul>
+<li><span class="hl">NITI Aayog SDG India Index 2023-24:</span> National score = 71/100 (up from 57 in 2018)</li>
+<li><span class="ky">Top states:</span> Kerala (75), Uttarakhand (74), Goa (74)</li>
+<li><span class="ky">Bottom states:</span> Bihar (57), Jharkhand (58)</li>
+<li><span class="ky">India's strength:</span> SDG 7 (Clean Energy — 3rd globally in renewables), SDG 9 (Innovation rank 38th)</li>
+<li><span class="rd">India's challenges:</span> SDG 2 (Zero Hunger), SDG 3 (Health), SDG 5 (Gender), SDG 14 (Oceans)</li>
+</ul></div></div>
+</div></div>
+
+<!-- CH16: ENVIRONMENT & CLIMATE -->
+<div class="ch" id="c16"><div class="chd" onclick="this.parentElement.classList.toggle('open')"><div class="cn">16</div><h2>Environment & Climate Change</h2><span class="pr ph">Critical</span><span class="tl">▼</span></div>
+<div class="cb">
+<div class="fg"><h3>Key Environmental Issues in India</h3><div class="fb"><ul>
+<li><span class="rd">Air Pollution:</span> 21 of world's 30 most polluted cities are in India. Delhi air quality crisis every winter.</li>
+<li><span class="rd">Water Scarcity:</span> 600M Indians face high to extreme water stress. Groundwater depleting fast.</li>
+<li><span class="rd">Deforestation:</span> Forest cover = 21.71% of area (ISFR 2023). Target: 33%.</li>
+<li><span class="rd">Soil Degradation:</span> ~30% of India's land is degraded. Desertification advancing.</li>
+<li><span class="rd">Waste Management:</span> 62M tonnes solid waste/year. 95% goes to landfills. Plastic pollution crisis.</li>
+<li><span class="rd">Biodiversity Loss:</span> India = mega-diverse country (4 biodiversity hotspots). Many species threatened.</li>
+</ul></div></div>
+<div class="fg"><h3>Climate Change — Key Concepts</h3><div class="fb"><table class="ft">
+<tr><th>Concept</th><th>Explanation</th></tr>
+<tr><td><span class="hl">Global Warming</span></td><td>Rise in Earth's average temperature due to greenhouse gases (CO₂, CH₄, N₂O)</td></tr>
+<tr><td><span class="hl">Greenhouse Effect</span></td><td>Trapping of heat by GHGs in atmosphere. Natural process; human activities intensifying it.</td></tr>
+<tr><td><span class="hl">Carbon Footprint</span></td><td>Total GHG emissions caused by an individual/organization/event</td></tr>
+<tr><td><span class="hl">Net Zero</span></td><td>Balance between GHGs emitted and removed from atmosphere. India's target: 2070.</td></tr>
+<tr><td><span class="hl">Carbon Sink</span></td><td>Anything that absorbs more carbon than it releases (forests, oceans, soil)</td></tr>
+<tr><td><span class="hl">CBDR (Common But Differentiated Responsibilities)</span></td><td>All countries responsible for climate action, but developed nations bear greater responsibility (historical emissions)</td></tr>
+</table></div></div>
+<div class="fg"><h3>Global Climate Agreements</h3><div class="fb"><table class="ft">
+<tr><th>Agreement</th><th>Year</th><th>Key Feature</th></tr>
+<tr><td>UNFCCC</td><td>1992</td><td>UN Framework Convention on Climate Change. Foundation of all climate negotiations.</td></tr>
+<tr><td><span class="hl">Kyoto Protocol</span></td><td>1997</td><td>Legally binding emission targets for developed countries. CDM mechanism.</td></tr>
+<tr><td><span class="hl">Paris Agreement</span></td><td>2015</td><td>Keep temperature rise well below 2°C (aim 1.5°C). NDCs by all countries. Not legally binding on targets.</td></tr>
+<tr><td>COP28 (Dubai)</td><td>2023</td><td>"Transitioning away from fossil fuels." Loss & Damage Fund operationalized.</td></tr>
+<tr><td>COP29 (Baku)</td><td>2024</td><td>Climate finance framework. $300B/year target for developing countries by 2035.</td></tr>
+</table></div></div>
+<div class="fg"><h3>India's Climate Action</h3><div class="fb"><table class="ft">
+<tr><th>Initiative</th><th>Detail</th></tr>
+<tr><td><span class="hl">Panchamrit (5 Climate Targets)</span></td><td>India @COP26: (1) 500 GW non-fossil capacity by 2030, (2) 50% energy from renewables by 2030, (3) Reduce total carbon emissions by 1B tonnes by 2030, (4) Reduce carbon intensity by 45% by 2030, (5) Net Zero by 2070</td></tr>
+<tr><td><span class="hl">Updated NDC (Aug 2022)</span></td><td>Reduce emissions intensity by 45% from 2005 levels by 2030; 50% cumulative electric power from non-fossil sources</td></tr>
+<tr><td><span class="hl">National Solar Mission</span></td><td>Target: 100 GW solar by 2022 (achieved ~75 GW). Now integrated into 500 GW RE target.</td></tr>
+<tr><td><span class="hl">FAME Scheme</span></td><td>Faster Adoption of EVs. Subsidies for electric vehicles. Now PM E-Drive scheme.</td></tr>
+<tr><td><span class="hl">Green Hydrogen Mission</span></td><td>₹19,744 Cr. Target: 5 MMT green hydrogen production by 2030.</td></tr>
+<tr><td><span class="hl">India RE Status</span></td><td>3rd globally in overall Renewable Energy + Solar capacity. 200+ GW RE installed.</td></tr>
+<tr><td><span class="hl">CCUS (Budget 2026-27)</span></td><td>₹20,000 Cr for Carbon Capture, Utilization & Storage over 5 years</td></tr>
+<tr><td><span class="hl">Lifestyle for Environment (LiFE)</span></td><td>PM Modi's initiative @COP26. Promote sustainable individual actions. Adopted by UN.</td></tr>
+</table></div></div>
+<div class="fg"><h3>Key Environmental Laws & Bodies in India</h3><div class="fb"><table class="ft">
+<tr><th>Law / Body</th><th>Year</th><th>Purpose</th></tr>
+<tr><td>Environment Protection Act</td><td>1986</td><td>Umbrella legislation for environmental protection</td></tr>
+<tr><td>Forest Conservation Act</td><td>1980</td><td>Restrict diversion of forest land for non-forest purposes (amended 2023)</td></tr>
+<tr><td>Wildlife Protection Act</td><td>1972</td><td>Protect wildlife, establish national parks & sanctuaries</td></tr>
+<tr><td>National Green Tribunal (NGT)</td><td>2010</td><td>Dedicated environmental court for speedy disposal of cases</td></tr>
+<tr><td>CAMPA (Compensatory Afforestation)</td><td>2016</td><td>Fund for afforestation when forest land diverted</td></tr>
+<tr><td>Biological Diversity Act</td><td>2002</td><td>Conservation of biodiversity; regulate access to genetic resources</td></tr>
+</table></div></div>
+<div class="tip"><b> Exam Tip:</b> Climate Change + SDGs = among the most asked descriptive questions in RBI Grade B ESI. Always prepare 3-4 essay outlines on: India's climate commitments, SDG progress, sustainable development vs growth trade-offs, green finance.</div>
+</div></div>
+
+<!-- FOOTER -->
+<div class="footer">
+<p> <b>ESI (Chapters 1–15: Economic Issues)</b> | RBI Grade B Phase 2</p>
+<p>All Data from Economic Survey 2025-26 & Budget 2026-27 | Professional Green Theme</p>
+<br>
+<button class="btn" onclick="window.print()">Print</button>
+<button class="btn" onclick="document.querySelectorAll('.ch').forEach(t=>t.classList.add('open'))"> Expand All</button>
+<button class="btn" onclick="document.querySelectorAll('.ch').forEach(t=>t.classList.remove('open'))"> Collapse All</button>
+
+</div>
+
+<script>
+window.addEventListener('scroll',function(){document.getElementById('stt').style.display=window.scrollY>500?'block':'none'});
+document.querySelectorAll('.toc a').forEach(l=>{l.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.classList.add('open');t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+</script>
+</body>
+</html>

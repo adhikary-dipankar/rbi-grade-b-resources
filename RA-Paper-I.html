@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Reasoning — RBI Grade B</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a2e,#1a1a4e,#0d0d3b);color:#e0e0e0;line-height:1.7;padding:20px;min-height:100vh}
+        .header{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#e74c3c 0%,#8e44ad 100%);border-radius:20px;margin-bottom:30px;box-shadow:0 10px 40px rgba(231,76,60,0.3)}
+        .header h1{font-size:2.5em;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,0.3);margin-bottom:10px}
+        .header p{font-size:1.1em;color:#ddd;max-width:700px;margin:0 auto}
+        .header .badge{display:inline-block;background:rgba(255,255,255,0.2);padding:5px 15px;border-radius:20px;margin-top:15px;font-size:0.9em;color:#fff;backdrop-filter:blur(10px)}
+        .toc{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:15px;padding:25px 30px;margin-bottom:30px}
+        .toc h2{color:#e74c3c;margin-bottom:15px;font-size:1.4em}
+        .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+        .toc a{color:#f5a5a5;text-decoration:none;padding:6px 10px;border-radius:8px;transition:all 0.3s;display:block;font-size:0.95em}
+        .toc a:hover{background:rgba(231,76,60,0.2);color:#fff;transform:translateX(5px)}
+        .toc a .num{color:#e74c3c;font-weight:bold;margin-right:5px}
+        .topic{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:15px;margin-bottom:25px;overflow:hidden;transition:transform 0.3s}
+        .topic:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+        .topic-header{padding:20px 25px;cursor:pointer;display:flex;align-items:center;gap:15px;user-select:none;flex-wrap:wrap}
+        .topic-number{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.1em;color:#fff;flex-shrink:0}
+        .topic-header h2{font-size:1.3em;color:#fff;flex-grow:1}
+        .topic-header .priority{padding:4px 12px;border-radius:20px;font-size:0.75em;font-weight:bold;text-transform:uppercase;letter-spacing:1px}
+        .priority-high{background:#e74c3c33;color:#ff6b6b;border:1px solid #e74c3c55}
+        .priority-medium{background:#f39c1233;color:#feca57;border:1px solid #f39c1255}
+        .priority-low{background:#2ecc7133;color:#55efc4;border:1px solid #2ecc7155}
+        .toggle-icon{font-size:1.5em;transition:transform 0.3s;color:#e74c3c}
+        .topic.open .toggle-icon{transform:rotate(180deg)}
+        .topic-body{padding:0 25px 25px;display:none}
+        .topic.open .topic-body{display:block;animation:fadeIn 0.3s ease}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+        .formula-group{margin-bottom:20px}
+        .formula-group h3{color:#f5a5a5;font-size:1.05em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid rgba(245,165,165,0.2);display:flex;align-items:center;gap:8px}
+        .formula-box{background:rgba(0,0,0,0.3);border:1px solid rgba(231,76,60,0.2);border-radius:10px;padding:15px 20px;margin-bottom:12px;font-family:'Courier New',monospace;font-size:0.92em;line-height:2;overflow-x:auto}
+        .formula-box .highlight{color:#feca57;font-weight:bold}
+        .formula-box .key{color:#55efc4;font-weight:bold}
+        .formula-box .note{color:#a29bfe;font-style:italic}
+        .formula-box .red{color:#ff6b6b;font-weight:bold}
+        .formula-box ul{list-style:none;padding-left:0}
+        .formula-box ul li{padding:3px 0;padding-left:20px;position:relative}
+        .formula-box ul li::before{content:"▸";position:absolute;left:0;color:#e74c3c}
+        .formula-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em}
+        .formula-table th{background:rgba(231,76,60,0.3);color:#fff;padding:10px 15px;text-align:left;border:1px solid rgba(255,255,255,0.1)}
+        .formula-table td{padding:8px 15px;border:1px solid rgba(255,255,255,0.06);color:#ccc}
+        .formula-table tr:nth-child(even){background:rgba(255,255,255,0.03)}
+        .formula-table tr:hover{background:rgba(231,76,60,0.1)}
+        .tip-box{background:linear-gradient(135deg,rgba(46,204,113,0.1),rgba(39,174,96,0.05));border-left:4px solid #2ecc71;border-radius:0 10px 10px 0;padding:15px 20px;margin:15px 0;font-size:0.92em}
+        .tip-box .tip-title{color:#2ecc71;font-weight:bold;margin-bottom:5px}
+        .warning-box{background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(192,57,43,0.05));border-left:4px solid #e74c3c;border-radius:0 10px 10px 0;padding:15px 20px;margin:15px 0;font-size:0.92em}
+        .warning-box .warning-title{color:#e74c3c;font-weight:bold;margin-bottom:5px}
+        .diagram-box{background:rgba(0,0,0,0.4);border:2px dashed rgba(231,76,60,0.3);border-radius:10px;padding:20px;margin:12px 0;font-family:'Courier New',monospace;font-size:0.88em;line-height:1.8;white-space:pre;overflow-x:auto;text-align:center;color:#feca57}
+        .grid-box{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:10px 0}
+        .grid-item{background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);border-radius:8px;padding:8px 12px;text-align:center;font-family:'Courier New',monospace;font-size:0.9em}
+        .grid-item .val{color:#feca57;font-weight:bold}
+        .bg-r{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+        .bg-o{background:linear-gradient(135deg,#e67e22,#d35400)}
+        .bg-y{background:linear-gradient(135deg,#f1c40f,#f39c12)}
+        .bg-g{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+        .bg-b{background:linear-gradient(135deg,#3498db,#2980b9)}
+        .bg-p{background:linear-gradient(135deg,#9b59b6,#8e44ad)}
+        .bg-t{background:linear-gradient(135deg,#1abc9c,#16a085)}
+        .bg-pk{background:linear-gradient(135deg,#fd79a8,#e84393)}
+        .bg-in{background:linear-gradient(135deg,#6c5ce7,#a29bfe)}
+        .bg-cy{background:linear-gradient(135deg,#00cec9,#81ecec)}
+        .bg-br{background:linear-gradient(135deg,#636e72,#b2bec3)}
+        .bg-mg{background:linear-gradient(135deg,#e74c3c,#8e44ad)}
+        .bg-lb{background:linear-gradient(135deg,#74b9ff,#0984e3)}
+        .bg-lg{background:linear-gradient(135deg,#55efc4,#00b894)}
+        .bg-ly{background:linear-gradient(135deg,#ffeaa7,#fdcb6e)}
+        .bg-dp{background:linear-gradient(135deg,#2d3436,#636e72)}
+        .footer{text-align:center;padding:30px;margin-top:30px;color:#888;font-size:0.9em}
+        .footer .btn{display:inline-block;padding:12px 30px;background:linear-gradient(135deg,#e74c3c,#8e44ad);color:#fff;border:none;border-radius:25px;font-size:1em;cursor:pointer;margin:10px;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s}
+        .footer .btn:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(231,76,60,0.4)}
+        #scrollTop{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,#e74c3c,#8e44ad);color:#fff;border:none;border-radius:50%;font-size:1.5em;cursor:pointer;display:none;z-index:1000;box-shadow:0 5px 15px rgba(231,76,60,0.4);transition:transform 0.3s}
+        #scrollTop:hover{transform:scale(1.1)}
+        @media print{body{background:#fff;color:#000;padding:10px}.header{background:#333}.topic{border:1px solid #ccc;break-inside:avoid}.topic-body{display:block!important}.formula-box{background:#f5f5f5;border-color:#ccc;color:#000}.formula-table th{background:#ddd;color:#000}.formula-table td{color:#000}#scrollTop,.toggle-icon{display:none!important}.diagram-box{background:#f0f0f0;color:#333;border-color:#999}}
+        @media(max-width:768px){.header h1{font-size:1.6em}.toc-grid{grid-template-columns:1fr}.topic-header{flex-wrap:wrap}.grid-box{grid-template-columns:repeat(2,1fr)}.diagram-box{font-size:0.75em}}
+    </style>
+</head>
+<body>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <h1>Reasoning Ability </h1>
+    <p>Complete Topic-Wise Rules, Tricks, Shortcuts & Concepts for RBI Grade B & All Banking Exams</p>
+    <div class="badge">60 Questions • 60 Marks • 45 Minutes • 16 Topics Covered</div>
+</div>
+
+<!-- ===== WEIGHTAGE TABLE ===== -->
+<div class="toc" style="margin-bottom:20px">
+    <h2>PYQ Weightage Analysis (2017–2024)</h2>
+    <div class="formula-box" style="font-family:'Segoe UI',sans-serif">
+        <table class="formula-table">
+            <tr><th>Topic</th><th>Avg Questions</th><th>Priority</th></tr>
+            <tr><td>Puzzles</td><td>10–20</td><td style="color:#ff6b6b">🔴 HIGHEST</td></tr>
+            <tr><td>Seating Arrangement</td><td>10–14</td><td style="color:#ff6b6b">🔴 HIGHEST</td></tr>
+            <tr><td>Analytical / Logical Reasoning</td><td>9–12</td><td style="color:#ff6b6b">🔴 HIGH</td></tr>
+            <tr><td>Input-Output</td><td>5</td><td style="color:#feca57">🟡 MEDIUM</td></tr>
+            <tr><td>Syllogism</td><td>3–5</td><td style="color:#feca57">🟡 MEDIUM</td></tr>
+            <tr><td>Data Sufficiency</td><td>2–5</td><td style="color:#feca57">🟡 MEDIUM</td></tr>
+            <tr><td>Inequality</td><td>2–6</td><td style="color:#feca57">🟡 MEDIUM</td></tr>
+            <tr><td>Blood Relation</td><td>1–9</td><td style="color:#feca57">🟡 MEDIUM</td></tr>
+            <tr><td>Direction Sense</td><td>0–4</td><td style="color:#55efc4">🟢 LOW</td></tr>
+            <tr><td>Coding-Decoding</td><td>0–4</td><td style="color:#55efc4">🟢 LOW</td></tr>
+            <tr><td>Alphanumeric Series</td><td>0–3</td><td style="color:#55efc4">🟢 LOW</td></tr>
+            <tr><td>Ranking & Order</td><td>0–3</td><td style="color:#55efc4">🟢 LOW</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+    <h2>Table of Contents (Click to Jump)</h2>
+    <div class="toc-grid">
+        <a href="#t1"><span class="num">01</span> Puzzles</a>
+        <a href="#t2"><span class="num">02</span> Seating Arrangement</a>
+        <a href="#t3"><span class="num">03</span> Syllogism</a>
+        <a href="#t4"><span class="num">04</span> Inequality</a>
+        <a href="#t5"><span class="num">05</span> Blood Relations</a>
+        <a href="#t6"><span class="num">06</span> Direction Sense</a>
+        <a href="#t7"><span class="num">07</span> Coding-Decoding</a>
+        <a href="#t8"><span class="num">08</span> Input-Output (Machine)</a>
+        <a href="#t9"><span class="num">09</span> Alphanumeric Series</a>
+        <a href="#t10"><span class="num">10</span> Ranking & Order</a>
+        <a href="#t11"><span class="num">11</span> Data Sufficiency</a>
+        <a href="#t12"><span class="num">12</span> Statement & Assumption</a>
+        <a href="#t13"><span class="num">13</span> Statement & Conclusion</a>
+        <a href="#t14"><span class="num">14</span> Statement & Argument</a>
+        <a href="#t15"><span class="num">15</span> Cause & Effect</a>
+        <a href="#t16"><span class="num">16</span> Course of Action</a>
+        <a href="#tref"><span class="num">⚡</span> Alphabet & Position Reference</a>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 1: PUZZLES ═══════════════ -->
+<div class="topic open" id="t1" style="border-left:4px solid #e74c3c">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-r">01</div>
+        <h2>Puzzles</h2>
+        <span class="priority priority-high">Highest</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Types of Puzzles</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="highlight">Floor-based Puzzle</span> — People live on different floors of a building</li>
+                    <li><span class="highlight">Box/Shelf Puzzle</span> — Objects placed on shelves/in boxes (top to bottom)</li>
+                    <li><span class="highlight">Scheduling Puzzle</span> — Days of the week / months assigned to people</li>
+                    <li><span class="highlight">Comparison/Ordering Puzzle</span> — Age, height, salary, marks based ordering</li>
+                    <li><span class="highlight">Tabular Puzzle</span> — Multiple parameters (name, city, color, profession etc.)</li>
+                    <li><span class="highlight">Combination Puzzle</span> — Puzzle + Seating combined</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Step-by-Step Solving Method</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Step 1:</span> Read ALL clues once → identify the variables (people, floors, days, etc.)</li>
+                    <li><span class="key">Step 2:</span> Draw the structure (floor diagram, table grid, timeline)</li>
+                    <li><span class="key">Step 3:</span> Start with <span class="highlight">DEFINITE clues</span> — clues that fix a position absolutely</li>
+                    <li><span class="key">Step 4:</span> Apply <span class="highlight">RELATIVE clues</span> — "A is above B", "C is 2 floors below D"</li>
+                    <li><span class="key">Step 5:</span> Use <span class="highlight">NEGATIVE clues</span> — "E does NOT live on floor 3"</li>
+                    <li><span class="key">Step 6:</span> Apply <span class="red">ELIMINATION</span> → if only one spot left, fill it</li>
+                    <li><span class="key">Step 7:</span> Cross-verify all conditions</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Floor Puzzle Diagram Template</h3>
+            <div class="diagram-box">
+Floor 8: _____ (Top)
+Floor 7: _____
+Floor 6: _____
+Floor 5: _____
+Floor 4: _____
+Floor 3: _____
+Floor 2: _____
+Floor 1: _____ (Bottom/Ground)
+
+"Above" = Higher floor number
+"Below" = Lower floor number
+"Immediately above" = Exactly 1 floor up
+            </div>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">💡 Pro Tip</div>
+            If a puzzle seems stuck, try <b>case-making</b> — assume 2 possible positions for one person, and see which case leads to a contradiction. Eliminate that case.
+        </div>
+        <div class="warning-box">
+            <div class="warning-title">⚠️ Common Mistake</div>
+            "A lives above B" does NOT mean immediately above. It just means A's floor &gt; B's floor. Read clues precisely!
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 2: SEATING ARRANGEMENT ═══════════════ -->
+<div class="topic" id="t2" style="border-left:4px solid #e67e22">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-o">02</div>
+        <h2>Seating Arrangement</h2>
+        <span class="priority priority-high">Highest</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Types of Seating</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Type</th><th>Key Rule</th></tr>
+                    <tr><td>Linear (Single Row)</td><td>All face same direction (usually North or South)</td></tr>
+                    <tr><td>Linear (Double Row)</td><td>Row 1 faces Row 2; people face each other</td></tr>
+                    <tr><td>Circular</td><td>All face centre OR all face outside OR mixed</td></tr>
+                    <tr><td>Rectangular / Square</td><td>People on 4 sides; corners + middle positions</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Linear Arrangement Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>"Left" and "Right" depend on <span class="highlight">the person's perspective</span>, NOT yours</li>
+                    <li>If people face <span class="key">NORTH</span>: Their Left = Your Right (mirror image)</li>
+                    <li>If people face <span class="key">SOUTH</span>: Their Left = Your Left (same)</li>
+                    <li>"Immediate left/right" = exactly next to (adjacent)</li>
+                    <li>"3rd to the left of A" = Count 3 positions leftward from A</li>
+                </ul>
+            </div>
+            <div class="diagram-box">
+FACING NORTH:
+← Left (their)                    Right (their) →
+
+Person's LEFT = Observer's RIGHT
+Person's RIGHT = Observer's LEFT
+
+   [P1] [P2] [P3] [P4] [P5] [P6] [P7] [P8]
+   ←────────────────────────────────────→
+                    Facing NORTH ↑
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Circular Arrangement Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>If <span class="highlight">facing centre</span>: Clockwise = person's Right, Anti-clockwise = person's Left</li>
+                    <li>If <span class="highlight">facing outside</span>: Clockwise = person's Left, Anti-clockwise = person's Right</li>
+                    <li>"Immediate left/right" = Adjacent seat</li>
+                    <li>"3rd to the right" = Count 3 seats clockwise (if facing centre)</li>
+                    <li>"Opposite" = Directly across (only in even-numbered arrangements)</li>
+                </ul>
+            </div>
+            <div class="diagram-box">
+CIRCULAR — Facing Centre:
+
+         [P1]
+    [P8]       [P2]
+  [P7]    ●      [P3]
+    [P6]       [P4]
+         [P5]
+
+Clockwise → Right of person
+Anti-clockwise → Left of person
+
+CIRCULAR — Facing Outside:
+
+Clockwise → LEFT of person
+Anti-clockwise → RIGHT of person
+(Exactly OPPOSITE of facing centre!)
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Double Row Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>Row 1 faces South, Row 2 faces North (standard setup)</li>
+                    <li>"Faces" = directly opposite person</li>
+                    <li>Left/Right in each row follows that row's facing direction</li>
+                    <li>Key: Draw both rows, number positions, map "faces" pairs</li>
+                </ul>
+            </div>
+            <div class="diagram-box">
+Row 2 (Facing North ↑): [Q1] [Q2] [Q3] [Q4] [Q5]
+                         ────────────────────────
+Row 1 (Facing South ↓): [P1] [P2] [P3] [P4] [P5]
+
+P1 faces Q1, P2 faces Q2... etc.
+Row 1's Left = Your RIGHT (they face South)
+Row 2's Left = Your LEFT (they face North)
+            </div>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">💡 Golden Rule</div>
+            Always fix <b>one person's position first</b>, then place others relative to them. Never try to solve without drawing a diagram!
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 3: SYLLOGISM ═══════════════ -->
+<div class="topic" id="t3" style="border-left:4px solid #f1c40f">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-y">03</div>
+        <h2>Syllogism</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Four Types of Statements</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Type</th><th>Format</th><th>Example</th><th>Venn Diagram</th></tr>
+                    <tr><td><span class="highlight">A (Universal +)</span></td><td>All A are B</td><td>All dogs are animals</td><td>A completely inside B</td></tr>
+                    <tr><td><span class="highlight">E (Universal −)</span></td><td>No A is B</td><td>No cat is a dog</td><td>A and B separate circles</td></tr>
+                    <tr><td><span class="highlight">I (Particular +)</span></td><td>Some A are B</td><td>Some birds are parrots</td><td>A and B overlap</td></tr>
+                    <tr><td><span class="highlight">O (Particular −)</span></td><td>Some A are not B</td><td>Some students are not toppers</td><td>Part of A outside B</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Key Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Rule 1:</span> All A are B + All B are C → <span class="highlight">All A are C ✓</span></li>
+                    <li><span class="key">Rule 2:</span> All A are B + No B is C → <span class="highlight">No A is C ✓</span></li>
+                    <li><span class="key">Rule 3:</span> Some A are B + All B are C → <span class="highlight">Some A are C ✓</span></li>
+                    <li><span class="key">Rule 4:</span> Some A are B + No B is C → <span class="highlight">Some A are not C ✓</span></li>
+                    <li><span class="key">Rule 5:</span> Some A are B → <span class="highlight">Some B are A ✓</span> (Converse always valid for "Some")</li>
+                    <li><span class="key">Rule 6:</span> All A are B → <span class="red">All B are A ✗</span> (NOT necessarily true)</li>
+                    <li><span class="key">Rule 7:</span> No A is B → <span class="highlight">No B is A ✓</span> (Converse valid for "No")</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Possibility Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>"<span class="highlight">Some A are B</span>" is POSSIBLE → is true when there is ANY overlap</li>
+                    <li>"All A are B" is POSSIBLE → true unless explicitly contradicted</li>
+                    <li><span class="red">If "No A is B" is definite → "Some A are B" is NOT possible</span></li>
+                    <li><span class="red">If "All A are B" is definite → "No A is B" is NOT possible</span></li>
+                    <li>If "Some A are B" → "All A are B" <span class="key">IS possible</span></li>
+                    <li>If "Some A are not B" → "No A is B" <span class="key">IS possible</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">💡 Venn Diagram Method</div>
+            Draw ALL possible Venn diagrams for the given statements. A conclusion is <b>DEFINITE</b> only if it holds in ALL possible diagrams. It is <b>POSSIBLE</b> if it holds in at least one diagram.
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 4: INEQUALITY ═══════════════ -->
+<div class="topic" id="t4" style="border-left:4px solid #2ecc71">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-g">04</div>
+        <h2>Inequality (Coded & Direct)</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Symbols & Meaning</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Symbol</th><th>Meaning</th><th>Example</th></tr>
+                    <tr><td>A > B</td><td>A is greater than B</td><td>5 > 3</td></tr>
+                    <tr><td>A < B</td><td>A is less than B</td><td>3 < 5</td></tr>
+                    <tr><td>A ≥ B</td><td>A is greater than or equal to B</td><td>5 ≥ 5</td></tr>
+                    <tr><td>A ≤ B</td><td>A is less than or equal to B</td><td>3 ≤ 5</td></tr>
+                    <tr><td>A = B</td><td>A is equal to B</td><td>5 = 5</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Combining Rules (Transitive Property)</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Same direction:</span> A > B > C → <span class="highlight">A > C ✓</span></li>
+                    <li><span class="key">Same direction (with ≥):</span> A ≥ B > C → <span class="highlight">A > C ✓</span></li>
+                    <li><span class="key">Same direction (both ≥):</span> A ≥ B ≥ C → <span class="highlight">A ≥ C ✓</span></li>
+                    <li><span class="red">Opposite direction:</span> A > B < C → <span class="red">NO relation between A and C ✗</span></li>
+                    <li><span class="red">Broken chain:</span> A ≥ B ≤ C → <span class="red">Cannot determine A vs C ✗</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Complementary Pair Rule</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>If asked: Is A > B true? and Is A ≤ B true?</li>
+                    <li>These are <span class="highlight">complementary</span> → EXACTLY ONE must be true</li>
+                    <li>Complementary pairs:</li>
+                    <li>&nbsp;&nbsp;> and ≤ (one is always true)</li>
+                    <li>&nbsp;&nbsp;< and ≥ (one is always true)</li>
+                    <li>&nbsp;&nbsp;<span class="red">= and ≠ are NOT complementary in these questions</span></li>
+                    <li class="note">"Either-or" answers are based on complementary pairs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Coded Inequality</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>Symbols like @, #, $, %, * represent >, <, ≥, ≤, =</li>
+                    <li><span class="key">Step 1:</span> Decode ALL symbols first (write on rough sheet)</li>
+                    <li><span class="key">Step 2:</span> Replace coded symbols with actual signs</li>
+                    <li><span class="key">Step 3:</span> Apply transitive rule as normal</li>
+                    <li class="note">Speed trick: Write the decoded key at the top and solve directly</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 5: BLOOD RELATIONS ═══════════════ -->
+<div class="topic" id="t5" style="border-left:4px solid #3498db">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-b">05</div>
+        <h2>Blood Relations</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Relationship Chart</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Relation</th><th>Male</th><th>Female</th></tr>
+                    <tr><td>Parent's Parent</td><td>Grandfather</td><td>Grandmother</td></tr>
+                    <tr><td>Parent</td><td>Father</td><td>Mother</td></tr>
+                    <tr><td>Parent's Child</td><td>Brother</td><td>Sister</td></tr>
+                    <tr><td>Child</td><td>Son</td><td>Daughter</td></tr>
+                    <tr><td>Child's Child</td><td>Grandson</td><td>Granddaughter</td></tr>
+                    <tr><td>Parent's Brother</td><td>Uncle (Paternal/Maternal)</td><td>—</td></tr>
+                    <tr><td>Parent's Sister</td><td>—</td><td>Aunt</td></tr>
+                    <tr><td>Uncle/Aunt's Child</td><td>Cousin (M)</td><td>Cousin (F)</td></tr>
+                    <tr><td>Sibling's Son</td><td>Nephew</td><td>—</td></tr>
+                    <tr><td>Sibling's Daughter</td><td>—</td><td>Niece</td></tr>
+                    <tr><td>Spouse's Father</td><td>Father-in-law</td><td>—</td></tr>
+                    <tr><td>Spouse's Mother</td><td>—</td><td>Mother-in-law</td></tr>
+                    <tr><td>Spouse's Brother</td><td>Brother-in-law</td><td>—</td></tr>
+                    <tr><td>Spouse's Sister</td><td>—</td><td>Sister-in-law</td></tr>
+                    <tr><td>Child's Spouse</td><td>Son-in-law</td><td>Daughter-in-law</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Symbol Method (Draw Family Tree)</h3>
+            <div class="diagram-box">
++ (Plus) = Male
+− (Minus) = Female
+── (Horizontal line) = Siblings / Spouse
+│ (Vertical line) = Parent-Child
+
+Example:   (+) A ─── (−) B         → A(husband) married to B(wife)
+                │
+           ────┼────
+          │         │
+        (+) C    (−) D              → C is son, D is daughter
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Coded Blood Relations</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>"A × B" might mean "A is father of B"</li>
+                    <li>"A + B" might mean "A is mother of B"</li>
+                    <li><span class="key">Step 1:</span> Decode each symbol into a relationship</li>
+                    <li><span class="key">Step 2:</span> Draw the family tree step by step</li>
+                    <li><span class="key">Step 3:</span> Trace the asked relationship from tree</li>
+                    <li class="note">Always mark gender (M/F) as you go — gender is crucial!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="warning-box">
+            <div class="warning-title">⚠️ Trap</div>
+            "A is the brother of B" does NOT tell B's gender. B can be male or female. Don't assume!
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 6: DIRECTION SENSE ═══════════════ -->
+<div class="topic" id="t6" style="border-left:4px solid #9b59b6">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-p">06</div>
+        <h2>Direction Sense</h2>
+        <span class="priority priority-low">Low</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Direction Map</h3>
+            <div class="diagram-box">
+                    North (N)
+                      ↑
+                      |
+   North-West (NW)  |  North-East (NE)
+            \       |       /
+West (W) ←───── ● ─────→ East (E)
+            /       |       \
+   South-West (SW)  |  South-East (SE)
+                      |
+                      ↓
+                   South (S)
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Turn Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Left Turn:</span> N → W → S → E → N (Anti-clockwise)</li>
+                    <li><span class="key">Right Turn:</span> N → E → S → W → N (Clockwise)</li>
+                    <li><span class="key">Opposite:</span> N↔S, E↔W, NE↔SW, NW↔SE</li>
+                    <li><span class="key">45° turn:</span> N → NE (right) or N → NW (left)</li>
+                    <li><span class="key">90° turn:</span> N → E (right) or N → W (left)</li>
+                    <li><span class="key">180° turn:</span> N → S (about-turn)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Distance Formula (Shortest Distance)</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>If final position forms a right-angle path:</li>
+                    <li><span class="highlight">Shortest Distance = √(horizontal² + vertical²)</span></li>
+                    <li>This is the Pythagorean theorem applied to direction problems</li>
+                </ul>
+            </div>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">💡 Strategy</div>
+            Always draw on rough paper. Fix North at the top. Track each movement with arrows. Mark distances on each arrow. Never try to solve mentally!
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 7: CODING-DECODING ═══════════════ -->
+<div class="topic" id="t7" style="border-left:4px solid #1abc9c">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-t">07</div>
+        <h2>Coding-Decoding</h2>
+        <span class="priority priority-low">Low-Med</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Types of Coding</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Type</th><th>Logic</th><th>Example</th></tr>
+                    <tr><td>Letter Shift</td><td>Each letter shifted by +n or −n positions</td><td>CAT → FDW (+3)</td></tr>
+                    <tr><td>Reverse Coding</td><td>Word reversed / Alphabet reversed (A=Z, B=Y)</td><td>CAT → TAC or XZG</td></tr>
+                    <tr><td>Position-based</td><td>Letter replaced by its position number</td><td>CAT → 3-1-20</td></tr>
+                    <tr><td>Sentence Coding</td><td>Each word in sentence has a code; find pattern</td><td>"go home"→"pa ka"; "come home"→"ta ka" → home=ka</td></tr>
+                    <tr><td>Conditional Coding</td><td>Different rules for vowels, consonants, positions</td><td>If vowel: +2, If consonant: −2</td></tr>
+                    <tr><td>Symbol/Number Coding</td><td>Letters → symbols or numbers based on pattern</td><td>A=@, B=#, C=$...</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Solving Strategy</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Step 1:</span> Find common words between sentences to decode individual word codes</li>
+                    <li><span class="key">Step 2:</span> For letter coding, find the shift pattern (check: is each letter shifted by same amount?)</li>
+                    <li><span class="key">Step 3:</span> Check reverse alphabet: A↔Z (pos 1↔26), B↔Y (2↔25), etc.</li>
+                    <li><span class="key">Step 4:</span> Check if vowels and consonants follow different rules</li>
+                    <li><span class="key">Step 5:</span> Look for position-based patterns (first letter, last letter, middle letter treated differently)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 8: INPUT-OUTPUT ═══════════════ -->
+<div class="topic" id="t8" style="border-left:4px solid #fd79a8">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-pk">08</div>
+        <h2>Machine Input-Output</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Concept</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>A "machine" takes an input (words/numbers) and rearranges them step by step</li>
+                    <li>Each step follows a <span class="highlight">consistent rule</span></li>
+                    <li>You must identify the rule and predict intermediate/final outputs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Common Patterns</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Ascending/Descending:</span> Numbers sorted small→big or big→small, one number per step</li>
+                    <li><span class="key">Alphabetical:</span> Words arranged A→Z or Z→A, one word per step</li>
+                    <li><span class="key">Alternating:</span> Step 1 = smallest number to left, Step 2 = largest word to right, etc.</li>
+                    <li><span class="key">Word length:</span> Arranged by number of letters in each word</li>
+                    <li><span class="key">Vowel-based:</span> Words starting with vowels moved first</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Solving Method</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Step 1:</span> Compare Input → Step 1 → What moved? Where?</li>
+                    <li><span class="key">Step 2:</span> Compare Step 1 → Step 2 → Confirm pattern</li>
+                    <li><span class="key">Step 3:</span> Verify pattern holds for Step 2 → Step 3</li>
+                    <li><span class="key">Step 4:</span> Apply the rule to the given input to find answer</li>
+                    <li class="note">Track what's fixed and what's moving in each step</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 9: ALPHANUMERIC SERIES ═══════════════ -->
+<div class="topic" id="t9" style="border-left:4px solid #6c5ce7">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-in">09</div>
+        <h2>Alphanumeric / Number Series</h2>
+        <span class="priority priority-low">Low</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="key">Letter Series:</span> A, C, E, G... → Skip 1 (positions: 1, 3, 5, 7)</li>
+                <li><span class="key">Mixed Series:</span> A2, D5, G8... → Letters +3, Numbers +3</li>
+                <li><span class="key">Symbol Series:</span> @, #, $, @, #, $... → Repeating pattern</li>
+                <li><span class="key">Odd One Out:</span> Find element that breaks the pattern</li>
+                <li><span class="highlight">Strategy:</span> Check alphabetical positions, check number patterns, check if letters & numbers follow independent rules</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 10: RANKING & ORDER ═══════════════ -->
+<div class="topic" id="t10" style="border-left:4px solid #00cec9">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-cy">10</div>
+        <h2>Ranking & Order</h2>
+        <span class="priority priority-low">Low</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Core Formulas</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="highlight">Total = (Rank from Top) + (Rank from Bottom) − 1</span></li>
+                    <li>Rank from Bottom = Total − Rank from Top + 1</li>
+                    <li>Rank from Top = Total − Rank from Bottom + 1</li>
+                    <li>If A is 5th from top and 20th from bottom → Total = 5 + 20 − 1 = <span class="key">24</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Between / Interchange</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>People between A and B = |Rank_A − Rank_B| − 1</li>
+                    <li>If A and B interchange, their NEW ranks = each other's OLD ranks</li>
+                    <li>If "at least x people between" → Minimum distance = x + 1 ranks apart</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 11: DATA SUFFICIENCY ═══════════════ -->
+<div class="topic" id="t11" style="border-left:4px solid #636e72">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-br">11</div>
+        <h2>Data Sufficiency</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="key">Standard Answer Choices:</span></li>
+                <li>(a) Only Statement I alone is sufficient</li>
+                <li>(b) Only Statement II alone is sufficient</li>
+                <li>(c) Either statement alone is sufficient</li>
+                <li>(d) Both statements together are sufficient</li>
+                <li>(e) Both together are NOT sufficient</li>
+            </ul>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Solving Framework</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Step 1:</span> Read the question — what exactly is asked?</li>
+                    <li><span class="key">Step 2:</span> Check Statement I alone — is it sufficient? (Yes/No)</li>
+                    <li><span class="key">Step 3:</span> Check Statement II alone — is it sufficient? (Yes/No)</li>
+                    <li><span class="key">Step 4:</span> If neither alone works → Combine both → sufficient? (Yes/No)</li>
+                    <li><span class="key">Step 5:</span> Choose answer based on framework above</li>
+                    <li class="note">Don't solve completely — just check if it CAN be solved</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 12: STATEMENT & ASSUMPTION ═══════════════ -->
+<div class="topic" id="t12" style="border-left:4px solid #e74c3c">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-mg">12</div>
+        <h2>Statement & Assumption</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="highlight">Assumption</span> = Something taken for granted / presumed true (not stated directly)</li>
+                <li>An assumption is <span class="key">IMPLICIT</span> if it logically follows from the statement</li>
+                <li>An assumption is <span class="red">NOT IMPLICIT</span> if it goes beyond the statement or contradicts it</li>
+                <li><b>Test:</b> If the assumption is false, does the statement become meaningless? → If YES, assumption is implicit</li>
+            </ul>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>✅ Implicit: Directly needed for the statement to be true/logical</li>
+                    <li>❌ Not Implicit: Too extreme, too broad, opinion-based, contradicts statement</li>
+                    <li>❌ Words like "only", "always", "never", "best", "all" → Usually NOT implicit</li>
+                    <li>✅ Moderate assumptions are usually implicit</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 13: STATEMENT & CONCLUSION ═══════════════ -->
+<div class="topic" id="t13" style="border-left:4px solid #74b9ff">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-lb">13</div>
+        <h2>Statement & Conclusion</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="highlight">Conclusion</span> = What can be logically derived/inferred from the statement</li>
+                <li>A conclusion <span class="key">FOLLOWS</span> if it can be directly inferred from the given information</li>
+                <li>A conclusion <span class="red">DOES NOT FOLLOW</span> if it requires outside knowledge or assumptions</li>
+                <li><b>Key difference from Assumption:</b> Conclusions are DRAWN from statements; Assumptions are BEHIND statements</li>
+            </ul>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>✅ Follows: Directly stated or logically inferable</li>
+                    <li>❌ Does Not Follow: Based on personal opinion, external knowledge, or too extreme</li>
+                    <li>❌ Generalizations (all, every, always) usually don't follow unless stated</li>
+                    <li>❌ Predictions about future usually don't follow</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 14: STATEMENT & ARGUMENT ═══════════════ -->
+<div class="topic" id="t14" style="border-left:4px solid #55efc4">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-lg">14</div>
+        <h2>Statement & Argument</h2>
+        <span class="priority priority-low">Low</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="highlight">Strong Argument:</span> Directly related to the statement, gives a valid reason, not extreme</li>
+                <li><span class="red">Weak Argument:</span> Not directly related, vague, extreme, based on examples/rare cases</li>
+                <li>✅ Strong: Logical, factual, addresses the core issue</li>
+                <li>❌ Weak: Emotional, too general, uses "only"/"all"/"always", based on minority</li>
+                <li>❌ Ambiguous or double-edged arguments → Usually weak</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 15: CAUSE & EFFECT ═══════════════ -->
+<div class="topic" id="t15" style="border-left:4px solid #ffeaa7">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-ly">15</div>
+        <h2>Cause & Effect</h2>
+        <span class="priority priority-low">Low</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li>Two statements given — determine their relationship:</li>
+                <li><span class="key">(a)</span> Statement I is the cause, Statement II is the effect</li>
+                <li><span class="key">(b)</span> Statement II is the cause, Statement I is the effect</li>
+                <li><span class="key">(c)</span> Both are effects of a common cause</li>
+                <li><span class="key">(d)</span> Both are independent causes</li>
+                <li><span class="key">(e)</span> Both are effects of independent causes</li>
+                <li class="note"><b>Ask yourself:</b> Did Event A LEAD TO Event B? Or did something else cause both?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 16: COURSE OF ACTION ═══════════════ -->
+<div class="topic" id="t16" style="border-left:4px solid #636e72">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-dp">16</div>
+        <h2>Statement & Course of Action</h2>
+        <span class="priority priority-low">Low</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="highlight">Course of Action</span> = A step/action suggested to address the problem in the statement</li>
+                <li>✅ <span class="key">Follows:</span> Practical, addresses the problem directly, feasible to implement</li>
+                <li>❌ <span class="red">Does Not Follow:</span> Extreme, impractical, punitive without reason, doesn't address the root cause</li>
+                <li>❌ Actions involving "ban", "terminate", "impose heavy penalty" → Usually too extreme</li>
+                <li>✅ Actions involving "investigate", "provide training", "form committee" → Usually follow</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ QUICK REFERENCE: ALPHABET POSITIONS ═══════════════ -->
+<div class="topic open" id="tref" style="border-left:4px solid #e74c3c">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-r">⚡</div>
+        <h2>Quick Reference — Alphabet Positions</h2>
+        <span class="priority priority-high">Must Memorize</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Alphabet Position Numbers (A=1 to Z=26)</h3>
+            <div class="grid-box">
+                <div class="grid-item">A = <span class="val">1</span></div>
+                <div class="grid-item">B = <span class="val">2</span></div>
+                <div class="grid-item">C = <span class="val">3</span></div>
+                <div class="grid-item">D = <span class="val">4</span></div>
+                <div class="grid-item">E = <span class="val">5</span></div>
+                <div class="grid-item">F = <span class="val">6</span></div>
+                <div class="grid-item">G = <span class="val">7</span></div>
+                <div class="grid-item">H = <span class="val">8</span></div>
+                <div class="grid-item">I = <span class="val">9</span></div>
+                <div class="grid-item">J = <span class="val">10</span></div>
+                <div class="grid-item">K = <span class="val">11</span></div>
+                <div class="grid-item">L = <span class="val">12</span></div>
+                <div class="grid-item">M = <span class="val">13</span></div>
+                <div class="grid-item">N = <span class="val">14</span></div>
+                <div class="grid-item">O = <span class="val">15</span></div>
+                <div class="grid-item">P = <span class="val">16</span></div>
+                <div class="grid-item">Q = <span class="val">17</span></div>
+                <div class="grid-item">R = <span class="val">18</span></div>
+                <div class="grid-item">S = <span class="val">19</span></div>
+                <div class="grid-item">T = <span class="val">20</span></div>
+                <div class="grid-item">U = <span class="val">21</span></div>
+                <div class="grid-item">V = <span class="val">22</span></div>
+                <div class="grid-item">W = <span class="val">23</span></div>
+                <div class="grid-item">X = <span class="val">24</span></div>
+                <div class="grid-item">Y = <span class="val">25</span></div>
+                <div class="grid-item">Z = <span class="val">26</span></div>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Opposite Letters (Sum = 27)</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Letter</th><th>Opposite</th><th>Letter</th><th>Opposite</th><th>Letter</th><th>Opposite</th></tr>
+                    <tr><td>A (1)</td><td>Z (26)</td><td>J (10)</td><td>Q (17)</td><td>S (19)</td><td>H (8)</td></tr>
+                    <tr><td>B (2)</td><td>Y (25)</td><td>K (11)</td><td>P (16)</td><td>T (20)</td><td>G (7)</td></tr>
+                    <tr><td>C (3)</td><td>X (24)</td><td>L (12)</td><td>O (15)</td><td>U (21)</td><td>F (6)</td></tr>
+                    <tr><td>D (4)</td><td>W (23)</td><td>M (13)</td><td>N (14)</td><td>V (22)</td><td>E (5)</td></tr>
+                    <tr><td>E (5)</td><td>V (22)</td><td>N (14)</td><td>M (13)</td><td>W (23)</td><td>D (4)</td></tr>
+                    <tr><td>F (6)</td><td>U (21)</td><td>O (15)</td><td>L (12)</td><td>X (24)</td><td>C (3)</td></tr>
+                    <tr><td>G (7)</td><td>T (20)</td><td>P (16)</td><td>K (11)</td><td>Y (25)</td><td>B (2)</td></tr>
+                    <tr><td>H (8)</td><td>S (19)</td><td>Q (17)</td><td>J (10)</td><td>Z (26)</td><td>A (1)</td></tr>
+                    <tr><td>I (9)</td><td>R (18)</td><td>R (18)</td><td>I (9)</td><td colspan="2" style="text-align:center"><b>Trick: Position + Opposite Position = 27</b></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 EJOTY Trick (Quick Position Memory)</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="highlight">E=5, J=10, O=15, T=20, Y=25</span></li>
+                    <li>These 5 milestone letters help you quickly find any letter's position</li>
+                    <li>Example: What is R's position? → T=20, R is 2 before T → R = 18 ✓</li>
+                    <li>Example: What is L's position? → J=10, L is 2 after J → L = 12 ✓</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Left-Right from a Position</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>"3rd to the left of 10th from left" = 10 − 3 = <span class="key">7th from left</span></li>
+                    <li>"4th to the right of 10th from right" = 10 − 4 = <span class="key">6th from right</span></li>
+                    <li>"3rd to the right of 10th from left" = 10 + 3 = <span class="key">13th from left</span></li>
+                    <li>"4th to the left of 10th from right" = 10 + 4 = <span class="key">14th from right</span></li>
+                    <li class="note">Same direction → Subtract | Opposite direction → Add</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+    <p> <b>Reasoning Ability</b> — RBI Grade B & All Banking Exams</p>
+    <p>16 Topics • Rules, Tricks, Diagrams & Shortcuts • Print-Ready • Mobile-Friendly</p>
+    <br>
+    <button class="btn" onclick="window.print()">Print</button>
+    <button class="btn" onclick="document.querySelectorAll('.topic').forEach(t=>t.classList.add('open'))">Expand All</button>
+    <button class="btn" onclick="document.querySelectorAll('.topic').forEach(t=>t.classList.remove('open'))">Collapse All</button>
+
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    window.addEventListener('scroll',function(){document.getElementById('scrollTop').style.display=window.scrollY>500?'block':'none'});
+    document.querySelectorAll('.toc a').forEach(link=>{link.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target){target.classList.add('open');target.scrollIntoView({behavior:'smooth',block:'start'})}})});
+</script>
+</body>
+</html>

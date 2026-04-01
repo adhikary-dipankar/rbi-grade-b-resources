@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English — RBI Grade B</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#06101a,#1b273b,#0d1d2b);color:#e0e0e0;line-height:1.7;padding:20px;min-height:100vh}
+        .header{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#27ae60 0%,#2980b9 100%);border-radius:20px;margin-bottom:30px;box-shadow:0 10px 40px rgba(39,174,96,0.3)}
+        .header h1{font-size:2.5em;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,0.3);margin-bottom:10px}
+        .header p{font-size:1.1em;color:#ddd;max-width:750px;margin:0 auto}
+        .header .badge{display:inline-block;background:rgba(255,255,255,0.2);padding:5px 15px;border-radius:20px;margin-top:15px;font-size:0.9em;color:#fff}
+        .toc{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:15px;padding:25px 30px;margin-bottom:30px}
+        .toc h2{color:#27ae60;margin-bottom:15px;font-size:1.4em}
+        .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+        .toc a{color:#7bed9f;text-decoration:none;padding:6px 10px;border-radius:8px;transition:all 0.3s;display:block;font-size:0.95em}
+        .toc a:hover{background:rgba(39,174,96,0.2);color:#fff;transform:translateX(5px)}
+        .toc a .num{color:#27ae60;font-weight:bold;margin-right:5px}
+        .topic{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:15px;margin-bottom:25px;overflow:hidden;transition:transform 0.3s}
+        .topic:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+        .topic-header{padding:20px 25px;cursor:pointer;display:flex;align-items:center;gap:15px;user-select:none;flex-wrap:wrap}
+        .topic-number{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.1em;color:#fff;flex-shrink:0}
+        .topic-header h2{font-size:1.25em;color:#fff;flex-grow:1}
+        .topic-header .priority{padding:4px 12px;border-radius:20px;font-size:0.75em;font-weight:bold;text-transform:uppercase;letter-spacing:1px}
+        .priority-high{background:#e74c3c33;color:#ff6b6b;border:1px solid #e74c3c55}
+        .priority-medium{background:#f39c1233;color:#feca57;border:1px solid #f39c1255}
+        .priority-low{background:#2ecc7133;color:#55efc4;border:1px solid #2ecc7155}
+        .toggle-icon{font-size:1.5em;transition:transform 0.3s;color:#27ae60}
+        .topic.open .toggle-icon{transform:rotate(180deg)}
+        .topic-body{padding:0 25px 25px;display:none}
+        .topic.open .topic-body{display:block;animation:fadeIn 0.3s ease}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+        .formula-group{margin-bottom:20px}
+        .formula-group h3{color:#7bed9f;font-size:1.05em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid rgba(123,237,159,0.2);display:flex;align-items:center;gap:8px}
+        .formula-box{background:rgba(0,0,0,0.3);border:1px solid rgba(39,174,96,0.2);border-radius:10px;padding:15px 20px;margin-bottom:12px;font-size:0.93em;line-height:2;overflow-x:auto}
+        .formula-box .highlight{color:#feca57;font-weight:bold}
+        .formula-box .key{color:#55efc4;font-weight:bold}
+        .formula-box .note{color:#a29bfe;font-style:italic}
+        .formula-box .red{color:#ff6b6b;font-weight:bold}
+        .formula-box .correct{color:#2ecc71;font-weight:bold}
+        .formula-box .wrong{color:#e74c3c;font-weight:bold;text-decoration:line-through}
+        .formula-box ul{list-style:none;padding-left:0}
+        .formula-box ul li{padding:3px 0;padding-left:20px;position:relative}
+        .formula-box ul li::before{content:"▸";position:absolute;left:0;color:#27ae60}
+        .formula-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em}
+        .formula-table th{background:rgba(39,174,96,0.3);color:#fff;padding:10px 15px;text-align:left;border:1px solid rgba(255,255,255,0.1)}
+        .formula-table td{padding:8px 15px;border:1px solid rgba(255,255,255,0.06);color:#ccc}
+        .formula-table tr:nth-child(even){background:rgba(255,255,255,0.03)}
+        .formula-table tr:hover{background:rgba(39,174,96,0.1)}
+        .tip-box{background:linear-gradient(135deg,rgba(46,204,113,0.15),rgba(39,174,96,0.05));border-left:4px solid #2ecc71;border-radius:0 10px 10px 0;padding:15px 20px;margin:15px 0;font-size:0.92em}
+        .tip-box .tip-title{color:#2ecc71;font-weight:bold;margin-bottom:5px}
+        .warning-box{background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(192,57,43,0.05));border-left:4px solid #e74c3c;border-radius:0 10px 10px 0;padding:15px 20px;margin:15px 0;font-size:0.92em}
+        .warning-box .warning-title{color:#e74c3c;font-weight:bold;margin-bottom:5px}
+        .example-box{background:rgba(41,128,185,0.12);border-left:4px solid #3498db;border-radius:0 10px 10px 0;padding:15px 20px;margin:12px 0;font-size:0.92em}
+        .example-box .ex-title{color:#3498db;font-weight:bold;margin-bottom:5px}
+        .bg-1{background:linear-gradient(135deg,#27ae60,#2ecc71)}.bg-2{background:linear-gradient(135deg,#2980b9,#3498db)}.bg-3{background:linear-gradient(135deg,#8e44ad,#9b59b6)}.bg-4{background:linear-gradient(135deg,#d35400,#e67e22)}.bg-5{background:linear-gradient(135deg,#c0392b,#e74c3c)}.bg-6{background:linear-gradient(135deg,#16a085,#1abc9c)}.bg-7{background:linear-gradient(135deg,#2c3e50,#34495e)}.bg-8{background:linear-gradient(135deg,#f39c12,#f1c40f)}.bg-9{background:linear-gradient(135deg,#e84393,#fd79a8)}.bg-10{background:linear-gradient(135deg,#6c5ce7,#a29bfe)}.bg-11{background:linear-gradient(135deg,#00cec9,#81ecec)}.bg-12{background:linear-gradient(135deg,#636e72,#b2bec3)}.bg-13{background:linear-gradient(135deg,#e17055,#fab1a0)}.bg-14{background:linear-gradient(135deg,#00b894,#55efc4)}.bg-15{background:linear-gradient(135deg,#0984e3,#74b9ff)}
+        .footer{text-align:center;padding:30px;margin-top:30px;color:#888;font-size:0.9em}
+        .footer .btn{display:inline-block;padding:12px 30px;background:linear-gradient(135deg,#27ae60,#2980b9);color:#fff;border:none;border-radius:25px;font-size:1em;cursor:pointer;margin:10px;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s}
+        .footer .btn:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(39,174,96,0.4)}
+        #scrollTop{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,#27ae60,#2980b9);color:#fff;border:none;border-radius:50%;font-size:1.5em;cursor:pointer;display:none;z-index:1000;box-shadow:0 5px 15px rgba(39,174,96,0.4);transition:transform 0.3s}
+        #scrollTop:hover{transform:scale(1.1)}
+        @media print{body{background:#fff;color:#000;padding:10px}.header{background:#333}.topic{border:1px solid #ccc;break-inside:avoid}.topic-body{display:block!important}.formula-box{background:#f5f5f5;border-color:#ccc;color:#000}.formula-table th{background:#ddd;color:#000}.formula-table td{color:#000}#scrollTop,.toggle-icon{display:none!important}}
+        @media(max-width:768px){.header h1{font-size:1.6em}.toc-grid{grid-template-columns:1fr}.topic-header{flex-wrap:wrap}}
+    </style>
+</head>
+<body>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- HEADER -->
+<div class="header">
+    <h1> English Language </h1>
+    <p>Complete Grammar Rules, Vocabulary, RC Strategies, Error Spotting & Descriptive Writing Guide for RBI Grade B</p>
+    <div class="badge">Phase 1: 30 Marks (Objective) • Phase 2: 100 Marks (Descriptive) • 15 Topics Covered</div>
+</div>
+
+<!-- EXAM PATTERN -->
+<div class="toc" style="margin-bottom:20px">
+    <h2> English Section — Exam Pattern</h2>
+    <div class="formula-box" style="font-family:'Segoe UI',sans-serif">
+        <table class="formula-table">
+            <tr><th>Phase</th><th>Type</th><th>Marks</th><th>Time</th><th>Key Topics</th></tr>
+            <tr><td>Phase 1 (Prelims)</td><td>Objective MCQs</td><td>30</td><td>25 min</td><td>RC, Cloze, Error Spotting, Para Jumbles, Fill in Blanks, Vocabulary</td></tr>
+            <tr><td>Phase 2 (Mains)</td><td>Descriptive</td><td>100</td><td>90 min</td><td>Essay Writing, Precis Writing, Reading Comprehension</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+    <h2>Table of Contents (Click to Jump)</h2>
+    <div class="toc-grid">
+        <a href="#t1"><span class="num">01</span> Tenses — All 12 Forms</a>
+        <a href="#t2"><span class="num">02</span> Subject-Verb Agreement</a>
+        <a href="#t3"><span class="num">03</span> Articles (A, An, The)</a>
+        <a href="#t4"><span class="num">04</span> Prepositions</a>
+        <a href="#t5"><span class="num">05</span> Conjunctions & Connectors</a>
+        <a href="#t6"><span class="num">06</span> Active & Passive Voice</a>
+        <a href="#t7"><span class="num">07</span> Direct & Indirect Speech</a>
+        <a href="#t8"><span class="num">08</span> Modals & Conditionals</a>
+        <a href="#t9"><span class="num">09</span> Common Error Spotting Rules</a>
+        <a href="#t10"><span class="num">10</span> Reading Comprehension Strategy</a>
+        <a href="#t11"><span class="num">11</span> Cloze Test Strategy</a>
+        <a href="#t12"><span class="num">12</span> Para Jumbles Strategy</a>
+        <a href="#t13"><span class="num">13</span> Vocabulary — Word Power</a>
+        <a href="#t14"><span class="num">14</span> Descriptive: Essay Writing</a>
+        <a href="#t15"><span class="num">15</span> Descriptive: Precis Writing</a>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 1: TENSES ═══════════════ -->
+<div class="topic open" id="t1" style="border-left:4px solid #27ae60">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-1">01</div>
+        <h2>Tenses — All 12 Forms (Foundation of Grammar)</h2>
+        <span class="priority priority-high">Critical</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Complete Tense Chart</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th></th><th>Simple</th><th>Continuous</th><th>Perfect</th><th>Perfect Continuous</th></tr>
+                    <tr><td><b>Past</b></td><td>S + V2<br><i>He <span class="key">went</span>.</i></td><td>S + was/were + V-ing<br><i>He <span class="key">was going</span>.</i></td><td>S + had + V3<br><i>He <span class="key">had gone</span>.</i></td><td>S + had been + V-ing<br><i>He <span class="key">had been going</span>.</i></td></tr>
+                    <tr><td><b>Present</b></td><td>S + V1/V1+s<br><i>He <span class="key">goes</span>.</i></td><td>S + is/am/are + V-ing<br><i>He <span class="key">is going</span>.</i></td><td>S + has/have + V3<br><i>He <span class="key">has gone</span>.</i></td><td>S + has/have been + V-ing<br><i>He <span class="key">has been going</span>.</i></td></tr>
+                    <tr><td><b>Future</b></td><td>S + will/shall + V1<br><i>He <span class="key">will go</span>.</i></td><td>S + will be + V-ing<br><i>He <span class="key">will be going</span>.</i></td><td>S + will have + V3<br><i>He <span class="key">will have gone</span>.</i></td><td>S + will have been + V-ing<br><i>He <span class="key">will have been going</span>.</i></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Key Signal Words</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Tense</th><th>Signal Words / Clue Phrases</th></tr>
+                    <tr><td>Simple Present</td><td>always, usually, often, every day, generally, sometimes, never</td></tr>
+                    <tr><td>Present Continuous</td><td>now, right now, at the moment, currently, these days</td></tr>
+                    <tr><td>Present Perfect</td><td>already, just, yet, ever, never, since, for, recently, so far</td></tr>
+                    <tr><td>Present Perfect Continuous</td><td>since, for (with duration), all day, how long</td></tr>
+                    <tr><td>Simple Past</td><td>yesterday, last (week/month/year), ago, in 2020, once, then</td></tr>
+                    <tr><td>Past Continuous</td><td>while, when (with another past action), at that time</td></tr>
+                    <tr><td>Past Perfect</td><td>before, after, by the time, already, until, as soon as</td></tr>
+                    <tr><td>Past Perfect Continuous</td><td>for, since (+ past reference point), how long (past)</td></tr>
+                    <tr><td>Simple Future</td><td>tomorrow, next (week/year), in the future, soon</td></tr>
+                    <tr><td>Future Continuous</td><td>at this time tomorrow, this time next week</td></tr>
+                    <tr><td>Future Perfect</td><td>by tomorrow, by next year, by then, before (future event)</td></tr>
+                    <tr><td>Future Perfect Continuous</td><td>by (future time) + for (duration)</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Golden Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Since</span> → Point in time (since 2020, since Monday) → Use <span class="highlight">Perfect tenses</span></li>
+                    <li><span class="key">For</span> → Duration (for 5 years, for 3 hours) → Use <span class="highlight">Perfect / Perfect Continuous</span></li>
+                    <li><span class="key">When + Past Simple</span>, use <span class="highlight">Past Continuous</span> for the longer action</li>
+                    <li>Two completed past actions → Earlier one = <span class="highlight">Past Perfect</span>, Later = <span class="highlight">Simple Past</span></li>
+                    <li>Stative verbs (know, believe, love, own, belong) → <span class="red">NEVER used in continuous tenses</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 2: SUBJECT-VERB AGREEMENT ═══════════════ -->
+<div class="topic" id="t2" style="border-left:4px solid #2980b9">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-2">02</div>
+        <h2>Subject-Verb Agreement (SVA) — 25 Rules</h2>
+        <span class="priority priority-high">Critical</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="key">Rule 1:</span> Singular subject → Singular verb; Plural subject → Plural verb<br>
+                    <span class="correct">✓ He goes.</span> &nbsp; <span class="wrong">✗ He go.</span></li>
+                <li><span class="key">Rule 2:</span> Two subjects joined by <b>"and"</b> → Plural verb<br>
+                    <span class="correct">✓ Ram and Shyam are friends.</span></li>
+                <li><span class="key">Rule 3:</span> Two subjects joined by <b>"or / nor / either...or / neither...nor"</b> → Verb agrees with the <span class="highlight">NEARER subject</span><br>
+                    <span class="correct">✓ Neither the students nor the teacher was present.</span></li>
+                <li><span class="key">Rule 4:</span> <b>"Along with / together with / as well as / with / besides / in addition to"</b> → Verb agrees with the <span class="highlight">FIRST subject</span> (ignore the phrase)<br>
+                    <span class="correct">✓ The captain, along with his players, is ready.</span></li>
+                <li><span class="key">Rule 5:</span> <b>"Each / Every / Everyone / Everybody / Everything / Either / Neither / No one / Nobody"</b> → Always <span class="highlight">SINGULAR</span><br>
+                    <span class="correct">✓ Each of the boys has a book.</span></li>
+                <li><span class="key">Rule 6:</span> <b>"Many / Few / Several / Both"</b> → Always <span class="highlight">PLURAL</span><br>
+                    <span class="correct">✓ Many students have passed.</span></li>
+                <li><span class="key">Rule 7:</span> <b>"Some / All / Most / Plenty / A lot of"</b> → Depends on the noun<br>
+                    <span class="correct">✓ Some of the water is dirty.</span> (uncountable → singular)<br>
+                    <span class="correct">✓ Some of the boys are absent.</span> (countable → plural)</li>
+                <li><span class="key">Rule 8:</span> Collective nouns (team, committee, family, jury, crowd) → Usually <span class="highlight">SINGULAR</span> (acting as one unit)<br>
+                    <span class="correct">✓ The committee has decided.</span></li>
+                <li><span class="key">Rule 9:</span> <b>"The number of"</b> → Singular; <b>"A number of"</b> → Plural<br>
+                    <span class="correct">✓ The number of students is increasing.</span><br>
+                    <span class="correct">✓ A number of students are absent.</span></li>
+                <li><span class="key">Rule 10:</span> Uncountable nouns (news, mathematics, physics, politics, economics, measles, mumps) → <span class="highlight">SINGULAR</span><br>
+                    <span class="correct">✓ Mathematics is my favorite subject.</span><br>
+                    <span class="correct">✓ The news is shocking.</span></li>
+                <li><span class="key">Rule 11:</span> <b>"One of the + plural noun"</b> → Singular verb<br>
+                    <span class="correct">✓ One of the students is absent.</span></li>
+                <li><span class="key">Rule 12:</span> Titles of books, movies, countries → <span class="highlight">SINGULAR</span><br>
+                    <span class="correct">✓ "The United States is a large country."</span></li>
+                <li><span class="key">Rule 13:</span> Amount/distance/time as one unit → <span class="highlight">SINGULAR</span><br>
+                    <span class="correct">✓ Ten kilometres is a long distance.</span><br>
+                    <span class="correct">✓ Five thousand rupees is a lot of money.</span></li>
+                <li><span class="key">Rule 14:</span> <b>"Not only...but also"</b> → Verb agrees with <span class="highlight">NEARER subject</span></li>
+                <li><span class="key">Rule 15:</span> Gerund (V-ing) as subject → <span class="highlight">SINGULAR</span><br>
+                    <span class="correct">✓ Swimming is a good exercise.</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 3: ARTICLES ═══════════════ -->
+<div class="topic" id="t3" style="border-left:4px solid #8e44ad">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-3">03</div>
+        <h2>Articles — A, An, The (Complete Rules)</h2>
+        <span class="priority priority-high">Critical</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 A vs An</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">"A"</span> before consonant <b>SOUNDS</b> → a boy, a cat, a <span class="highlight">university</span> (yoo~), a <span class="highlight">European</span> (yoo~), a <span class="highlight">one-rupee</span> (wun~)</li>
+                    <li><span class="key">"An"</span> before vowel <b>SOUNDS</b> → an apple, an <span class="highlight">hour</span> (silent h), an <span class="highlight">MBA</span> (em~), an <span class="highlight">honest</span> (silent h), an <span class="highlight">FIR</span> (ef~)</li>
+                    <li class="note">Based on SOUND, not spelling!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 When to Use "The" (Definite Article)</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>Unique things: <span class="correct">the sun, the moon, the earth, the sky</span></li>
+                    <li>Superlatives: <span class="correct">the best, the tallest, the most beautiful</span></li>
+                    <li>Ordinals: <span class="correct">the first, the second, the last</span></li>
+                    <li>Rivers, oceans, seas, mountain ranges: <span class="correct">the Ganges, the Pacific, the Himalayas</span></li>
+                    <li>Holy books: <span class="correct">the Quran, the Bible, the Gita</span></li>
+                    <li>Newspapers: <span class="correct">the Hindu, the Times of India</span></li>
+                    <li>Musical instruments: <span class="correct">plays the guitar, the piano</span></li>
+                    <li>Specific/already mentioned: <span class="correct">"I saw a dog. The dog was brown."</span></li>
+                    <li>Directions: <span class="correct">the north, the east</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 When NOT to Use Articles</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="red">No article</span> before: proper nouns, languages, sports, meals, abstract nouns (general), subjects</li>
+                    <li><span class="wrong">✗ The honesty is the best policy.</span> → <span class="correct">✓ Honesty is the best policy.</span></li>
+                    <li><span class="wrong">✗ He plays the cricket.</span> → <span class="correct">✓ He plays cricket.</span></li>
+                    <li><span class="wrong">✗ The Mount Everest is tall.</span> → <span class="correct">✓ Mount Everest is tall.</span> (single peaks = no article)</li>
+                    <li><span class="red">No article</span> before: single mountains, lakes, continents, countries (mostly)</li>
+                    <li><span class="key">Exception:</span> <span class="correct">the USA, the UK, the Netherlands</span> (countries with "united/plural")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 4: PREPOSITIONS ═══════════════ -->
+<div class="topic" id="t4" style="border-left:4px solid #d35400">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-4">04</div>
+        <h2>Prepositions — Complete Rules & Tricky Uses</h2>
+        <span class="priority priority-high">Critical</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Time Prepositions</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Preposition</th><th>Used For</th><th>Examples</th></tr>
+                    <tr><td><b>At</b></td><td>Specific time, festivals without "day"</td><td>at 5 PM, at noon, at night, at dawn, at Diwali</td></tr>
+                    <tr><td><b>On</b></td><td>Days, dates, specific days</td><td>on Monday, on 15th August, on my birthday, on Diwali day</td></tr>
+                    <tr><td><b>In</b></td><td>Months, years, seasons, long periods, parts of day</td><td>in January, in 2026, in summer, in the morning, in the 21st century</td></tr>
+                    <tr><td><b>Since</b></td><td>Point in time (with perfect tenses)</td><td>since 2020, since Monday, since childhood</td></tr>
+                    <tr><td><b>For</b></td><td>Duration</td><td>for 5 years, for 3 hours, for a long time</td></tr>
+                    <tr><td><b>By</b></td><td>Deadline / no later than</td><td>by 5 PM, by next week</td></tr>
+                    <tr><td><b>During</b></td><td>Throughout a period</td><td>during the meeting, during summer</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Place Prepositions</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Preposition</th><th>Used For</th><th>Examples</th></tr>
+                    <tr><td><b>At</b></td><td>Specific point / address</td><td>at the bus stop, at 221B Baker Street, at home</td></tr>
+                    <tr><td><b>On</b></td><td>Surface / line</td><td>on the table, on the wall, on the road, on the 3rd floor</td></tr>
+                    <tr><td><b>In</b></td><td>Enclosed space / area</td><td>in the room, in India, in the box, in the city</td></tr>
+                    <tr><td><b>Between</b></td><td>Two things</td><td>between you and me</td></tr>
+                    <tr><td><b>Among</b></td><td>Three or more things</td><td>among the students</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Commonly Tested Preposition Pairs</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Agree with</span> (a person) / <span class="key">Agree to</span> (a proposal) / <span class="key">Agree on</span> (a point)</li>
+                    <li><span class="key">Angry with</span> (a person) / <span class="key">Angry at</span> (a thing/action)</li>
+                    <li><span class="key">Consist of</span> (comprise) — <span class="red">Never "consist in"</span></li>
+                    <li><span class="key">Differ from</span> (be different) / <span class="key">Differ with</span> (disagree)</li>
+                    <li><span class="key">Die of</span> (disease/hunger) / <span class="key">Die from</span> (injury/wound)</li>
+                    <li><span class="key">Good at</span> (skill) — <span class="red">NOT "good in"</span></li>
+                    <li><span class="key">Interested in</span> — <span class="red">NOT "interested for"</span></li>
+                    <li><span class="key">Listen to</span> — <span class="red">NOT "listen at"</span></li>
+                    <li><span class="key">Prefer A to B</span> — <span class="red">NOT "prefer than"</span></li>
+                    <li><span class="key">Provide with</span> / <span class="key">Provide for</span></li>
+                    <li><span class="key">Superior to / Inferior to / Senior to / Junior to</span> — <span class="red">NEVER use "than"</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 5: CONJUNCTIONS ═══════════════ -->
+<div class="topic" id="t5" style="border-left:4px solid #c0392b">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-5">05</div>
+        <h2>Conjunctions & Connectors</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <table class="formula-table">
+                <tr><th>Type</th><th>Conjunctions</th><th>Function</th></tr>
+                <tr><td>Coordinating (FANBOYS)</td><td><span class="highlight">For, And, Nor, But, Or, Yet, So</span></td><td>Join equal clauses</td></tr>
+                <tr><td>Correlative (Pairs)</td><td>either…or, neither…nor, not only…but also, both…and, whether…or</td><td>Always used in pairs</td></tr>
+                <tr><td>Subordinating</td><td>because, since, although, though, while, when, if, unless, until, before, after, as</td><td>Join dependent + independent clause</td></tr>
+                <tr><td>Contrast</td><td>however, nevertheless, on the other hand, whereas, despite, in spite of</td><td>Show opposition</td></tr>
+                <tr><td>Addition</td><td>moreover, furthermore, in addition, besides, also</td><td>Add information</td></tr>
+                <tr><td>Cause/Effect</td><td>therefore, hence, consequently, as a result, thus</td><td>Show result</td></tr>
+            </table>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Critical Rules</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Although / Though</span> → NEVER followed by <span class="red">"but"</span><br>
+                        <span class="correct">✓ Although he was tired, he continued.</span> <span class="wrong">✗ Although he was tired, but he continued.</span></li>
+                    <li><span class="key">Because</span> → NEVER followed by <span class="red">"so / therefore"</span></li>
+                    <li><span class="key">Unless</span> = If not → <span class="red">NEVER use "not" with unless</span><br>
+                        <span class="correct">✓ Unless you work hard, you won't pass.</span> <span class="wrong">✗ Unless you don't work hard...</span></li>
+                    <li><span class="key">Neither...nor</span> → Both parts must be grammatically parallel</li>
+                    <li><span class="key">Hardly / Scarcely...when</span> and <span class="key">No sooner...than</span> → Fixed pairs<br>
+                        <span class="red">NOT "hardly...than" or "no sooner...when"</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 6: ACTIVE & PASSIVE VOICE ═══════════════ -->
+<div class="topic" id="t6" style="border-left:4px solid #16a085">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-6">06</div>
+        <h2>Active & Passive Voice</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <table class="formula-table">
+                <tr><th>Tense</th><th>Active</th><th>Passive</th></tr>
+                <tr><td>Simple Present</td><td>S + V1 + O</td><td>O + is/am/are + V3 + by S</td></tr>
+                <tr><td>Simple Past</td><td>S + V2 + O</td><td>O + was/were + V3 + by S</td></tr>
+                <tr><td>Simple Future</td><td>S + will + V1 + O</td><td>O + will be + V3 + by S</td></tr>
+                <tr><td>Present Continuous</td><td>S + is/am/are + V-ing + O</td><td>O + is/am/are + being + V3 + by S</td></tr>
+                <tr><td>Past Continuous</td><td>S + was/were + V-ing + O</td><td>O + was/were + being + V3 + by S</td></tr>
+                <tr><td>Present Perfect</td><td>S + has/have + V3 + O</td><td>O + has/have + been + V3 + by S</td></tr>
+                <tr><td>Past Perfect</td><td>S + had + V3 + O</td><td>O + had + been + V3 + by S</td></tr>
+                <tr><td>Future Perfect</td><td>S + will have + V3 + O</td><td>O + will have + been + V3 + by S</td></tr>
+                <tr><td>Modal</td><td>S + modal + V1 + O</td><td>O + modal + be + V3 + by S</td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 7: DIRECT & INDIRECT SPEECH ═══════════════ -->
+<div class="topic" id="t7" style="border-left:4px solid #2c3e50">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-7">07</div>
+        <h2>Direct & Indirect Speech (Narration)</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Tense Changes (Reporting verb in Past)</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Direct (Quoted)</th><th>Indirect (Reported)</th></tr>
+                    <tr><td>Simple Present → </td><td>Simple Past</td></tr>
+                    <tr><td>Present Continuous → </td><td>Past Continuous</td></tr>
+                    <tr><td>Present Perfect → </td><td>Past Perfect</td></tr>
+                    <tr><td>Simple Past → </td><td>Past Perfect</td></tr>
+                    <tr><td>Past Perfect → </td><td>Past Perfect (no change)</td></tr>
+                    <tr><td>will → </td><td>would</td></tr>
+                    <tr><td>can → </td><td>could</td></tr>
+                    <tr><td>may → </td><td>might</td></tr>
+                    <tr><td>shall → </td><td>should / would</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Word Changes</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Direct</th><th>Indirect</th><th>Direct</th><th>Indirect</th></tr>
+                    <tr><td>this</td><td>that</td><td>here</td><td>there</td></tr>
+                    <tr><td>these</td><td>those</td><td>now</td><td>then</td></tr>
+                    <tr><td>today</td><td>that day</td><td>tomorrow</td><td>the next day</td></tr>
+                    <tr><td>yesterday</td><td>the previous day</td><td>ago</td><td>before</td></tr>
+                    <tr><td>tonight</td><td>that night</td><td>last week</td><td>the previous week</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 8: MODALS & CONDITIONALS ═══════════════ -->
+<div class="topic" id="t8" style="border-left:4px solid #f39c12">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-8">08</div>
+        <h2>Modals & Conditional Sentences</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Modals — Meaning & Usage</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Modal</th><th>Usage</th><th>Example</th></tr>
+                    <tr><td>Can</td><td>Ability, permission (informal)</td><td>I can swim.</td></tr>
+                    <tr><td>Could</td><td>Past ability, polite request, possibility</td><td>Could you help me?</td></tr>
+                    <tr><td>May</td><td>Permission (formal), possibility</td><td>It may rain today.</td></tr>
+                    <tr><td>Might</td><td>Weaker possibility</td><td>He might come.</td></tr>
+                    <tr><td>Shall</td><td>Suggestion, future (I/We), legal</td><td>Shall we go?</td></tr>
+                    <tr><td>Should</td><td>Advice, obligation, expectation</td><td>You should study.</td></tr>
+                    <tr><td>Will</td><td>Future, willingness, promise</td><td>I will help you.</td></tr>
+                    <tr><td>Would</td><td>Polite request, past habit, conditional</td><td>Would you mind?</td></tr>
+                    <tr><td>Must</td><td>Strong obligation, certainty</td><td>You must obey the law.</td></tr>
+                    <tr><td>Need</td><td>Necessity</td><td>You need not worry.</td></tr>
+                    <tr><td>Ought to</td><td>Moral obligation, expectation</td><td>You ought to respect elders.</td></tr>
+                    <tr><td>Used to</td><td>Past habit (discontinued)</td><td>I used to play cricket.</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Conditional Sentences (If Clauses)</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Type</th><th>If Clause</th><th>Main Clause</th><th>Example</th></tr>
+                    <tr><td>Zero (General truth)</td><td>If + Present Simple</td><td>Present Simple</td><td>If you heat water, it boils.</td></tr>
+                    <tr><td>First (Real/Likely)</td><td>If + Present Simple</td><td><span class="highlight">will + V1</span></td><td>If it rains, I will stay home.</td></tr>
+                    <tr><td>Second (Unreal present)</td><td>If + Past Simple</td><td><span class="highlight">would + V1</span></td><td>If I were rich, I would travel.</td></tr>
+                    <tr><td>Third (Unreal past)</td><td>If + Past Perfect</td><td><span class="highlight">would have + V3</span></td><td>If I had studied, I would have passed.</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 9: ERROR SPOTTING RULES ═══════════════ -->
+<div class="topic" id="t9" style="border-left:4px solid #e84393">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-9">09</div>
+        <h2>Error Spotting — 30 Most Common Exam Rules</h2>
+        <span class="priority priority-high">Highest</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="key">1.</span> <span class="wrong">Each boys</span> → <span class="correct">Each boy</span> (Each/Every + singular noun)</li>
+                <li><span class="key">2.</span> <span class="wrong">One of the best student</span> → <span class="correct">One of the best students</span> (One of the + plural noun)</li>
+                <li><span class="key">3.</span> <span class="wrong">He is more taller</span> → <span class="correct">He is taller</span> (Never more + -er)</li>
+                <li><span class="key">4.</span> <span class="wrong">Most unique</span> → <span class="correct">Unique</span> (Unique, perfect, complete = no degrees)</li>
+                <li><span class="key">5.</span> <span class="wrong">Superior than</span> → <span class="correct">Superior to</span> (Latin comparatives use "to")</li>
+                <li><span class="key">6.</span> <span class="wrong">Beside the point</span> → <span class="correct">Besides the point</span> (beside = next to; besides = in addition to)</li>
+                <li><span class="key">7.</span> <span class="wrong">He gave me an advice</span> → <span class="correct">He gave me advice</span> (Uncountable: advice, information, furniture, luggage, equipment)</li>
+                <li><span class="key">8.</span> <span class="wrong">I am having a car</span> → <span class="correct">I have a car</span> (Stative verbs: no continuous)</li>
+                <li><span class="key">9.</span> <span class="wrong">He is knowing the answer</span> → <span class="correct">He knows the answer</span></li>
+                <li><span class="key">10.</span> <span class="wrong">Unless you don't try</span> → <span class="correct">Unless you try</span> (Unless = if not, so no "not")</li>
+                <li><span class="key">11.</span> <span class="wrong">Although…but</span> → <span class="correct">Although… (no but)</span></li>
+                <li><span class="key">12.</span> <span class="wrong">Hardly…than</span> → <span class="correct">Hardly…when</span></li>
+                <li><span class="key">13.</span> <span class="wrong">No sooner…when</span> → <span class="correct">No sooner…than</span></li>
+                <li><span class="key">14.</span> <span class="wrong">Scarcely…than</span> → <span class="correct">Scarcely…when</span></li>
+                <li><span class="key">15.</span> <span class="wrong">Prefer tea than coffee</span> → <span class="correct">Prefer tea to coffee</span></li>
+                <li><span class="key">16.</span> <span class="wrong">Between you and I</span> → <span class="correct">Between you and me</span> (After preposition → objective case)</li>
+                <li><span class="key">17.</span> <span class="wrong">He insisted to go</span> → <span class="correct">He insisted on going</span></li>
+                <li><span class="key">18.</span> <span class="wrong">Comprised of</span> → <span class="correct">Comprises</span> OR <span class="correct">Composed of</span></li>
+                <li><span class="key">19.</span> <span class="wrong">He denied to go</span> → <span class="correct">He refused to go</span> (Deny = deny a fact; Refuse = decline to do)</li>
+                <li><span class="key">20.</span> <span class="wrong">The sceneries are beautiful</span> → <span class="correct">The scenery is beautiful</span> (No plural: scenery, poetry, machinery, jewellery)</li>
+                <li><span class="key">21.</span> <span class="wrong">If I was you</span> → <span class="correct">If I were you</span> (Subjunctive mood)</li>
+                <li><span class="key">22.</span> <span class="wrong">Lest he should not fail</span> → <span class="correct">Lest he should fail</span> (Lest = negative already; don't add "not")</li>
+                <li><span class="key">23.</span> <span class="wrong">The committee have decided</span> → <span class="correct">The committee has decided</span> (Collective noun = singular)</li>
+                <li><span class="key">24.</span> <span class="wrong">He is elder than me</span> → <span class="correct">He is older than me</span> (Elder = within family; Older = age comparison)</li>
+                <li><span class="key">25.</span> <span class="wrong">I and Ram went</span> → <span class="correct">Ram and I went</span> ("I" comes last in compound subjects)</li>
+                <li><span class="key">26.</span> <span class="wrong">Many a students</span> → <span class="correct">Many a student</span> (Many a + singular)</li>
+                <li><span class="key">27.</span> Parallel structure: <span class="wrong">I like reading, writing and to swim</span> → <span class="correct">I like reading, writing and swimming</span></li>
+                <li><span class="key">28.</span> <span class="wrong">Fewer pollution</span> → <span class="correct">Less pollution</span> (Fewer = countable; Less = uncountable)</li>
+                <li><span class="key">29.</span> <span class="wrong">Much students</span> → <span class="correct">Many students</span> (Much = uncountable; Many = countable)</li>
+                <li><span class="key">30.</span> <span class="wrong">Discuss about</span> → <span class="correct">Discuss</span> (No preposition after: discuss, enter, reach, order, request, emphasize, stress, accompany)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 10: READING COMPREHENSION ═══════════════ -->
+<div class="topic" id="t10" style="border-left:4px solid #6c5ce7">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-10">10</div>
+        <h2>Reading Comprehension (RC) — Strategy & Tricks</h2>
+        <span class="priority priority-high">Highest Weightage</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Types of RC Questions</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Question Type</th><th>What They Ask</th><th>Strategy</th></tr>
+                    <tr><td>Main Idea / Title</td><td>What is the passage about?</td><td>Read first & last para carefully</td></tr>
+                    <tr><td>Detail / Factual</td><td>Specific info from passage</td><td>Scan for keywords from question</td></tr>
+                    <tr><td>Inference</td><td>What can be logically concluded?</td><td>Look for implied meaning, not stated</td></tr>
+                    <tr><td>Tone / Attitude</td><td>Author's feeling about the topic</td><td>Look for adjectives, adverbs, word choice</td></tr>
+                    <tr><td>Vocabulary (in context)</td><td>Meaning of a word as used in passage</td><td>Re-read the sentence; replace with options</td></tr>
+                    <tr><td>True / False / Not Given</td><td>Which statement matches passage?</td><td>Eliminate clearly wrong options first</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Step-by-Step RC Solving Method</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Step 1:</span> Read the questions FIRST (just the questions, not options)</li>
+                    <li><span class="key">Step 2:</span> Read the passage actively — underline key points</li>
+                    <li><span class="key">Step 3:</span> Answer factual/detail questions first (quick marks)</li>
+                    <li><span class="key">Step 4:</span> Then attempt inference and tone questions</li>
+                    <li><span class="key">Step 5:</span> For vocab questions → Re-read the sentence, try substitution</li>
+                    <li><span class="key">Step 6:</span> Eliminate extreme options (always, never, only, all)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Common Tone Words to Know</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Positive Tones</th><th>Negative Tones</th><th>Neutral Tones</th></tr>
+                    <tr><td>Optimistic, Appreciative, Supportive, Enthusiastic, Laudatory</td><td>Critical, Pessimistic, Cynical, Sarcastic, Derisive, Contemptuous</td><td>Objective, Analytical, Descriptive, Informative, Impartial, Didactic</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">💡 Speed Tip</div>
+            In RBI Grade B, RC passages are usually on <b>economy, banking, social issues, or governance</b>. Reading editorials from The Hindu daily will make you faster at comprehending such passages.
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 11: CLOZE TEST ═══════════════ -->
+<div class="topic" id="t11" style="border-left:4px solid #00cec9">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-11">11</div>
+        <h2>Cloze Test — Strategy</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="key">Step 1:</span> Read the ENTIRE passage first without filling blanks → understand the theme & tone</li>
+                <li><span class="key">Step 2:</span> For each blank, read the sentence before and after → context is king</li>
+                <li><span class="key">Step 3:</span> Guess the word BEFORE looking at options</li>
+                <li><span class="key">Step 4:</span> Match your guess with the closest option</li>
+                <li><span class="key">Step 5:</span> Eliminate grammatically wrong options (wrong tense, wrong form)</li>
+                <li><span class="key">Step 6:</span> Check if the option fits the tone (positive passage → positive word)</li>
+                <li><span class="highlight">Most blanks test:</span> Vocabulary, Prepositions, Conjunctions, Verb forms, Collocations</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 12: PARA JUMBLES ═══════════════ -->
+<div class="topic" id="t12" style="border-left:4px solid #636e72">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-12">12</div>
+        <h2>Para Jumbles — Strategy & Tricks</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-box">
+            <ul>
+                <li><span class="key">Step 1:</span> Identify the <span class="highlight">OPENING sentence</span> — introduces the topic, no pronoun references (he/she/it/this/that)</li>
+                <li><span class="key">Step 2:</span> Identify the <span class="highlight">CLOSING sentence</span> — conclusion, summary, future outlook</li>
+                <li><span class="key">Step 3:</span> Find <span class="highlight">MANDATORY PAIRS</span> — two sentences that MUST be together</li>
+                <li><span class="key">Step 4:</span> Look for <span class="highlight">CONNECTOR CLUES:</span></li>
+                <li>&nbsp;&nbsp;→ <b>However, But, Yet, Nevertheless</b> = Contrast with previous sentence</li>
+                <li>&nbsp;&nbsp;→ <b>Moreover, Furthermore, Additionally, Also</b> = Continuation</li>
+                <li>&nbsp;&nbsp;→ <b>Therefore, Hence, Consequently, Thus</b> = Result of previous sentence</li>
+                <li>&nbsp;&nbsp;→ <b>For example, For instance, Such as</b> = Follows a general statement</li>
+                <li><span class="key">Step 5:</span> Look for <span class="highlight">PRONOUN REFERENCES</span> — "This", "He", "They", "It" → must refer to something in the PREVIOUS sentence</li>
+                <li><span class="key">Step 6:</span> Look for <span class="highlight">TIME/CHRONOLOGICAL order</span> — dates, events, sequences</li>
+                <li><span class="key">Step 7:</span> Eliminate options that violate the logical flow</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 13: VOCABULARY ═══════════════ -->
+<div class="topic" id="t13" style="border-left:4px solid #e17055">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-13">13</div>
+        <h2>Vocabulary — Word Power & Idioms</h2>
+        <span class="priority priority-medium">Medium</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 50 Most Important Words for Banking Exams</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Word</th><th>Meaning</th><th>Word</th><th>Meaning</th></tr>
+                    <tr><td>Abate</td><td>Reduce, lessen</td><td>Mitigate</td><td>Make less severe</td></tr>
+                    <tr><td>Augment</td><td>Increase, enlarge</td><td>Mundane</td><td>Ordinary, dull</td></tr>
+                    <tr><td>Benevolent</td><td>Kind, charitable</td><td>Nefarious</td><td>Wicked, criminal</td></tr>
+                    <tr><td>Bolster</td><td>Support, strengthen</td><td>Obscure</td><td>Unclear, unknown</td></tr>
+                    <tr><td>Candid</td><td>Honest, frank</td><td>Plausible</td><td>Seemingly reasonable</td></tr>
+                    <tr><td>Complacent</td><td>Self-satisfied, smug</td><td>Pragmatic</td><td>Practical, realistic</td></tr>
+                    <tr><td>Concur</td><td>Agree</td><td>Prudent</td><td>Wise, cautious</td></tr>
+                    <tr><td>Deter</td><td>Discourage, prevent</td><td>Resilient</td><td>Able to recover quickly</td></tr>
+                    <tr><td>Diligent</td><td>Hardworking, careful</td><td>Robust</td><td>Strong, healthy</td></tr>
+                    <tr><td>Elicit</td><td>Draw out, extract</td><td>Scrutinize</td><td>Examine closely</td></tr>
+                    <tr><td>Eloquent</td><td>Fluent, persuasive</td><td>Stringent</td><td>Strict, severe</td></tr>
+                    <tr><td>Exacerbate</td><td>Make worse</td><td>Substantial</td><td>Large, significant</td></tr>
+                    <tr><td>Fiscal</td><td>Related to finance</td><td>Sustainable</td><td>Maintainable long-term</td></tr>
+                    <tr><td>Hamper</td><td>Hinder, obstruct</td><td>Tenacious</td><td>Persistent, determined</td></tr>
+                    <tr><td>Impede</td><td>Block, delay</td><td>Unprecedented</td><td>Never done before</td></tr>
+                    <tr><td>Inevitable</td><td>Unavoidable</td><td>Volatile</td><td>Unstable, changeable</td></tr>
+                    <tr><td>Lucrative</td><td>Profitable</td><td>Vulnerable</td><td>Exposed to risk</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 20 Important Idioms</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>Idiom</th><th>Meaning</th></tr>
+                    <tr><td>A dime a dozen</td><td>Very common, not special</td></tr>
+                    <tr><td>Beat around the bush</td><td>Avoid the main topic</td></tr>
+                    <tr><td>Bite the bullet</td><td>Face a difficult situation bravely</td></tr>
+                    <tr><td>Burn the midnight oil</td><td>Work late into the night</td></tr>
+                    <tr><td>By the skin of your teeth</td><td>Barely, just narrowly</td></tr>
+                    <tr><td>Cut corners</td><td>Do something in an easy/cheap way</td></tr>
+                    <tr><td>Hit the nail on the head</td><td>Say something exactly right</td></tr>
+                    <tr><td>In the red</td><td>In debt / losing money</td></tr>
+                    <tr><td>Keep at bay</td><td>Keep at a distance</td></tr>
+                    <tr><td>Leave no stone unturned</td><td>Try every possible method</td></tr>
+                    <tr><td>Nip in the bud</td><td>Stop something at an early stage</td></tr>
+                    <tr><td>On the fence</td><td>Undecided</td></tr>
+                    <tr><td>Pull strings</td><td>Use influence to get something</td></tr>
+                    <tr><td>Read between the lines</td><td>Understand the hidden meaning</td></tr>
+                    <tr><td>See eye to eye</td><td>Agree with someone</td></tr>
+                    <tr><td>Spill the beans</td><td>Reveal a secret</td></tr>
+                    <tr><td>The ball is in your court</td><td>It's your turn to decide/act</td></tr>
+                    <tr><td>Turn a blind eye</td><td>Ignore something deliberately</td></tr>
+                    <tr><td>Under the weather</td><td>Feeling ill</td></tr>
+                    <tr><td>With flying colours</td><td>With great success</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 14: ESSAY WRITING ═══════════════ -->
+<div class="topic" id="t14" style="border-left:4px solid #00b894">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-14">14</div>
+        <h2>Phase 2 — Essay Writing (Descriptive)</h2>
+        <span class="priority priority-high">100 Marks Paper</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 Essay Structure Template (~500–600 words)</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="highlight">Para 1 — Introduction (3–4 lines):</span> Define the topic, give context, state your thesis/stand</li>
+                    <li><span class="highlight">Para 2 — Background/Current Scenario (5–6 lines):</span> Data, stats, recent developments</li>
+                    <li><span class="highlight">Para 3 — Arguments FOR / Advantages (6–7 lines):</span> Key points with examples</li>
+                    <li><span class="highlight">Para 4 — Arguments AGAINST / Challenges (6–7 lines):</span> Limitations, counterpoints</li>
+                    <li><span class="highlight">Para 5 — Government Initiatives / Way Forward (4–5 lines):</span> Schemes, policies, recommendations</li>
+                    <li><span class="highlight">Para 6 — Conclusion (3–4 lines):</span> Balanced summary, optimistic ending, quote (optional)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Scoring Checklist</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>✅ Clear structure with paragraphs</li>
+                    <li>✅ Strong opening line (quote/statistic/definition)</li>
+                    <li>✅ Relevant data and examples</li>
+                    <li>✅ Balanced view (both sides)</li>
+                    <li>✅ No grammatical errors</li>
+                    <li>✅ Good vocabulary (not overused)</li>
+                    <li>✅ Conclusion ties back to the introduction</li>
+                    <li>❌ Avoid: repetition, slang, very long sentences, personal bias</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Hot Topics for RBI Grade B Essay 2026</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>Digital Rupee (CBDC) and its impact on India's financial system</li>
+                    <li>Financial Inclusion through FinTech</li>
+                    <li>India's path to $5 trillion economy</li>
+                    <li>Climate Finance and Green Banking</li>
+                    <li>Role of RBI in managing inflation</li>
+                    <li>Privatization of Public Sector Banks — Pros and Cons</li>
+                    <li>Cryptocurrency regulation in India</li>
+                    <li>AI and its impact on Banking Sector</li>
+                    <li>NPA crisis and resolution mechanisms</li>
+                    <li>Gig Economy and Labour reforms</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ TOPIC 15: PRECIS WRITING ═══════════════ -->
+<div class="topic" id="t15" style="border-left:4px solid #0984e3">
+    <div class="topic-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="topic-number bg-15">15</div>
+        <h2>Phase 2 — Precis Writing (Descriptive)</h2>
+        <span class="priority priority-high">Phase 2</span>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="topic-body">
+        <div class="formula-group">
+            <h3>📐 What is Precis?</h3>
+            <div class="formula-box">
+                <ul>
+                    <li>A <span class="highlight">precis</span> is a concise summary of a given passage — typically <span class="key">1/3rd of the original length</span></li>
+                    <li>It must capture the <b>main ideas</b> in your OWN words</li>
+                    <li>It should be in <b>third person</b>, <b>past tense</b> (usually), and indirect speech</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 Step-by-Step Method</h3>
+            <div class="formula-box">
+                <ul>
+                    <li><span class="key">Step 1:</span> Read the passage 2–3 times → understand the central theme</li>
+                    <li><span class="key">Step 2:</span> Underline key sentences and main arguments</li>
+                    <li><span class="key">Step 3:</span> Remove examples, repetitions, illustrations, and quotations</li>
+                    <li><span class="key">Step 4:</span> Write the summary in YOUR words (don't copy from passage)</li>
+                    <li><span class="key">Step 5:</span> Check word count → should be about 1/3 of original</li>
+                    <li><span class="key">Step 6:</span> Give a suitable <span class="highlight">TITLE</span> (short, relevant, captures the essence)</li>
+                    <li><span class="key">Step 7:</span> Re-read to remove any unnecessary words</li>
+                </ul>
+            </div>
+        </div>
+        <div class="formula-group">
+            <h3>📐 DOs and DON'Ts</h3>
+            <div class="formula-box">
+                <table class="formula-table">
+                    <tr><th>✅ DOs</th><th>❌ DON'Ts</th></tr>
+                    <tr><td>Use your own words</td><td>Don't copy sentences from passage</td></tr>
+                    <tr><td>Write in third person</td><td>Don't write in first person (I, We)</td></tr>
+                    <tr><td>Include all main ideas</td><td>Don't add your own opinion</td></tr>
+                    <tr><td>Keep it concise (~1/3 length)</td><td>Don't include examples or illustrations</td></tr>
+                    <tr><td>Give a title</td><td>Don't use direct speech</td></tr>
+                    <tr><td>Maintain logical flow</td><td>Don't start with "The passage says…"</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><b>English Language Bible</b> — RBI Grade B Phase 1 + Phase 2</p>
+    <p>15 Topics • Grammar Rules, Error Spotting, RC Strategy, Vocabulary, Essay & Precis Templates • Print-Ready</p>
+    <br>
+    <button class="btn" onclick="window.print()"> Print</button>
+    <button class="btn" onclick="document.querySelectorAll('.topic').forEach(t=>t.classList.add('open'))">Expand All</button>
+    <button class="btn" onclick="document.querySelectorAll('.topic').forEach(t=>t.classList.remove('open'))"> Collapse All</button>
+   
+</div>
+
+<script>
+    window.addEventListener('scroll',function(){document.getElementById('scrollTop').style.display=window.scrollY>500?'block':'none'});
+    document.querySelectorAll('.toc a').forEach(link=>{link.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target){target.classList.add('open');target.scrollIntoView({behavior:'smooth',block:'start'})}})});
+</script>
+</body>
+</html>
